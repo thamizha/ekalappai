@@ -120,7 +120,7 @@ if (wParam == WM_KEYDOWN){
 
 	case 0x45 : //E/ஊ 
 		if(SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ){
-			GenerateKey(3009,FALSE);
+			GenerateKey(3010,FALSE);
 		}
 		else{
 			GenerateKey(2954,FALSE);
@@ -305,7 +305,7 @@ if (wParam == WM_KEYDOWN){
 	
 	case 0x43: //C/ஒ
 		if(SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ){
-			GenerateKey(3020,FALSE);
+			GenerateKey(3018,FALSE);
 		}
 		else{
 			GenerateKey(2962,FALSE);
