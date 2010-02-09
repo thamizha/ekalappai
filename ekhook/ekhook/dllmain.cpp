@@ -23,12 +23,26 @@
 static DWORD previous_1_vkCode = NULL;
 static DWORD previous_2_vkCode = NULL;
 
+static int previous_1_character = NULL;
+static int previous_2_character = NULL;
+
+static int capslock_on = 0;
+
 #pragma data_seg()
 
 #pragma comment(linker, "/SECTION:.HOOKDATA,RWS")
 
 
+//define meiezhuthukal array
+//க   ங 	   ச   ஞ  ட  ண 	த  ந   ப   ம   ய  ர   ல  வ  ழ   ள  ற  ன
+//h   b   [   ]  o   p  l  ;  j  k   '  m  n  v   /  y  u  i
+DWORD meiezhuthukkal[] = {0x48, 0x42, 0xDB, 0xDD, 0x4F, 0x50,0x4C, 0xBA, 0x4A, 0x4B, 0xDE, 0x4D, 0x4E, 
+						  0x56, 0xBF, 0x59, 0x55, 0x49 };
 
+
+
+
+//Helper functions//
 int SearchArray (DWORD array[], DWORD key)
 {
 	int index = 0;  	
@@ -37,39 +51,58 @@ int SearchArray (DWORD array[], DWORD key)
 		if (array[index] != key)
 			index++;
 	}
-
-	//if (array[0] == key){
-	//	index++;
-	//}
-
-    return (index);                           
+	return (index);                           
 } 
 
 
-void GenerateKey ( int vk , bool bExtended)
+bool IsPrevkeyGrantha()
 {
+	//define grantha array
+	//ஸ  ஷ ஜ ஹ க்ஷ 
+	int granthaezhuthukkal[] = {3000, 2999, 2972, 3001};
 
-  KEYBDINPUT kb={0};
-  INPUT Input={0};
+	int index = 0;  	
+	while( (index < 4 ) && (previous_1_character != granthaezhuthukkal[index]))
+	{ 
+		if (granthaezhuthukkal[index] != previous_1_character)
+			index++;
+	}
 
-  // down
-  kb.wVk    =  0;
-  kb.wScan = vk;/*enter unicode here*/;
-  kb.dwFlags = KEYEVENTF_UNICODE; // KEYEVENTF_UNICODE=4
-  Input.type = INPUT_KEYBOARD;
-  Input.ki = kb;
+	if (index < 4){
+		return true;
+	}
+	else{
+		return false;
+	}
+} 
 
-  ::SendInput(1,&Input,sizeof(Input));
 
-  // up
-  kb.wVk    =  0;
-  kb.wScan = vk;/*enter unicode here*/;
-  kb.dwFlags = KEYEVENTF_UNICODE|KEYEVENTF_KEYUP; //KEYEVENTF_UNICODE=4
-  Input.type = INPUT_KEYBOARD;
-  Input.ki = kb;
+void GenerateKey(int vk , bool bExtended)
+{
+	//update previous characters
+	previous_2_character = previous_1_character;
+	previous_1_character = vk;
 
-  ::SendInput(1,&Input,sizeof(Input));
+	KEYBDINPUT kb={0};
+	INPUT Input={0};
 
+	//keydown
+	kb.wVk    =  0;
+	kb.wScan = vk;/*enter unicode here*/;
+	kb.dwFlags = KEYEVENTF_UNICODE; // KEYEVENTF_UNICODE=4
+	Input.type = INPUT_KEYBOARD;
+	Input.ki = kb;
+
+	::SendInput(1,&Input,sizeof(Input));
+
+	//keyup
+	kb.wVk    =  0;
+	kb.wScan = vk;/*enter unicode here*/;
+	kb.dwFlags = KEYEVENTF_UNICODE|KEYEVENTF_KEYUP; //KEYEVENTF_UNICODE=4
+	Input.type = INPUT_KEYBOARD;
+	Input.ki = kb;
+
+	::SendInput(1,&Input,sizeof(Input));
 }
 
 
@@ -85,31 +118,36 @@ LRESULT CALLBACK keyboardHookProc(int nCode, WPARAM wParam, LPARAM lParam) {
 
 PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT) (lParam);
 
-//define meiezhuthukal array
-//க   ங 	   ச   ஞ  ட  ண 	த  ந   ப   ம   ய  ர   ல  வ  ழ   ள  ற  ன
-//h   b   [   ]  o   p  l  ;  j  k   '  m  n  v   /  y  u  i
-DWORD meiezhuthukkal[] = {0x48, 0x42, 0xDB, 0xDD, 0x4F, 0x50,0x4C, 0xBA, 0x4A, 0x4B, 0xDE, 0x4D, 0x4E, 
-						  0x56, 0xBF, 0x59, 0x55, 0x49 };
 
 if (wParam == WM_KEYDOWN){
 //in future the below logic should be moved to another keyboardLogic function.
 
+    bool isShiftPressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
+	bool isCapslockOn = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
+
 	switch (p->vkCode) {
 	//Q row keys
 	case 0x51 : //Q/ஆ
-		if(SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ){
-			GenerateKey(3006,FALSE);
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
+			GenerateKey(3006,FALSE); //ா
+		}
+		else if (isShiftPressed){
+			GenerateKey(3000,FALSE); //ஸ
 		}
 		else{
-			GenerateKey(2950,FALSE);
+			GenerateKey(2950,FALSE); //ஆ
 		}
+		
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;		
 		return 1;
 
 	case 0x57 : //W/ஈ
-		if(SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3008,FALSE);
+		}
+		else if (isShiftPressed){
+			GenerateKey(2999,FALSE); //ஷ
 		}
 		else{
 			GenerateKey(2952,FALSE);
@@ -119,8 +157,11 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 
 	case 0x45 : //E/ஊ 
-		if(SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3010,FALSE);
+		}
+		else if (isShiftPressed){
+			GenerateKey(2972,FALSE); //ஜ
 		}
 		else{
 			GenerateKey(2954,FALSE);
@@ -130,8 +171,11 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 
 	case 0x52 : //R/ஐ
-		if(SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3016,FALSE);
+		}
+		else if (isShiftPressed){
+			GenerateKey(3001,FALSE); //ஹ
 		}
 		else{
 			GenerateKey(2960,FALSE);
@@ -141,8 +185,13 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 
 	case 0x54 : //T/ஏ
-		if(SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3015,FALSE);
+		}
+		else if (isShiftPressed){
+			GenerateKey(2965,FALSE); //க்ஷ 
+			GenerateKey(3021,FALSE); 
+			GenerateKey(2999,FALSE); 
 		}
 		else{
 			GenerateKey(2959,FALSE);
@@ -243,7 +292,7 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 	
 	case 0x53: //S/இ
-		if(SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3007,FALSE);
 		}
 		else{
@@ -254,7 +303,7 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 
 	case 0x44: //D/உ
-		if(SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3009,FALSE);
 		}
 		else{
@@ -265,7 +314,7 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 
 	case 0x46: //F/ஃ
-		if(SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3021,FALSE);
 		}
 		else{
@@ -276,7 +325,7 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 
 	case 0x47: //G/எ
-		if(SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3014,FALSE);
 		}
 		else{
@@ -367,7 +416,7 @@ if (wParam == WM_KEYDOWN){
 
 	// Z row keys
 	case 0x5A: //Z / ஔ
-		if(SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3020,FALSE);
 		}
 		else{
@@ -378,7 +427,7 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 	
 	case 0x58: //X/ஓ
-		if(SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3019,FALSE);
 		}
 		else{
@@ -389,7 +438,7 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 	
 	case 0x43: //C/ஒ
-		if(SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3018,FALSE);
 		}
 		else{
