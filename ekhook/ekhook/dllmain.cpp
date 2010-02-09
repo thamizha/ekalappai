@@ -152,39 +152,81 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 
 	case 0x59 : //Y/ள
+		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+			GenerateKey(3021,FALSE);
+			GenerateKey(2995,FALSE);
+		}
+		else {
+			GenerateKey(2995,FALSE);
+		}
 		previous_2_vkCode = previous_1_vkCode;
-		previous_1_vkCode = p->vkCode;
-		GenerateKey(2995,FALSE);
+		previous_1_vkCode = p->vkCode;		
 		return 1;
 
 	case 0x55 : //U/ற
+		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+			GenerateKey(3021,FALSE);
+			GenerateKey(2993,FALSE);
+		}
+		else {
+			GenerateKey(2993,FALSE);
+		}
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
-		GenerateKey(2993,FALSE);
 		return 1;
 
 	case 0x49 : //I/ன
+		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+			GenerateKey(3021,FALSE);
+			GenerateKey(2985,FALSE);
+		}
+		else {
+			GenerateKey(2985,FALSE);
+		}
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
-		GenerateKey(2985,FALSE);
 		return 1;
 
 	case 0x4F : //O/ட
+		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+			GenerateKey(3021,FALSE);
+			GenerateKey(2975,FALSE);
+		}
+		else {
+			GenerateKey(2975,FALSE);
+		}
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
-		GenerateKey(2975,FALSE);
 		return 1;
 
 	case 0x50 : //P/ண 
+		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+			GenerateKey(3021,FALSE);
+			GenerateKey(2979,FALSE);
+		}
+		else {
+			GenerateKey(2979,FALSE);
+		}
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
-		GenerateKey(2979,FALSE);
 		return 1;
 	
 	case 0xDB: //[/ச
+		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+			GenerateKey(3021,FALSE);
+			GenerateKey(2970,FALSE);
+		}
+		else {
+			GenerateKey(2970,FALSE);
+		}
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
-		GenerateKey(2970,FALSE);
 		return 1;
 
 	case 0xDD: //]/ஞ
@@ -245,39 +287,82 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 
 	case 0x48: //H/க
+		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+			GenerateKey(3021,FALSE);
+			GenerateKey(2965,FALSE);
+		}
+		else {
+			GenerateKey(2965,FALSE);
+		}
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
-		GenerateKey(2965,FALSE);
 		return 1;
 
 	case 0x4A: //J/ப
+		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+			GenerateKey(3021,FALSE);
+			GenerateKey(2986,FALSE);
+		}
+		else {
+			GenerateKey(2986,FALSE);
+		}
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
-		GenerateKey(2986,FALSE);
 		return 1;
 
 	case 0x4B: //K/ம
+		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+			GenerateKey(3021,FALSE);
+			GenerateKey(2990,FALSE);
+		}
+		else {
+			GenerateKey(2990,FALSE);
+		}
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
-		GenerateKey(2990,FALSE);
 		return 1;
 
 	case 0x4C: //L/த
+		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+			GenerateKey(3021,FALSE);
+			GenerateKey(2980,FALSE);
+		}
+		else {
+			GenerateKey(2980,FALSE);
+		}
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
-		GenerateKey(2980,FALSE);
 		return 1;
 	
 	case 0xBA: //;/ந
+		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+			GenerateKey(3021,FALSE);
+			GenerateKey(2984,FALSE);
+		}
+		else {
+			GenerateKey(2984,FALSE);
+		}
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
-		GenerateKey(2984,FALSE);
 		return 1;
 
 	case 0xDE: //'/ய
+		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+			GenerateKey(3021,FALSE);
+			GenerateKey(2991,FALSE);
+		}
+		else {
+			GenerateKey(2991,FALSE);
+		}
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
-		GenerateKey(2991,FALSE);
+		//GenerateKey(2991,FALSE);
 		return 1;
 
 	// Z row keys
@@ -315,33 +400,68 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 
 	case 0x56: //V/வ 
+		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+			GenerateKey(3021,FALSE);
+			GenerateKey(2997,FALSE);
+		}
+		else {
+			GenerateKey(2997,FALSE);
+		}
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
-		GenerateKey(2997,FALSE);
 		return 1;
 
 	case 0x42: //B/ங
+		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+			GenerateKey(3021,FALSE);
+			GenerateKey(2969,FALSE);
+		}
+		else {
+			GenerateKey(2969,FALSE);
+		}
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
-		GenerateKey(2969,FALSE);
 		return 1;
 
 	case 0x4E: //N/ல
+		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+			GenerateKey(3021,FALSE);
+			GenerateKey(2994,FALSE);
+		}
+		else {
+			GenerateKey(2994,FALSE);
+		}
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
-		GenerateKey(2994,FALSE);
 		return 1;
 
 	case 0x4D: //M/ர
+		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+			GenerateKey(3021,FALSE);
+			GenerateKey(2992,FALSE);
+		}
+		else {
+			GenerateKey(2992,FALSE);
+		}
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
-		GenerateKey(2992,FALSE);
 		return 1;
 
 	case 0xBF: // / /ழ
+		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+			GenerateKey(3021,FALSE);
+			GenerateKey(2996,FALSE);
+		}
+		else {
+			GenerateKey(2996,FALSE);
+		}
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
-		GenerateKey(2996,FALSE);
 		return 1;
 	//default:
 
