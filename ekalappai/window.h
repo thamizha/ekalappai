@@ -59,7 +59,7 @@ private:
     void createIconGroupBox();
     void createActions();
     void createTrayIcon();
-    void callHook();
+    void callHook(int kb_index);
     void removeHook();
 
     QGroupBox *iconGroupBox;

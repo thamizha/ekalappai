@@ -32,27 +32,35 @@ static int capslock_on = 0;
 
 #pragma comment(linker, "/SECTION:.HOOKDATA,RWS")
 
-
-//define meiezhuthukal array
+//define meiezhuthukal keystrokes array for tamil99
 //க   ங 	   ச   ஞ  ட  ண 	த  ந   ப   ம   ய  ர   ல  வ  ழ   ள  ற  ன
 //h   b   [   ]  o   p  l  ;  j  k   '  m  n  v   /  y  u  i
 DWORD meiezhuthukkal[] = {0x48, 0x42, 0xDB, 0xDD, 0x4F, 0x50,0x4C, 0xBA, 0x4A, 0x4B, 0xDE, 0x4D, 0x4E, 
 						  0x56, 0xBF, 0x59, 0x55, 0x49 };
 
-
-
+// meiezhuthu keystrokes for phonetic, it includes the grantha ezhuthukal also
+//w r t y p s d f g h  k l z x c v b n m
+//shift+s , shift+l , shift + r , shift+ N 
+DWORD meiezhuthukkal_phonetic[] = {0x57, 0x52, 0x54, 0x59, 0x50, 0x53, 0x44, 0x46, 0x47, 0x48, 
+									0x4B, 0x4C, 0x5A, 0x58, 0x43, 0x56, 0x42, 0x4E, 0x4D  };
 
 //Helper functions//
-int SearchArray (DWORD array[], DWORD key)
+bool SearchArray (DWORD array[], DWORD key, int length)
 {
 	int index = 0;  	
-	while( (index < 18) && (key != array[index]))
+	while( (index < length) && (key != array[index]))
 	{ 
 		if (array[index] != key)
 			index++;
 	}
-	return (index);                           
-} 
+
+	if (index < length){
+		return true;
+	}
+	else{ 
+		return false;
+	}
+}
 
 
 bool IsPrevkeyGrantha()
@@ -114,21 +122,22 @@ void KeyboardLogic()
 }
 */
 
-LRESULT CALLBACK keyboardHookProc(int nCode, WPARAM wParam, LPARAM lParam) {
+LRESULT CALLBACK keyboardHookProc_tamil99(int nCode, WPARAM wParam, LPARAM lParam) {
 
 PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT) (lParam);
-
 
 if (wParam == WM_KEYDOWN){
 //in future the below logic should be moved to another keyboardLogic function.
 
     bool isShiftPressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
 	bool isCapslockOn = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
+	bool isAltPressed = ((GetKeyState(VK_MENU) & 0x80) == 0x80 ? true : false);
+	bool isCtlPressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
 
 	switch (p->vkCode) {
 	//Q row keys
 	case 0x51 : //Q/ஆ
-		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode, 18)) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3006,FALSE); //ா
 		}
 		else if (isShiftPressed){
@@ -143,7 +152,7 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 
 	case 0x57 : //W/ஈ
-		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode, 18 )) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3008,FALSE);
 		}
 		else if (isShiftPressed){
@@ -157,7 +166,7 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 
 	case 0x45 : //E/ஊ 
-		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode ,18) ) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3010,FALSE);
 		}
 		else if (isShiftPressed){
@@ -171,7 +180,7 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 
 	case 0x52 : //R/ஐ
-		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode, 18)) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3016,FALSE);
 		}
 		else if (isShiftPressed){
@@ -185,7 +194,7 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 
 	case 0x54 : //T/ஏ
-		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode,18 )) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3015,FALSE);
 		}
 		else if (isShiftPressed){
@@ -237,6 +246,7 @@ if (wParam == WM_KEYDOWN){
 		}
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
+
 		return 1;
 
 	case 0x4F : //O/ட
@@ -292,7 +302,7 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 	
 	case 0x53: //S/இ
-		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode, 18 )) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3007,FALSE);
 		}
 		else{
@@ -303,7 +313,7 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 
 	case 0x44: //D/உ
-		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode, 18)) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3009,FALSE);
 		}
 		else{
@@ -314,7 +324,7 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 
 	case 0x46: //F/ஃ
-		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode,18 )) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3021,FALSE);
 		}
 		else{
@@ -325,7 +335,7 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 
 	case 0x47: //G/எ
-		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode, 18 )) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3014,FALSE);
 		}
 		else{
@@ -416,7 +426,7 @@ if (wParam == WM_KEYDOWN){
 
 	// Z row keys
 	case 0x5A: //Z / ஔ
-		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode, 18 )) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3020,FALSE);
 		}
 		else{
@@ -427,7 +437,7 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 	
 	case 0x58: //X/ஓ
-		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode, 18 )) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3019,FALSE);
 		}
 		else{
@@ -438,27 +448,34 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 	
 	case 0x43: //C/ஒ
-		if((SearchArray(meiezhuthukkal, previous_1_vkCode ) < 18 ) || (IsPrevkeyGrantha()) ){
-			GenerateKey(3018,FALSE);
+		// if control + C is pressed copy functionality will be implemented
+		if(!isCtlPressed){
+			if((SearchArray(meiezhuthukkal, previous_1_vkCode,18 )) || (IsPrevkeyGrantha()) ){
+				GenerateKey(3018,FALSE);
+			}
+			else{
+				GenerateKey(2962,FALSE);
+			}
+			previous_2_vkCode = previous_1_vkCode;
+			previous_1_vkCode = p->vkCode;
 		}
-		else{
-			GenerateKey(2962,FALSE);
-		}
-		previous_2_vkCode = previous_1_vkCode;
-		previous_1_vkCode = p->vkCode;
+
 		return 1;
 
 	case 0x56: //V/வ 
-		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
-		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-			GenerateKey(3021,FALSE);
-			GenerateKey(2997,FALSE);
+		// if control + v is pressed paste functionality will be implemented
+		if(!isCtlPressed){
+			//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+			if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+				GenerateKey(3021,FALSE);
+				GenerateKey(2997,FALSE);
+			}
+			else {
+				GenerateKey(2997,FALSE);
+			}
+			previous_2_vkCode = previous_1_vkCode;
+			previous_1_vkCode = p->vkCode;
 		}
-		else {
-			GenerateKey(2997,FALSE);
-		}
-		previous_2_vkCode = previous_1_vkCode;
-		previous_1_vkCode = p->vkCode;
 		return 1;
 
 	case 0x42: //B/ங
@@ -512,7 +529,15 @@ if (wParam == WM_KEYDOWN){
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
 		return 1;
-	//default:
+
+	//case VK_SPACE: //tab/spac/return key is to prevent the mey modifiers from appearing after the blank spaces.
+	//case VK_TAB:
+	//case VK_RETURN:
+	default:
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		//GenerateKey(p->vkCode, FALSE);
+		return 0;
 
 	} //switch (p->vkCode)
 
@@ -523,10 +548,365 @@ return CallNextHookEx(NULL, nCode, wParam, lParam);
 }
 
 
-extern "C" __declspec(dllexport) HHOOK Init(HINSTANCE hInstance)
+
+//Callbak funtion to handle the phonetic keyboard, these functions need to be rewritten in a generic way later
+LRESULT CALLBACK keyboardHookProc_phonetic(int nCode, WPARAM wParam, LPARAM lParam) {
+
+PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT) (lParam);
+
+if (wParam == WM_KEYDOWN){
+//in future the below logic should be moved to another keyboardLogic function.
+
+    bool isShiftPressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
+	bool isCapslockOn = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
+	bool isAltPressed = ((GetKeyState(VK_MENU) & 0x80) == 0x80 ? true : false);
+	bool isCtlPressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
+
+	switch (p->vkCode) {
+	//Q row keys
+	case 0x51 : //Q/ஃ
+		if (isShiftPressed){
+			GenerateKey(3000,FALSE); //ஸ
+		}
+		else {
+			GenerateKey(2947,FALSE); //ஃ
+		}
+
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;		
+		return 1;
+
+	case 0x57 : //W/ந்
+
+		GenerateKey(2984,FALSE); //ந
+		GenerateKey(3021,FALSE); //pulli
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		return 1;
+
+	case 0x45 : //E/எ
+		if (isShiftPressed){
+				if(SearchArray(meiezhuthukkal_phonetic, previous_1_vkCode, 19) ){
+					GenerateKey(VK_BACK,FALSE); //backspace to delete the pulli
+					GenerateKey(3015, FALSE); //ே
+				}
+				else {
+					GenerateKey(2959,FALSE); //ஏ
+				}
+		} //shift pressed
+		else {
+				if(SearchArray(meiezhuthukkal_phonetic, previous_1_vkCode, 19) ){
+					GenerateKey(VK_BACK,FALSE); //backspace to delete the pulli
+					GenerateKey(3014, FALSE); //ெ
+				}
+				else {
+					GenerateKey(2958,FALSE); //எ
+				}
+		}
+
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		return 1;
+
+	case 0x52 : //R/ர்
+		if (isShiftPressed){
+			GenerateKey(2993,FALSE); //ற
+			GenerateKey(3021,FALSE); //pulli
+		}
+		else {
+			GenerateKey(2992,FALSE); //ர
+			GenerateKey(3021,FALSE); //pulli
+		}
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		return 1;
+
+	case 0x54 : //T/ட்
+		GenerateKey(2975,FALSE); //ட
+		GenerateKey(3021,FALSE); //pulli
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		return 1;
+
+	case 0x59 : //Y/ய்
+		GenerateKey(2991,FALSE); //ய
+		GenerateKey(3021,FALSE); //pulli
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;		
+		return 1;
+
+	case 0x55 : //U/உ
+		if (isShiftPressed){
+				if(SearchArray(meiezhuthukkal_phonetic, previous_1_vkCode, 19) ){
+					GenerateKey(VK_BACK,FALSE); //backspace to delete the pulli
+					GenerateKey(3010, FALSE); //ூ
+				}
+				else {
+					GenerateKey(2954,FALSE); //ஊ
+				}
+		} //shift pressed
+		else {
+				if(SearchArray(meiezhuthukkal_phonetic, previous_1_vkCode, 19) ){
+					GenerateKey(VK_BACK,FALSE); //backspace to delete the pulli
+					GenerateKey(3009, FALSE); //ு
+				}
+				else {
+					GenerateKey(2953,FALSE); //உ
+				}
+		}
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		return 1;
+
+	case 0x49 : //I/இ
+		if (isShiftPressed){
+				if(SearchArray(meiezhuthukkal_phonetic, previous_1_vkCode, 19) ){
+					GenerateKey(VK_BACK,FALSE); //backspace to delete the pulli
+					GenerateKey(3008, FALSE); //ீ
+				}
+				else {
+					GenerateKey(2952,FALSE); //ஈ
+				}
+		} //shift pressed
+		else {
+				if(SearchArray(meiezhuthukkal_phonetic, previous_1_vkCode, 19) ){
+					GenerateKey(VK_BACK,FALSE); //backspace to delete the pulli
+					GenerateKey(3007, FALSE); //ி
+				}
+				else {
+					GenerateKey(2951,FALSE); //இ
+				}
+		}
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+
+		return 1;
+
+	case 0x4F : //O/ஒ
+		if (isShiftPressed){
+				if(SearchArray(meiezhuthukkal_phonetic, previous_1_vkCode, 19) ){
+					GenerateKey(VK_BACK,FALSE); //backspace to delete the pulli
+					GenerateKey(3019, FALSE); //ோ
+				}
+				else {
+					GenerateKey(2963,FALSE); //ஓ
+				}
+		} //shift pressed
+		else {
+				if(SearchArray(meiezhuthukkal_phonetic, previous_1_vkCode, 19) ){
+					GenerateKey(VK_BACK,FALSE); //backspace to delete the pulli
+					GenerateKey(3018, FALSE); //ொ
+				}
+				else {
+					GenerateKey(2962,FALSE); //ஒ
+				}
+		}
+
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		return 1;
+
+	case 0x50 : //P/ப்
+		GenerateKey(2986,FALSE); //ப
+		GenerateKey(3021,FALSE); //pulli
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		return 1;
+	
+	// A row keys
+	case 0x41: //A/அ
+		if (isShiftPressed){
+				if(SearchArray(meiezhuthukkal_phonetic, previous_1_vkCode, 19) ){
+					GenerateKey(VK_BACK,FALSE); //backspace to delete the pulli
+					GenerateKey(3006, FALSE); //ா
+				}
+				else {
+					GenerateKey(2950,FALSE); //ஆ
+				}
+		} //shift pressed
+		else {
+				if(SearchArray(meiezhuthukkal_phonetic, previous_1_vkCode, 19) ){
+					GenerateKey(VK_BACK,FALSE); //backspace to delete the pulli
+				}
+				else {
+					GenerateKey(2949,FALSE); //அ
+				}
+		}
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+
+		return 1;
+	
+	case 0x53: //S/ச்
+		if (isShiftPressed){
+			GenerateKey(3000,FALSE); //ஸ
+			GenerateKey(3021,FALSE); //pulli
+		}
+		else {
+			GenerateKey(2970,FALSE); //ச
+			GenerateKey(3021,FALSE); //pulli
+		}
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;	
+		return 1;
+
+	case 0x44: //D/ட்
+		GenerateKey(2975,FALSE); //ட
+		GenerateKey(3021,FALSE); //pulli
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		return 1;
+
+	case 0x46: //F/ஃ
+		GenerateKey(2947,FALSE); //ஃ
+		GenerateKey(2986,FALSE); //ப
+		GenerateKey(3021,FALSE); //pulli
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;	
+		return 1;
+
+	case 0x47: //G/க்
+		GenerateKey(2965,FALSE); //க
+		GenerateKey(3021,FALSE); //pulli
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		return 1;
+
+	case 0x48: //H/ஹ்
+		if( previous_1_vkCode == 0x54){
+			GenerateKey(VK_BACK,FALSE); 
+			GenerateKey(VK_BACK,FALSE); //2 backspaces to delete ட் 
+			GenerateKey(2980,FALSE); //2980
+			GenerateKey(3021,FALSE); //pulli
+		}
+		else {
+			GenerateKey(3001,FALSE); //ஹ
+			GenerateKey(3021,FALSE); //pulli
+		}
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		return 1;
+
+	case 0x4A: //J/ஜ் 
+		GenerateKey(2972,FALSE); //ஹ
+		GenerateKey(3021,FALSE); //pulli
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		return 1;
+
+	case 0x4B: //K/க்
+		GenerateKey(2965,FALSE); //க
+		GenerateKey(3021,FALSE); //pulli
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		return 1;
+
+	case 0x4C: //L/ல்
+		if (isShiftPressed){
+			GenerateKey(2995,FALSE); //ஸ
+			GenerateKey(3021,FALSE); //pulli
+		}
+		else {
+			GenerateKey(2994,FALSE); //ல்
+			GenerateKey(3021,FALSE); //pulli
+		}
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		return 1;
+	
+	// Z row keys
+	case 0x5A: //Z / ழ்
+		GenerateKey(2996,FALSE); //ழ
+		GenerateKey(3021,FALSE); //pulli
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		return 1;
+	
+	case 0x58: //X/க்ஷ்
+		GenerateKey(2965,FALSE); //க
+		GenerateKey(3021,FALSE); //pulli
+		GenerateKey(2999,FALSE); //க்ஷ 
+		GenerateKey(3021,FALSE); //pulli
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		return 1;
+	
+	case 0x43: //C/ச்
+		// if control + C is pressed copy functionality will be implemented
+		if(!isCtlPressed){
+			GenerateKey(2970,FALSE); //ச
+			GenerateKey(3021,FALSE); //pulli
+			previous_2_vkCode = previous_1_vkCode;
+			previous_1_vkCode = p->vkCode;
+		}
+		return 1;
+
+	case 0x56: //V/வ்
+		// if control + V is pressed copy functionality will be implemented
+		if(!isCtlPressed){
+			GenerateKey(2997,FALSE); //வ 
+			GenerateKey(3021,FALSE); //pulli
+			previous_2_vkCode = previous_1_vkCode;
+			previous_1_vkCode = p->vkCode;
+		}
+		return 1;
+
+	case 0x42: //B/ப் 
+		GenerateKey(2986,FALSE); //ப
+		GenerateKey(3021,FALSE); //pulli
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		return 1;
+
+	case 0x4E: //N/ன்
+		if (isShiftPressed){
+			GenerateKey(2979,FALSE); //ண
+			GenerateKey(3021,FALSE); //pulli
+		}
+		else {
+			GenerateKey(2985,FALSE); //ன
+			GenerateKey(3021,FALSE); //pulli
+		}
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		return 1;
+
+	case 0x4D: //M/ம் 
+		GenerateKey(2990,FALSE); //ம
+		GenerateKey(3021,FALSE); //pulli
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		return 1;
+
+	//case VK_SPACE: //tab/spac/return key is to prevent the mey modifiers from appearing after the blank spaces.
+	//case VK_TAB:
+	//case VK_RETURN:
+	default:
+		previous_2_vkCode = previous_1_vkCode;
+		previous_1_vkCode = p->vkCode;
+		//GenerateKey(p->vkCode, FALSE);
+		return 0;
+
+	} //switch (p->vkCode)
+
+	//return 1;
+ }
+
+return CallNextHookEx(NULL, nCode, wParam, lParam);
+}
+
+
+extern "C" __declspec(dllexport) HHOOK Init_tamil99(HINSTANCE hInstance)
 {
 		HHOOK hkb;
-        hkb = SetWindowsHookEx( WH_KEYBOARD_LL, keyboardHookProc, hInstance, 0 );
+        hkb = SetWindowsHookEx( WH_KEYBOARD_LL, keyboardHookProc_tamil99, hInstance, 0 );
+		return hkb;
+}
+
+extern "C" __declspec(dllexport) HHOOK Init_phonetic(HINSTANCE hInstance)
+{
+		HHOOK hkb;
+        hkb = SetWindowsHookEx( WH_KEYBOARD_LL, keyboardHookProc_phonetic, hInstance, 0 );
 		return hkb;
 }
 
@@ -557,4 +937,5 @@ BOOL APIENTRY DllMain( HINSTANCE  hModule,DWORD  reason, LPVOID lpReserved)
 	}
 	return TRUE;
 }
+
 

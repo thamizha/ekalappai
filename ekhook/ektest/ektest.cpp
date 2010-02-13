@@ -40,11 +40,11 @@ typedef void (*importFunction)(HINSTANCE);
  } 
 
  	// Get function pointer
-	initKey = (importFunction)GetProcAddress(hinst, "Init");
+	//initKey = (importFunction)GetProcAddress(hinst, "Init_tamil99");
+	initKey = (importFunction)GetProcAddress(hinst, "Init_phonetic");
 
 	initKey(hinst);
  
-
 	MessageBox(NULL, L"Press OK to stop logging.", L"Information", MB_OK);
 
 	// Unload DLL file
@@ -52,3 +52,5 @@ typedef void (*importFunction)(HINSTANCE);
 
 return 0;
 }
+
+

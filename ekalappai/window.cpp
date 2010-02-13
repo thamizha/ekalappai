@@ -83,15 +83,15 @@ void Window::setIcon(int index)
     setWindowIcon(icon);
     trayIcon->setToolTip(iconComboBox->itemText(index));
 
-    //logic to start keyboard hook or remove keyboard hook based on the keyboard choosen
-    if(index == 0){
-        //when no keyboard is selected stop the keyboard hook
-        removeHook();
-    }
-    else{
-        //start keyboard hook
-        callHook();
-    }
+
+    //call remove hook before cecking for the keyboard choosen .
+    removeHook();
+
+    //logic to start a keyboard hook or remove keyboard hook based on the keyboard choosen
+    if(index > 0){
+        //start the selected keyboard hooks if index > 0, i.e when some keyboard is selected.
+        callHook(index);
+     }
     showTrayMessage(index);
 }
 
@@ -132,6 +132,7 @@ void Window::createIconGroupBox()
     iconComboBox = new QComboBox;
     iconComboBox->addItem(QIcon(":/images/nokey.png"), tr("No Keyboard"));
     iconComboBox->addItem(QIcon(":/images/logo.png"), tr("Tamil99"));
+    iconComboBox->addItem(QIcon(":/images/logo.png"), tr("Phonetic"));
 
     QHBoxLayout *iconLayout = new QHBoxLayout;
     iconLayout->addWidget(iconLabel);
@@ -168,9 +169,16 @@ void Window::createTrayIcon()
     trayIcon->setContextMenu(trayIconMenu);
 }
 
-void Window::callHook(){
+void Window::callHook(int kb_index){
     MyPrototype myFunction;
-    myFunction = (MyPrototype) myLib->resolve( "Init" );
+    switch (kb_index) {
+    case 1:
+        myFunction = (MyPrototype) myLib->resolve( "Init_tamil99" );
+        break;
+    case 2:
+        myFunction = (MyPrototype) myLib->resolve( "Init_phonetic" );
+        break;
+    }
 
     if ( myFunction ) {
         hkb = myFunction(GetModuleHandle(0));
@@ -182,3 +190,4 @@ void Window::removeHook(){
     cleanupHook = (CleanupHook) myLib->resolve( "Cleanup" );
     cleanupHook(hkb);
 }
+
