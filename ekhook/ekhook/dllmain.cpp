@@ -390,6 +390,10 @@ if (wParam == WM_KEYDOWN){
 			GenerateKey(3021,FALSE);
 			GenerateKey(2980,FALSE);
 		}
+		else if(previous_1_vkCode == 0xBA) { //if previous letter is ந, it should be made as mei
+			GenerateKey(3021,FALSE);
+			GenerateKey(2980,FALSE);
+		}
 		else {
 			GenerateKey(2980,FALSE);
 		}
