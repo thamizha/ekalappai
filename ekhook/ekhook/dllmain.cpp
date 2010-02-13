@@ -295,9 +295,17 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 
 	case 0xDD: //]/ஞ
+		//ஒரே அகர மெய்யெழுத்து இரண்டு முறை வந்தால், முதல் மெய்யாக மாறவேண்டும்
+		if((previous_1_vkCode == p->vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
+			GenerateKey(3021,FALSE);
+			GenerateKey(2974,FALSE);
+		}
+		else {
+			GenerateKey(2974,FALSE);
+		}
 		previous_2_vkCode = previous_1_vkCode;
 		previous_1_vkCode = p->vkCode;
-		GenerateKey(2974,FALSE);
+
 		return 1;
 
 	// A row keys
@@ -330,7 +338,7 @@ if (wParam == WM_KEYDOWN){
 		return 1;
 
 	case 0x46: //F/ஃ
-		if((SearchArray(meiezhuthukkal, previous_1_vkCode,18 )) || (IsPrevkeyGrantha()) ){
+		if((SearchArray(meiezhuthukkal, previous_1_vkCode, 18 )) || (IsPrevkeyGrantha()) ){
 			GenerateKey(3021,FALSE);
 		}
 		else{
