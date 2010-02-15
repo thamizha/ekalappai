@@ -130,9 +130,9 @@ void Window::createIconGroupBox()
     iconLabel = new QLabel("Keyboard:");
 
     iconComboBox = new QComboBox;
-    iconComboBox->addItem(QIcon(":/images/nokey.png"), tr("No Keyboard"));
-    iconComboBox->addItem(QIcon(":/images/logo.png"), tr("Tamil99"));
-    iconComboBox->addItem(QIcon(":/images/logo.png"), tr("Phonetic"));
+    iconComboBox->addItem(QIcon(":/images/ekalappai_icons_en.png"), tr("No Keyboard"));
+    iconComboBox->addItem(QIcon(":/images/ekalappai_icons_tn99.png"), tr("Tamil99"));
+    iconComboBox->addItem(QIcon(":/images/ekalappai_icons_anjal.png"), tr("Phonetic"));
 
     QHBoxLayout *iconLayout = new QHBoxLayout;
     iconLayout->addWidget(iconLabel);

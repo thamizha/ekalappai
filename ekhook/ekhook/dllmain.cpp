@@ -606,6 +606,19 @@ if (wParam == WM_KEYDOWN){
 					GenerateKey(2959,FALSE); //ஏ
 				}
 		} //shift pressed
+		else if(previous_1_vkCode == p->vkCode) {
+				if(SearchArray(meiezhuthukkal_phonetic, previous_2_vkCode, 20) ){
+					GenerateKey(VK_BACK,FALSE); //delete previous எ
+					GenerateKey(3015, FALSE); //ே
+				}
+				else {
+					GenerateKey(VK_BACK,FALSE); //delete previous எ
+					GenerateKey(2959,FALSE); //ஏ
+				}
+			previous_2_vkCode = previous_1_vkCode;
+			previous_1_vkCode = NULL;
+			return 1;
+		}
 		else {
 				if(SearchArray(meiezhuthukkal_phonetic, previous_1_vkCode, 20) ){
 					GenerateKey(VK_BACK,FALSE); //backspace to delete the pulli
@@ -657,6 +670,19 @@ if (wParam == WM_KEYDOWN){
 					GenerateKey(2954,FALSE); //ஊ
 				}
 		} //shift pressed
+		else if(previous_1_vkCode == p->vkCode) {
+				if(SearchArray(meiezhuthukkal_phonetic, previous_2_vkCode, 20) ){
+					GenerateKey(VK_BACK,FALSE); //delete previous உ
+					GenerateKey(3010, FALSE); //ூ
+				}
+				else {
+					GenerateKey(VK_BACK,FALSE); //delete previous உ
+					GenerateKey(2954,FALSE); //ஊ
+				}
+			previous_2_vkCode = previous_1_vkCode;
+			previous_1_vkCode = NULL;
+			return 1;
+		}
 		else {
 				if(SearchArray(meiezhuthukkal_phonetic, previous_1_vkCode, 20) ){
 					GenerateKey(VK_BACK,FALSE); //backspace to delete the pulli
@@ -680,6 +706,19 @@ if (wParam == WM_KEYDOWN){
 					GenerateKey(2952,FALSE); //ஈ
 				}
 		} //shift pressed
+		else if(previous_1_vkCode == p->vkCode) { //double kuril press 
+				if(SearchArray(meiezhuthukkal_phonetic, previous_2_vkCode, 20) ){
+					GenerateKey(VK_BACK,FALSE);
+					GenerateKey(3008, FALSE); //ீ
+				}
+				else {
+					GenerateKey(VK_BACK,FALSE); //delete previous இ
+					GenerateKey(2952,FALSE); //ஈ
+				}
+			previous_2_vkCode = previous_1_vkCode;
+			previous_1_vkCode = NULL;
+			return 1;
+		}
 		else {
 				if(SearchArray(meiezhuthukkal_phonetic, previous_1_vkCode, 20) ){
 					GenerateKey(VK_BACK,FALSE); //backspace to delete the pulli
@@ -712,6 +751,19 @@ if (wParam == WM_KEYDOWN){
 					GenerateKey(2963,FALSE); //ஓ
 				}
 		} //shift pressed
+		else if(previous_1_vkCode == p->vkCode) { //double kuril press 
+				if(SearchArray(meiezhuthukkal_phonetic, previous_2_vkCode, 20) ){
+					GenerateKey(VK_BACK,FALSE);
+					GenerateKey(3019, FALSE); //ோ
+				}
+				else {
+					GenerateKey(VK_BACK,FALSE); //delete previous ஒ
+					GenerateKey(2963,FALSE); //ஓ
+				}
+			previous_2_vkCode = previous_1_vkCode;
+			previous_1_vkCode = NULL;
+			return 1;
+		}
 		else {
 				if(SearchArray(meiezhuthukkal_phonetic, previous_1_vkCode, 20) ){
 					GenerateKey(VK_BACK,FALSE); //backspace to delete the pulli
@@ -744,6 +796,19 @@ if (wParam == WM_KEYDOWN){
 					GenerateKey(2950,FALSE); //ஆ
 				}
 		} //shift pressed
+		else if(previous_1_vkCode == p->vkCode) {
+				if(SearchArray(meiezhuthukkal_phonetic, previous_2_vkCode, 20) ){
+					GenerateKey(3006, FALSE); //ா
+				}
+				else {
+					GenerateKey(VK_BACK,FALSE); //delete previous a
+					GenerateKey(2950,FALSE); //ஆ
+				}
+			previous_2_vkCode = previous_1_vkCode;
+			previous_1_vkCode = NULL;
+
+			return 1;
+		}
 		else {
 				if(SearchArray(meiezhuthukkal_phonetic, previous_1_vkCode, 20) ){
 					GenerateKey(VK_BACK,FALSE); //backspace to delete the pulli
