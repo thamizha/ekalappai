@@ -34,7 +34,6 @@ int main(int argc, char *argv[])
     QSplashScreen splash(pix);
     splash.show();
 
-    app.processEvents();
     Sleep(2000);
     splash.showMessage("Ready!");
     Sleep(500);

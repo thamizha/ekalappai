@@ -55,13 +55,19 @@ Window::Window()
     iconComboBox->setCurrentIndex(1);
     trayIcon->show();
 
+    //this timer is addd to check the keyboard status regularly(after current queue is finished) and change the keyboard
+    // note to developers: this method could be used to get the keys pressed info from dll also and call generatekey function from here
+    //based on the keyboard logic. This way we could move the keyboard logic out of ekhook.dll
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(getKeyboardStatus()));
+    timer->start();
+
     setWindowTitle(tr("eKalappai 3.0"));
+
 }
 
 void Window::setVisible(bool visible)
 {
-  //  minimizeAction->setEnabled(visible);
-  //  maximizeAction->setEnabled(!isMaximized());
     settingsAction->setEnabled(isMaximized() || !visible);
     QDialog::setVisible(visible);
 }
@@ -75,7 +81,7 @@ void Window::closeEvent(QCloseEvent *event)
 }
 
 
-// This function is called when the tray icon is clicked (which causes increment in the index value)
+// This function is called when the tray icon is clicked
 void Window::setIcon(int index)
 {
     QIcon icon = iconComboBox->itemIcon(index);
@@ -88,12 +94,27 @@ void Window::setIcon(int index)
     removeHook();
 
     //logic to start a keyboard hook or remove keyboard hook based on the keyboard choosen
-    if(index > 0){
-        //start the selected keyboard hooks if index > 0, i.e when some keyboard is selected.
-        callHook(index);
-     }
+    callHook(index);
     showTrayMessage(index);
 }
+
+
+// This function is called when the tray icon is clicked
+void Window::changeKeyboard(int index)
+{
+    QIcon icon = iconComboBox->itemIcon(index);
+    trayIcon->setIcon(icon);
+    setWindowIcon(icon);
+    trayIcon->setToolTip(iconComboBox->itemText(index));
+
+    //call remove hook before cecking for the keyboard choosen .
+    removeHook();
+
+    //logic to start a keyboard hook or remove keyboard hook based on the keyboard choosen
+    callHook(index);
+    showTrayMessage(index);
+}
+
 
 void Window::iconActivated(QSystemTrayIcon::ActivationReason reason)
 {
@@ -119,7 +140,7 @@ void Window::showTrayMessage(int index)
     QString message;
 
     message = iconComboBox->itemText(index)+ " set";
-    trayIcon->showMessage("eKalappai 3.0",message, icon, 20 * 500);
+    trayIcon->showMessage("eKalappai 3.0",message, icon, 1000);
 }
 
 
@@ -159,8 +180,6 @@ void Window::createActions()
 void Window::createTrayIcon()
 {
     trayIconMenu = new QMenu(this);
-   // trayIconMenu->addAction(minimizeAction);
-   // trayIconMenu->addAction(maximizeAction);
     trayIconMenu->addAction(settingsAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);
@@ -174,15 +193,23 @@ void Window::callHook(int kb_index){
     switch (kb_index) {
     case 1:
         myFunction = (MyPrototype) myLib->resolve( "Init_tamil99" );
+        selected_keyboard = kb_index;
+        current_keyboard = kb_index;
         break;
     case 2:
         myFunction = (MyPrototype) myLib->resolve( "Init_phonetic" );
+        selected_keyboard = kb_index;
+        current_keyboard = kb_index;
         break;
+    default:
+        myFunction = (MyPrototype) myLib->resolve( "Init_nokeyboard" );
+        current_keyboard = 0;
+        break;        
     }
-
     if ( myFunction ) {
         hkb = myFunction(GetModuleHandle(0));
     }
+
 }
 
 void Window::removeHook(){
@@ -191,3 +218,19 @@ void Window::removeHook(){
     cleanupHook(hkb);
 }
 
+void Window::getKeyboardStatus(){
+    int keyboard_status;
+    GetKeyboardStatus getkbstatus;
+    getkbstatus = (GetKeyboardStatus) myLib->resolve( "GetKeyboardStatus" );
+    keyboard_status = getkbstatus();
+    if(keyboard_status){
+        if(current_keyboard == 0){
+            changeKeyboard(selected_keyboard);
+        }
+
+    }else{
+            if(current_keyboard > 0){
+                changeKeyboard(0);
+            }
+    }
+}

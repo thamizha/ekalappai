@@ -26,6 +26,11 @@ static DWORD previous_2_vkCode = NULL;
 static int previous_1_character = NULL;
 static int previous_2_character = NULL;
 
+static DWORD short_cut_key = 0x1B; //(escape key)
+
+//this stores the status of the keyboard which will be queried by the Qt application at regular intervals
+static bool keyboard_enabled = true; 
+
 static int capslock_on = 0;
 
 #pragma data_seg()
@@ -134,12 +139,23 @@ if (wParam == WM_KEYDOWN){
 	bool isAltPressed = ((GetKeyState(VK_MENU) & 0x80) == 0x80 ? true : false);
 	bool isCtlPressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
 
+	//toggle the keyboard_enabled flag based on the shortcut key placed
+	if(p->vkCode == short_cut_key){
+		if (keyboard_enabled)
+			keyboard_enabled = false;
+		else
+			keyboard_enabled = true;
+	}
+
 	//Do not handle the keystrokes if control key is pressed - let the system handle them.
 	if(isCtlPressed)
 	{
 		return 0;
 	}
 
+//if keyboard is not enabled dont handle the keystrokes
+if(keyboard_enabled)
+{
 	switch (p->vkCode) {
 	//Q row keys
 	case 0x51 : //Q/ஆ
@@ -547,10 +563,38 @@ if (wParam == WM_KEYDOWN){
 		return 0;
 
 	} //switch (p->vkCode)
+} //if keyboard enabled
+else {
+	return 0;
+}
 
  }
 
 return CallNextHookEx(NULL, nCode, wParam, lParam);
+}
+
+
+//Callbak funtion to handle the phonetic keyboard, these functions need to be rewritten in a generic way later
+LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lParam) {
+
+PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT) (lParam);
+
+if (wParam == WM_KEYDOWN){
+//in future the below logic should be moved to another keyboardLogic function.
+
+    bool isShiftPressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
+	bool isCapslockOn = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
+	bool isAltPressed = ((GetKeyState(VK_LMENU) & 0x80) == 0x80 ? true : false);
+	bool isCtlPressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
+
+	//toggle the keyboard_enabled flag based on the shortcut key placed
+	if(p->vkCode == short_cut_key){
+			keyboard_enabled = true;
+	}
+	return 0;
+} //if wParam == WM_KEYDOWN
+
+	return CallNextHookEx(NULL, nCode, wParam, lParam);
 }
 
 
@@ -565,8 +609,16 @@ if (wParam == WM_KEYDOWN){
 
     bool isShiftPressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
 	bool isCapslockOn = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
-	bool isAltPressed = ((GetKeyState(VK_MENU) & 0x80) == 0x80 ? true : false);
+	bool isAltPressed = ((GetKeyState(VK_LMENU) & 0x80) == 0x80 ? true : false);
 	bool isCtlPressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
+
+	//toggle the keyboard_enabled flag based on the shortcut key placed
+	if(p->vkCode == short_cut_key){
+		if (keyboard_enabled)
+			keyboard_enabled = false;
+		else
+			keyboard_enabled = true;
+	}
 
 	//Do not handle the keystrokes if control key is pressed - let the system handle them.
 	if(isCtlPressed)
@@ -574,6 +626,9 @@ if (wParam == WM_KEYDOWN){
 		return 0;
 	}
 
+//if keyboard is not enabled dont handle the keystrokes
+if(keyboard_enabled)
+{
 	switch (p->vkCode) {
 	//Q row keys
 	case 0x51 : //Q/ஃ
@@ -982,6 +1037,10 @@ if (wParam == WM_KEYDOWN){
 		return 0;
 
 	} //switch (p->vkCode)
+} //if keyboard enabled
+else {
+	return 0;
+}
 
  }
 
@@ -991,6 +1050,7 @@ return CallNextHookEx(NULL, nCode, wParam, lParam);
 
 extern "C" __declspec(dllexport) HHOOK Init_tamil99(HINSTANCE hInstance)
 {
+		keyboard_enabled = true; 
 		HHOOK hkb;
         hkb = SetWindowsHookEx( WH_KEYBOARD_LL, keyboardHookProc_tamil99, hInstance, 0 );
 		return hkb;
@@ -998,8 +1058,17 @@ extern "C" __declspec(dllexport) HHOOK Init_tamil99(HINSTANCE hInstance)
 
 extern "C" __declspec(dllexport) HHOOK Init_phonetic(HINSTANCE hInstance)
 {
+		keyboard_enabled = true; 
 		HHOOK hkb;
         hkb = SetWindowsHookEx( WH_KEYBOARD_LL, keyboardHookProc_phonetic, hInstance, 0 );
+		return hkb;
+}
+
+extern "C" __declspec(dllexport) HHOOK Init_nokeyboard(HINSTANCE hInstance)
+{
+		keyboard_enabled = false; 
+		HHOOK hkb;
+        hkb = SetWindowsHookEx( WH_KEYBOARD_LL, keyboardHookProc_nokeyboard, hInstance, 0 );
 		return hkb;
 }
 
@@ -1010,6 +1079,12 @@ extern "C" __declspec(dllexport) void Cleanup(HHOOK hkb)
 
        // hkb = NULL;
 }
+
+extern "C" __declspec(dllexport) int GetKeyboardStatus()
+{
+	return keyboard_enabled;
+}
+
 
 
 BOOL APIENTRY DllMain( HINSTANCE  hModule,DWORD  reason, LPVOID lpReserved)

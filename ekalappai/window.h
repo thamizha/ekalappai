@@ -46,6 +46,8 @@ public:
     Window();
 
     void setVisible(bool visible);
+    int selected_keyboard;
+    int current_keyboard;
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -54,6 +56,7 @@ private slots:
     void setIcon(int index);
     void iconActivated(QSystemTrayIcon::ActivationReason reason);
     void showTrayMessage(int index);
+    void getKeyboardStatus();
 
 private:
     void createIconGroupBox();
@@ -61,6 +64,7 @@ private:
     void createTrayIcon();
     void callHook(int kb_index);
     void removeHook();
+    void changeKeyboard(int index);
 
     QGroupBox *iconGroupBox;
     QLabel *iconLabel;
@@ -78,8 +82,11 @@ private:
 
     QLibrary *myLib;
     HHOOK hkb;
+
     typedef HHOOK (*MyPrototype)(HINSTANCE);
-    typedef HHOOK (*CleanupHook)(HHOOK);
+    typedef void (*CleanupHook)(HHOOK);
+    typedef void (*DisableKeyboard)();
+    typedef bool (*GetKeyboardStatus)();
 };
 
 #endif
