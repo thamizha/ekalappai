@@ -46,8 +46,13 @@ public:
     Window();
 
     void setVisible(bool visible);
+
+    //choosen keyboard
     int selected_keyboard;
+
+    //status of the current keyboard including no keyboard
     int current_keyboard;
+
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -56,7 +61,7 @@ private slots:
     void setIcon(int index);
     void iconActivated(QSystemTrayIcon::ActivationReason reason);
     void showTrayMessage(int index);
-    void getKeyboardStatus();
+    void processKeypressEvent();
 
 private:
     void createIconGroupBox();
@@ -65,6 +70,10 @@ private:
     void callHook(int kb_index);
     void removeHook();
     void changeKeyboard(int index);
+    void implementTamil99();
+    void implementPhonetic();
+    bool SearchArray (DWORD array[], DWORD key, int length);
+    bool IsPrevkeyGrantha();
 
     QGroupBox *iconGroupBox;
     QLabel *iconLabel;
@@ -83,10 +92,26 @@ private:
     QLibrary *myLib;
     HHOOK hkb;
 
-    typedef HHOOK (*MyPrototype)(HINSTANCE);
+    typedef HHOOK (*MyPrototype)(HINSTANCE, bool);
     typedef void (*CleanupHook)(HHOOK);
     typedef void (*DisableKeyboard)();
     typedef bool (*GetKeyboardStatus)();
+    typedef DWORD (*GetKeyPress)();
+    typedef void (*GenerateKey)(int, bool);
+    typedef bool (*GetShiftKeyPress)();
+
+    GenerateKey generatekey;
+
+    BOOL shiftkey_pressed;
+    DWORD current_vkCode;
+    DWORD previous_1_vkCode;
+    DWORD previous_2_vkCode;
+
+    int previous_1_character;
+    int previous_2_character;
+
+    QVector<DWORD> meiezhuthukkal;
+    QVector<DWORD> meiezhuthukkal_phonetic;
 };
 
 #endif
