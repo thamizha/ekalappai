@@ -70,13 +70,6 @@ Window::Window()
     iconComboBox->setCurrentIndex(1);
     trayIcon->show();
 
-    //this timer is addd to check the keyboard status regularly(after current queue is finished) and change the keyboard
-    // note to developers: this method could be used to get the keys pressed info from dll also and call generatekey function from here
-    //based on the keyboard logic. This way we could move the keyboard logic out of ekhook.dll
-    QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(processKeypressEvent()));
-    timer->start();
-
     setWindowTitle(tr("eKalappai 3.0"));
 
 }
@@ -95,6 +88,27 @@ void Window::closeEvent(QCloseEvent *event)
     }
 }
 
+
+bool Window::winEvent( MSG* message, long* result )
+{
+    UINT msg = message->message;
+    WPARAM wparam = message->wParam;
+    LPARAM lparam = message->lParam;
+
+//    PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT) (lp);
+
+    switch ( msg )
+    {
+        case WM_USER+755:
+            processKeypressEvent();
+            break;
+
+        default:
+            break;
+    }
+
+    return false;
+}
 
 // This function is called when the tray icon is clicked
 void Window::setIcon(int index)
@@ -221,7 +235,7 @@ void Window::callHook(int kb_index){
     current_keyboard = kb_index;
 
     if ( myFunction ) {
-        hkb = myFunction(GetModuleHandle(0),keyboard_enabled);
+        hkb = myFunction(GetModuleHandle(0),keyboard_enabled, this->winId());
     }
 
 }
@@ -238,6 +252,7 @@ void Window::removeHook(){
 void Window::processKeypressEvent(){
 
     //logic to check the keyboard status if enabled or disabled
+
     bool keyboard_status;
     GetKeyboardStatus getkbstatus;
     getkbstatus = (GetKeyboardStatus) myLib->resolve( "GetKeyboardStatus" );
@@ -249,19 +264,18 @@ void Window::processKeypressEvent(){
         }
 
     }else{
-           if(current_keyboard > 0){
+          if(current_keyboard > 0){
                 changeKeyboard(0);
-            }
+           }
     }
 
 
     if(current_vkCode == 0x0){
-        GetKeyPress getkeypress;
-        getkeypress = (GetKeyPress) myLib->resolve( "GetKeyPress" );
-        current_vkCode = getkeypress();
-       // getkeypress = null;
+       GetKeyPress getkeypress;
+       getkeypress = (GetKeyPress) myLib->resolve( "GetKeyPress" );
+       current_vkCode = getkeypress();
 
-        //get shift key info (notes: need to find a way to get all key info together.)
+       //get shift key info (notes: need to find a way to get all key info together.)
        GetShiftKeyPress getshiftkeypress;
        getshiftkeypress = (GetShiftKeyPress) myLib->resolve( "GetShiftKeyPress" );
        shiftkey_pressed = getshiftkeypress();

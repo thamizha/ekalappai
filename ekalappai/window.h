@@ -53,6 +53,7 @@ public:
     //status of the current keyboard including no keyboard
     int current_keyboard;
 
+    virtual bool winEvent( MSG* message, long* result );
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -92,7 +93,7 @@ private:
     QLibrary *myLib;
     HHOOK hkb;
 
-    typedef HHOOK (*MyPrototype)(HINSTANCE, bool);
+    typedef HHOOK (*MyPrototype)(HINSTANCE, bool, HWND);
     typedef void (*CleanupHook)(HHOOK);
     typedef void (*DisableKeyboard)();
     typedef bool (*GetKeyboardStatus)();

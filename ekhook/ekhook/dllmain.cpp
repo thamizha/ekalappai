@@ -36,7 +36,8 @@ static int previous_2_character = NULL;
 
 static DWORD short_cut_key = 0x1B; //(escape key)
 
- 
+static HWND callapp_hInst; //Hinstance of the calling exe 
+
 //this stores the status of the keyboard which will be queried by the Qt application at regular intervals
 static bool keyboard_enabled = true; 
 
@@ -67,7 +68,6 @@ bool SearchArray (DWORD array[], DWORD key, int length)
 		return false;
 	}
 }
-
 
 
 extern "C" __declspec(dllexport) void GenerateKey(int vk , bool bExtended)
@@ -103,14 +103,11 @@ extern "C" __declspec(dllexport) void GenerateKey(int vk , bool bExtended)
 //Callbak funtion to handle the phonetic keyboard, these functions need to be rewritten in a generic way later
 LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lParam) {
 
-PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT) (lParam);
+	PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT) (lParam);
 
-
-
-
-if (wParam == WM_KEYDOWN){
-current_vkCode = p->vkCode ;
-//in future the below logic should be moved to another keyboardLogic function.
+	if (wParam == WM_KEYDOWN){
+	current_vkCode = p->vkCode ;
+	PostMessage(callapp_hInst,WM_USER+755,wParam,lParam);
 
     shiftkey_pressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
 	bool isControlKey = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
@@ -128,6 +125,7 @@ current_vkCode = p->vkCode ;
 	//Do not handle the keystrokes if control key is pressed - let the system handle them.
 	if(isControlKey) 
 	{
+		//PostMessage(callapp_hInst,WM_KEYDOWN,wParam,lParam);
 		return 0;
 	}
 
@@ -135,7 +133,7 @@ current_vkCode = p->vkCode ;
 		if (keyboard_enabled)
 		{
 		keychanged = true;
-		return 1;
+		return 1;		
 		}
 		else {
 			return 0;
@@ -148,13 +146,9 @@ current_vkCode = p->vkCode ;
 }
 
 
-
-
-
-
-
-extern "C" __declspec(dllexport) HHOOK Init_nokeyboard(HINSTANCE hInstance, bool enabled)
+extern "C" __declspec(dllexport) HHOOK Init_nokeyboard(HINSTANCE hInstance, bool enabled, HWND hwnd)
 {
+		callapp_hInst = hwnd;
 		keyboard_enabled = enabled; 
 		HHOOK hkb;
         hkb = SetWindowsHookEx( WH_KEYBOARD_LL, keyboardHookProc_nokeyboard, hInstance, 0 );
