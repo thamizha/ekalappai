@@ -3,6 +3,8 @@
 Name "eKalappai"
 OutFile "eKalappai-3.0-alpha-installer.exe"
 
+RequestExecutionLevel admin
+
 LicenseText "You must agree to this license before installing."
 LicenseData "license.txt"
 
@@ -12,6 +14,7 @@ InstallDirRegKey HKEY_LOCAL_MACHINE "SOFTWARE\eKalappai" ""
 DirText "Select the directory to install eKalappai in:"
 
 Section "" ; (default section)
+SetShellVarContext all
 SetOutPath "$INSTDIR"
 
 #Installed files list
@@ -54,6 +57,7 @@ SectionEnd ; end of default section
 UninstallText "This will uninstall eKalappai from your system"
 
 Section Uninstall
+SetShellVarContext all
 
 #Uninstall files & folders
 Delete "$INSTDIR\ekuninstall.exe"
