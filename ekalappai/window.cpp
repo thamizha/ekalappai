@@ -170,7 +170,7 @@ void Window::showTrayMessage(int index)
     QString message;
 
     message = iconComboBox->itemText(index)+ " set";
-    trayIcon->showMessage("eKalappai 3.0",message, icon, 1000);
+    trayIcon->showMessage("eKalappai 3.0",message, icon, 100);
 }
 
 
@@ -715,23 +715,6 @@ void Window::implementTamil99(){
 void Window::implementPhonetic(){
 
     generatekey = (GenerateKey) myLib->resolve( "GenerateKey" );
-//                switch (current_vkCode) {
-//                //Q row keys
-//                case 0x51 : //Q/?
-//                        if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-//                                generatekey(3006,FALSE); //?
-//                        }
-//                        else if (shiftkey_pressed){
-//                                 generatekey(3000,FALSE); //?
-//                        }
-//                        else{
-//                                 generatekey(2950,FALSE); //?
-//                        }
-//
-//                        previous_2_vkCode = previous_1_vkCode;
-//                        previous_1_vkCode = current_vkCode;
-//                        break;
-//
 
     switch (current_vkCode) {
     //Q row keys
@@ -758,7 +741,7 @@ void Window::implementPhonetic(){
     case 0x45 : //E/எ
             if (shiftkey_pressed){
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
-                                    generatekey(VK_BACK,FALSE); //backspace to delete the pulli
+                                    generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(3015, FALSE); //ே
                             }
                             else {
@@ -767,11 +750,11 @@ void Window::implementPhonetic(){
             } //shift pressed
             else if(previous_1_vkCode == current_vkCode) {
                             if(meiezhuthukkal_phonetic.contains(previous_2_vkCode) ){
-                                    generatekey(VK_BACK,FALSE); //delete previous எ
+                                    generatekey(8,FALSE); //delete previous எ
                                     generatekey(3015, FALSE); //ே
                             }
                             else {
-                                    generatekey(VK_BACK,FALSE); //delete previous எ
+                                    generatekey(8,FALSE); //delete previous எ
                                     generatekey(2959,FALSE); //ஏ
                             }
                     previous_2_vkCode = previous_1_vkCode;
@@ -780,7 +763,7 @@ void Window::implementPhonetic(){
             }
             else {
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
-                                    generatekey(VK_BACK,FALSE); //backspace to delete the pulli
+                                    generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(3014, FALSE); //ெ
                             }
                             else {
@@ -822,7 +805,7 @@ void Window::implementPhonetic(){
     case 0x55 : //U/உ
             if (shiftkey_pressed){
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
-                                    generatekey(VK_BACK,FALSE); //backspace to delete the pulli
+                                    generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(3010, FALSE); //ூ
                             }
                             else {
@@ -831,11 +814,11 @@ void Window::implementPhonetic(){
             } //shift pressed
             else if(previous_1_vkCode == current_vkCode) {
                             if(meiezhuthukkal_phonetic.contains(previous_2_vkCode) ){
-                                    generatekey(VK_BACK,FALSE); //delete previous உ
+                                    generatekey(8,FALSE); //delete previous உ
                                     generatekey(3010, FALSE); //ூ
                             }
                             else {
-                                    generatekey(VK_BACK,FALSE); //delete previous உ
+                                    generatekey(8,FALSE); //delete previous உ
                                     generatekey(2954,FALSE); //ஊ
                             }
                     previous_2_vkCode = previous_1_vkCode;
@@ -844,7 +827,7 @@ void Window::implementPhonetic(){
             }
             else {
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
-                                    generatekey(VK_BACK,FALSE); //backspace to delete the pulli
+                                    generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(3009, FALSE); //ு
                             }
                             else {
@@ -858,7 +841,7 @@ void Window::implementPhonetic(){
     case 0x49 : //I/இ
             if (shiftkey_pressed){
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
-                                    generatekey(VK_BACK,FALSE); //backspace to delete the pulli
+                                    generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(3008, FALSE); //ீ
                             }
                             else {
@@ -867,11 +850,11 @@ void Window::implementPhonetic(){
             } //shift pressed
             else if(previous_1_vkCode == current_vkCode) { //double kuril press
                             if(meiezhuthukkal_phonetic.contains(previous_2_vkCode) ){
-                                    generatekey(VK_BACK,FALSE);
+                                    generatekey(8,FALSE);
                                     generatekey(3008, FALSE); //ீ
                             }
                             else {
-                                    generatekey(VK_BACK,FALSE); //delete previous இ
+                                    generatekey(8,FALSE); //delete previous இ
                                     generatekey(2952,FALSE); //ஈ
                             }
                     previous_2_vkCode = previous_1_vkCode;
@@ -880,12 +863,12 @@ void Window::implementPhonetic(){
             }
             else {
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
-                                    generatekey(VK_BACK,FALSE); //backspace to delete the pulli
+                                    generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(3007, FALSE); //ி
                             }
                             else {
                                     if((previous_1_vkCode == 0x41) && !(meiezhuthukkal_phonetic.contains(previous_2_vkCode)) ){
-                                            generatekey(VK_BACK,FALSE); //delete the previous a character
+                                            generatekey(8,FALSE); //delete the previous a character
                                             generatekey(2960, FALSE); //ai
                                     }
                                     else if ((previous_1_vkCode == 0x41) && (meiezhuthukkal_phonetic.contains(previous_2_vkCode)) ){
@@ -903,7 +886,7 @@ void Window::implementPhonetic(){
     case 0x4F : //O/ஒ
             if (shiftkey_pressed){
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
-                                    generatekey(VK_BACK,FALSE); //backspace to delete the pulli
+                                    generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(3019, FALSE); //ோ
                             }
                             else {
@@ -912,11 +895,11 @@ void Window::implementPhonetic(){
             } //shift pressed
             else if(previous_1_vkCode == current_vkCode) { //double kuril press
                             if(meiezhuthukkal_phonetic.contains(previous_2_vkCode) ){
-                                    generatekey(VK_BACK,FALSE);
+                                    generatekey(8,FALSE);
                                     generatekey(3019, FALSE); //ோ
                             }
                             else {
-                                    generatekey(VK_BACK,FALSE); //delete previous ஒ
+                                    generatekey(8,FALSE); //delete previous ஒ
                                     generatekey(2963,FALSE); //ஓ
                             }
                     previous_2_vkCode = previous_1_vkCode;
@@ -925,7 +908,7 @@ void Window::implementPhonetic(){
             }
             else {
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
-                                    generatekey(VK_BACK,FALSE); //backspace to delete the pulli
+                                    generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(3018, FALSE); //ொ
                             }
                             else {
@@ -948,7 +931,7 @@ void Window::implementPhonetic(){
     case 0x41: //A/அ
             if (shiftkey_pressed){
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
-                                    generatekey(VK_BACK,FALSE); //backspace to delete the pulli
+                                    generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(3006, FALSE); //ா
                             }
                             else {
@@ -960,7 +943,7 @@ void Window::implementPhonetic(){
                                     generatekey(3006, FALSE); //ா
                             }
                             else {
-                                    generatekey(VK_BACK,FALSE); //delete previous a
+                                    generatekey(8,FALSE); //delete previous a
                                     generatekey(2950,FALSE); //ஆ
                             }
                     previous_2_vkCode = previous_1_vkCode;
@@ -970,7 +953,7 @@ void Window::implementPhonetic(){
             }
             else {
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
-                                    generatekey(VK_BACK,FALSE); //backspace to delete the pulli
+                                    generatekey(8,FALSE); //backspace to delete the pulli
                             }
                             else {
                                     generatekey(2949,FALSE); //அ
@@ -1011,8 +994,8 @@ void Window::implementPhonetic(){
 
     case 0x47: //G/க்
             if (previous_1_vkCode == 0x4E){
-                    generatekey(VK_BACK,FALSE);
-                    generatekey(VK_BACK,FALSE);
+                    generatekey(8,FALSE);
+                    generatekey(8,FALSE);
                     generatekey(2969,FALSE); //ங
                     generatekey(3021,FALSE); //pulli
             }
@@ -1026,8 +1009,8 @@ void Window::implementPhonetic(){
 
     case 0x48: //H/ஹ்
             if( previous_1_vkCode == 0x54){
-                    generatekey(VK_BACK,FALSE);
-                    generatekey(VK_BACK,FALSE); //2 backspaces to delete ட்
+                    generatekey(8,FALSE);
+                    generatekey(8,FALSE); //2 backspaces to delete ட்
                     generatekey(2980,FALSE); //2980
                     generatekey(3021,FALSE); //pulli
             }
@@ -1041,8 +1024,8 @@ void Window::implementPhonetic(){
 
     case 0x4A: //J/ஜ்
             if (previous_1_vkCode == 0x4E){
-                    generatekey(VK_BACK,FALSE);
-                    generatekey(VK_BACK,FALSE);
+                    generatekey(8,FALSE);
+                    generatekey(8,FALSE);
                     generatekey(2974,FALSE); //ஞ
                     generatekey(3021,FALSE); //pulli
             }
@@ -1131,6 +1114,24 @@ void Window::implementPhonetic(){
     case 0x4D: //M/ம்
             generatekey(2990,FALSE); //ம
             generatekey(3021,FALSE); //pulli
+            previous_2_vkCode = previous_1_vkCode;
+            previous_1_vkCode = current_vkCode;
+            break;
+
+    case 0xBC: //comma
+            generatekey(44,FALSE); //comma
+            previous_2_vkCode = previous_1_vkCode;
+            previous_1_vkCode = current_vkCode;
+            break;
+
+    case 0xBE: //full stop
+            generatekey(46,FALSE); //full stop
+            previous_2_vkCode = previous_1_vkCode;
+            previous_1_vkCode = current_vkCode;
+            break;
+
+    case 0x08: //backspace
+            generatekey(8,FALSE); //backspace
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;

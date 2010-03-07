@@ -49,7 +49,7 @@ static int capslock_on = 0;
 
 //define visible keystrokes array other than alphabets
 //[ ] ; ' \  , . /
-DWORD visiblekeys[] = { 0xDB , 0xDE, 0xBA, 0xDE, 0xDC, 0xBC, 0xBE, 0xBF, };
+DWORD visiblekeys[] = { 0xDB , 0xDE, 0xBA, 0xDE, 0xDC, 0xBC, 0xBE, 0xBF };
 
 //Helper functions//
 bool SearchArray (DWORD array[], DWORD key, int length)
