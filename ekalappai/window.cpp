@@ -301,13 +301,13 @@ void Window::implementTamil99(){
                 //Q row keys
                 case 0x51 : //Q/?
                         if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3006,FALSE); //?
+                                generatekey(3006,TRUE); //?
                         }
                         else if (shiftkey_pressed){
-                                 generatekey(3000,FALSE); //?
+                                 generatekey(3000,TRUE); //?
                         }
                         else{
-                                 generatekey(2950,FALSE); //?
+                                 generatekey(2950,TRUE); //?
                         }
 
                         previous_2_vkCode = previous_1_vkCode;
@@ -316,13 +316,13 @@ void Window::implementTamil99(){
 
                 case 0x57 : //W/?
                         if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3008,FALSE);
+                                generatekey(3008,TRUE);
                         }
                         else if (shiftkey_pressed){
-                                generatekey(2999,FALSE); //?
+                                generatekey(2999,TRUE); //?
                         }
                         else{
-                                generatekey(2952,FALSE);
+                                generatekey(2952,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -330,13 +330,13 @@ void Window::implementTamil99(){
 
                 case 0x45 : //E/?
                         if((meiezhuthukkal.contains(previous_1_vkCode) ) || (IsPrevkeyGrantha()) ){
-                                generatekey(3010,FALSE);
+                                generatekey(3010,TRUE);
                         }
                         else if (shiftkey_pressed){
-                                generatekey(2972,FALSE); //?
+                                generatekey(2972,TRUE); //?
                         }
                         else{
-                                generatekey(2954,FALSE);
+                                generatekey(2954,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -344,13 +344,13 @@ void Window::implementTamil99(){
 
                 case 0x52 : //R/?
                         if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3016,FALSE);
+                                generatekey(3016,TRUE);
                         }
                         else if (shiftkey_pressed){
-                                generatekey(3001,FALSE); //?
+                                generatekey(3001,TRUE); //?
                         }
                         else{
-                                generatekey(2960,FALSE);
+                                generatekey(2960,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -358,15 +358,15 @@ void Window::implementTamil99(){
 
                 case 0x54 : //T/?
                         if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3015,FALSE);
+                                generatekey(3015,TRUE);
                         }
                         else if (shiftkey_pressed){
-                                generatekey(2965,FALSE); //???
-                                generatekey(3021,FALSE);
-                                generatekey(2999,FALSE);
+                                generatekey(2965,TRUE); //???
+                                generatekey(3021,TRUE);
+                                generatekey(2999,TRUE);
                         }
                         else{
-                                generatekey(2959,FALSE);
+                                generatekey(2959,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -375,11 +375,11 @@ void Window::implementTamil99(){
                 case 0x59 : //Y/?
                         //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
                         if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,FALSE);
-                                generatekey(2995,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2995,TRUE);
                         }
                         else {
-                                generatekey(2995,FALSE);
+                                generatekey(2995,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -388,11 +388,11 @@ void Window::implementTamil99(){
                 case 0x55 : //U/?
                         //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
                         if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,FALSE);
-                                generatekey(2993,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2993,TRUE);
                         }
                         else {
-                                generatekey(2993,FALSE);
+                                generatekey(2993,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -401,11 +401,11 @@ void Window::implementTamil99(){
                 case 0x49 : //I/?
                         //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
                         if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,FALSE);
-                                generatekey(2985,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2985,TRUE);
                         }
                         else {
-                                generatekey(2985,FALSE);
+                                generatekey(2985,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -414,11 +414,11 @@ void Window::implementTamil99(){
                 case 0x4F : //O/?
                         //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
                         if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,FALSE);
-                                generatekey(2975,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2975,TRUE);
                         }
                         else {
-                                generatekey(2975,FALSE);
+                                generatekey(2975,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -427,11 +427,11 @@ void Window::implementTamil99(){
                 case 0x50 : //P/?
                         //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
                         if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,FALSE);
-                                generatekey(2979,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2979,TRUE);
                         }
                         else {
-                                generatekey(2979,FALSE);
+                                generatekey(2979,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -440,11 +440,11 @@ void Window::implementTamil99(){
                 case 0xDB: //[/?
                         //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
                         if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,FALSE);
-                                generatekey(2970,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2970,TRUE);
                         }
                         else {
-                                generatekey(2970,FALSE);
+                                generatekey(2970,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -453,11 +453,11 @@ void Window::implementTamil99(){
                 case 0xDD: //]/?
                         //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
                         if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,FALSE);
-                                generatekey(2974,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2974,TRUE);
                         }
                         else {
-                                generatekey(2974,FALSE);
+                                generatekey(2974,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -468,15 +468,15 @@ void Window::implementTamil99(){
                 case 0x41: //A/?
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
-                        generatekey(2949,FALSE);
+                        generatekey(2949,TRUE);
                         break;
 
                 case 0x53: //S/?
                         if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3007,FALSE);
+                                generatekey(3007,TRUE);
                         }
                         else{
-                                generatekey(2951,FALSE);
+                                generatekey(2951,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -484,10 +484,10 @@ void Window::implementTamil99(){
 
                 case 0x44: //D/?
                         if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3009,FALSE);
+                                generatekey(3009,TRUE);
                         }
                         else{
-                                generatekey(2953,FALSE);
+                                generatekey(2953,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -495,10 +495,10 @@ void Window::implementTamil99(){
 
                 case 0x46: //F/?
                         if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3021,FALSE);
+                                generatekey(3021,TRUE);
                         }
                         else{
-                                generatekey(2947,FALSE);
+                                generatekey(2947,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -506,10 +506,10 @@ void Window::implementTamil99(){
 
                 case 0x47: //G/?
                         if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3014,FALSE);
+                                generatekey(3014,TRUE);
                         }
                         else{
-                                generatekey(2958,FALSE);
+                                generatekey(2958,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -518,11 +518,11 @@ void Window::implementTamil99(){
                 case 0x48: //H/?
                         //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
                         if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,FALSE);
-                                generatekey(2965,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2965,TRUE);
                         }
                         else {
-                                generatekey(2965,FALSE);
+                                generatekey(2965,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -531,11 +531,11 @@ void Window::implementTamil99(){
                 case 0x4A: //J/?
                         //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
                         if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,FALSE);
-                                generatekey(2986,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2986,TRUE);
                         }
                         else {
-                                generatekey(2986,FALSE);
+                                generatekey(2986,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -544,11 +544,11 @@ void Window::implementTamil99(){
                 case 0x4B: //K/?
                         //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
                         if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,FALSE);
-                                generatekey(2990,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2990,TRUE);
                         }
                         else {
-                                generatekey(2990,FALSE);
+                                generatekey(2990,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -557,15 +557,15 @@ void Window::implementTamil99(){
                 case 0x4C: //L/?
                         //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
                         if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,FALSE);
-                                generatekey(2980,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2980,TRUE);
                         }
                         else if(previous_1_vkCode == 0xBA) { //if previous letter is ?, it should be made as mei
-                                generatekey(3021,FALSE);
-                                generatekey(2980,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2980,TRUE);
                         }
                         else {
-                                generatekey(2980,FALSE);
+                                generatekey(2980,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -574,11 +574,11 @@ void Window::implementTamil99(){
                 case 0xBA: //;/?
                         //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
                         if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,FALSE);
-                                generatekey(2984,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2984,TRUE);
                         }
                         else {
-                                generatekey(2984,FALSE);
+                                generatekey(2984,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -587,11 +587,11 @@ void Window::implementTamil99(){
                 case 0xDE: //'/?
                         //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
                         if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,FALSE);
-                                generatekey(2991,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2991,TRUE);
                         }
                         else {
-                                generatekey(2991,FALSE);
+                                generatekey(2991,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -600,10 +600,10 @@ void Window::implementTamil99(){
                 // Z row keys
                 case 0x5A: //Z / ?
                         if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3020,FALSE);
+                                generatekey(3020,TRUE);
                         }
                         else{
-                                generatekey(2964,FALSE);
+                                generatekey(2964,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -611,10 +611,10 @@ void Window::implementTamil99(){
 
                 case 0x58: //X/?
                         if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3019,FALSE);
+                                generatekey(3019,TRUE);
                         }
                         else{
-                                generatekey(2963,FALSE);
+                                generatekey(2963,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -622,10 +622,10 @@ void Window::implementTamil99(){
 
                 case 0x43: //C/?
                         if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3018,FALSE);
+                                generatekey(3018,TRUE);
                         }
                         else{
-                                generatekey(2962,FALSE);
+                                generatekey(2962,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -634,11 +634,11 @@ void Window::implementTamil99(){
                 case 0x56: //V/?
                         //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
                         if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,FALSE);
-                                generatekey(2997,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2997,TRUE);
                         }
                         else {
-                                generatekey(2997,FALSE);
+                                generatekey(2997,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -647,11 +647,11 @@ void Window::implementTamil99(){
                 case 0x42: //B/?
                         //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
                         if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,FALSE);
-                                generatekey(2969,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2969,TRUE);
                         }
                         else {
-                                generatekey(2969,FALSE);
+                                generatekey(2969,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -660,11 +660,11 @@ void Window::implementTamil99(){
                 case 0x4E: //N/?
                         //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
                         if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,FALSE);
-                                generatekey(2994,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2994,TRUE);
                         }
                         else {
-                                generatekey(2994,FALSE);
+                                generatekey(2994,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -673,11 +673,11 @@ void Window::implementTamil99(){
                 case 0x4D: //M/?
                         //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
                         if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,FALSE);
-                                generatekey(2992,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2992,TRUE);
                         }
                         else {
-                                generatekey(2992,FALSE);
+                                generatekey(2992,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -686,11 +686,11 @@ void Window::implementTamil99(){
                 case 0xBF: // / /?
                         //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
                         if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,FALSE);
-                                generatekey(2996,FALSE);
+                                generatekey(3021,TRUE);
+                                generatekey(2996,TRUE);
                         }
                         else {
-                                generatekey(2996,FALSE);
+                                generatekey(2996,TRUE);
                         }
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
@@ -720,10 +720,10 @@ void Window::implementPhonetic(){
     //Q row keys
     case 0x51 : //Q/ஃ
             if (shiftkey_pressed){
-                    generatekey(3000,FALSE); //ஸ
+                    generatekey(3000,TRUE); //ஸ
             }
             else {
-                    generatekey(2947,FALSE); //ஃ
+                    generatekey(2947,TRUE); //ஃ
             }
 
             previous_2_vkCode = previous_1_vkCode;
@@ -732,8 +732,8 @@ void Window::implementPhonetic(){
 
     case 0x57 : //W/ந்
 
-            generatekey(2984,FALSE); //ந
-            generatekey(3021,FALSE); //pulli
+            generatekey(2984,TRUE); //ந
+            generatekey(3021,TRUE); //pulli
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
@@ -742,20 +742,20 @@ void Window::implementPhonetic(){
             if (shiftkey_pressed){
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
-                                    generatekey(3015, FALSE); //ே
+                                    generatekey(3015, TRUE); //ே
                             }
                             else {
-                                    generatekey(2959,FALSE); //ஏ
+                                    generatekey(2959,TRUE); //ஏ
                             }
             } //shift pressed
             else if(previous_1_vkCode == current_vkCode) {
                             if(meiezhuthukkal_phonetic.contains(previous_2_vkCode) ){
                                     generatekey(8,FALSE); //delete previous எ
-                                    generatekey(3015, FALSE); //ே
+                                    generatekey(3015, TRUE); //ே
                             }
                             else {
                                     generatekey(8,FALSE); //delete previous எ
-                                    generatekey(2959,FALSE); //ஏ
+                                    generatekey(2959,TRUE); //ஏ
                             }
                     previous_2_vkCode = previous_1_vkCode;
                     previous_1_vkCode = NULL;
@@ -764,10 +764,10 @@ void Window::implementPhonetic(){
             else {
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
-                                    generatekey(3014, FALSE); //ெ
+                                    generatekey(3014, TRUE); //ெ
                             }
                             else {
-                                    generatekey(2958,FALSE); //எ
+                                    generatekey(2958,TRUE); //எ
                             }
             }
 
@@ -777,27 +777,27 @@ void Window::implementPhonetic(){
 
     case 0x52 : //R/ர்
             if (shiftkey_pressed){
-                    generatekey(2993,FALSE); //ற
-                    generatekey(3021,FALSE); //pulli
+                    generatekey(2993,TRUE); //ற
+                    generatekey(3021,TRUE); //pulli
             }
             else {
-                    generatekey(2992,FALSE); //ர
-                    generatekey(3021,FALSE); //pulli
+                    generatekey(2992,TRUE); //ர
+                    generatekey(3021,TRUE); //pulli
             }
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
 
     case 0x54 : //T/ட்
-            generatekey(2975,FALSE); //ட
-            generatekey(3021,FALSE); //pulli
+            generatekey(2975,TRUE); //ட
+            generatekey(3021,TRUE); //pulli
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
 
     case 0x59 : //Y/ய்
-            generatekey(2991,FALSE); //ய
-            generatekey(3021,FALSE); //pulli
+            generatekey(2991,TRUE); //ய
+            generatekey(3021,TRUE); //pulli
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
@@ -806,20 +806,20 @@ void Window::implementPhonetic(){
             if (shiftkey_pressed){
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
-                                    generatekey(3010, FALSE); //ூ
+                                    generatekey(3010, TRUE); //ூ
                             }
                             else {
-                                    generatekey(2954,FALSE); //ஊ
+                                    generatekey(2954,TRUE); //ஊ
                             }
             } //shift pressed
             else if(previous_1_vkCode == current_vkCode) {
                             if(meiezhuthukkal_phonetic.contains(previous_2_vkCode) ){
                                     generatekey(8,FALSE); //delete previous உ
-                                    generatekey(3010, FALSE); //ூ
+                                    generatekey(3010, TRUE); //ூ
                             }
                             else {
                                     generatekey(8,FALSE); //delete previous உ
-                                    generatekey(2954,FALSE); //ஊ
+                                    generatekey(2954,TRUE); //ஊ
                             }
                     previous_2_vkCode = previous_1_vkCode;
                     previous_1_vkCode = NULL;
@@ -828,10 +828,10 @@ void Window::implementPhonetic(){
             else {
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
-                                    generatekey(3009, FALSE); //ு
+                                    generatekey(3009, TRUE); //ு
                             }
                             else {
-                                    generatekey(2953,FALSE); //உ
+                                    generatekey(2953,TRUE); //உ
                             }
             }
             previous_2_vkCode = previous_1_vkCode;
@@ -842,20 +842,20 @@ void Window::implementPhonetic(){
             if (shiftkey_pressed){
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
-                                    generatekey(3008, FALSE); //ீ
+                                    generatekey(3008, TRUE); //ீ
                             }
                             else {
-                                    generatekey(2952,FALSE); //ஈ
+                                    generatekey(2952,TRUE); //ஈ
                             }
             } //shift pressed
             else if(previous_1_vkCode == current_vkCode) { //double kuril press
                             if(meiezhuthukkal_phonetic.contains(previous_2_vkCode) ){
                                     generatekey(8,FALSE);
-                                    generatekey(3008, FALSE); //ீ
+                                    generatekey(3008, TRUE); //ீ
                             }
                             else {
                                     generatekey(8,FALSE); //delete previous இ
-                                    generatekey(2952,FALSE); //ஈ
+                                    generatekey(2952,TRUE); //ஈ
                             }
                     previous_2_vkCode = previous_1_vkCode;
                     previous_1_vkCode = NULL;
@@ -864,18 +864,18 @@ void Window::implementPhonetic(){
             else {
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
-                                    generatekey(3007, FALSE); //ி
+                                    generatekey(3007, TRUE); //ி
                             }
                             else {
                                     if((previous_1_vkCode == 0x41) && !(meiezhuthukkal_phonetic.contains(previous_2_vkCode)) ){
                                             generatekey(8,FALSE); //delete the previous a character
-                                            generatekey(2960, FALSE); //ai
+                                            generatekey(2960, TRUE); //ai
                                     }
                                     else if ((previous_1_vkCode == 0x41) && (meiezhuthukkal_phonetic.contains(previous_2_vkCode)) ){
-                                            generatekey(3016, FALSE); //ை
+                                            generatekey(3016, TRUE); //ை
                                     }
                                     else {
-                                            generatekey(2951,FALSE); //இ
+                                            generatekey(2951,TRUE); //இ
                                     }
                             }
             }
@@ -887,20 +887,20 @@ void Window::implementPhonetic(){
             if (shiftkey_pressed){
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
-                                    generatekey(3019, FALSE); //ோ
+                                    generatekey(3019, TRUE); //ோ
                             }
                             else {
-                                    generatekey(2963,FALSE); //ஓ
+                                    generatekey(2963,TRUE); //ஓ
                             }
             } //shift pressed
             else if(previous_1_vkCode == current_vkCode) { //double kuril press
                             if(meiezhuthukkal_phonetic.contains(previous_2_vkCode) ){
                                     generatekey(8,FALSE);
-                                    generatekey(3019, FALSE); //ோ
+                                    generatekey(3019, TRUE); //ோ
                             }
                             else {
                                     generatekey(8,FALSE); //delete previous ஒ
-                                    generatekey(2963,FALSE); //ஓ
+                                    generatekey(2963,TRUE); //ஓ
                             }
                     previous_2_vkCode = previous_1_vkCode;
                     previous_1_vkCode = NULL;
@@ -909,10 +909,10 @@ void Window::implementPhonetic(){
             else {
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
-                                    generatekey(3018, FALSE); //ொ
+                                    generatekey(3018, TRUE); //ொ
                             }
                             else {
-                                    generatekey(2962,FALSE); //ஒ
+                                    generatekey(2962,TRUE); //ஒ
                             }
             }
 
@@ -921,8 +921,8 @@ void Window::implementPhonetic(){
             break;
 
     case 0x50 : //P/ப்
-            generatekey(2986,FALSE); //ப
-            generatekey(3021,FALSE); //pulli
+            generatekey(2986,TRUE); //ப
+            generatekey(3021,TRUE); //pulli
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
@@ -932,19 +932,19 @@ void Window::implementPhonetic(){
             if (shiftkey_pressed){
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
-                                    generatekey(3006, FALSE); //ா
+                                    generatekey(3006, TRUE); //ா
                             }
                             else {
-                                    generatekey(2950,FALSE); //ஆ
+                                    generatekey(2950,TRUE); //ஆ
                             }
             } //shift pressed
             else if(previous_1_vkCode == current_vkCode) {
                             if(meiezhuthukkal_phonetic.contains(previous_2_vkCode) ){
-                                    generatekey(3006, FALSE); //ா
+                                    generatekey(3006, TRUE); //ா
                             }
                             else {
                                     generatekey(8,FALSE); //delete previous a
-                                    generatekey(2950,FALSE); //ஆ
+                                    generatekey(2950,TRUE); //ஆ
                             }
                     previous_2_vkCode = previous_1_vkCode;
                     previous_1_vkCode = NULL;
@@ -956,7 +956,7 @@ void Window::implementPhonetic(){
                                     generatekey(8,FALSE); //backspace to delete the pulli
                             }
                             else {
-                                    generatekey(2949,FALSE); //அ
+                                    generatekey(2949,TRUE); //அ
                             }
             }
             previous_2_vkCode = previous_1_vkCode;
@@ -966,28 +966,28 @@ void Window::implementPhonetic(){
 
     case 0x53: //S/ச்
             if (shiftkey_pressed){
-                    generatekey(3000,FALSE); //ஸ
-                    generatekey(3021,FALSE); //pulli
+                    generatekey(3000,TRUE); //ஸ
+                    generatekey(3021,TRUE); //pulli
             }
             else {
-                    generatekey(2970,FALSE); //ச
-                    generatekey(3021,FALSE); //pulli
+                    generatekey(2970,TRUE); //ச
+                    generatekey(3021,TRUE); //pulli
             }
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
 
     case 0x44: //D/ட்
-            generatekey(2975,FALSE); //ட
-            generatekey(3021,FALSE); //pulli
+            generatekey(2975,TRUE); //ட
+            generatekey(3021,TRUE); //pulli
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
 
     case 0x46: //F/ஃ
-            generatekey(2947,FALSE); //ஃ
-            generatekey(2986,FALSE); //ப
-            generatekey(3021,FALSE); //pulli
+            generatekey(2947,TRUE); //ஃ
+            generatekey(2986,TRUE); //ப
+            generatekey(3021,TRUE); //pulli
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
@@ -996,12 +996,12 @@ void Window::implementPhonetic(){
             if (previous_1_vkCode == 0x4E){
                     generatekey(8,FALSE);
                     generatekey(8,FALSE);
-                    generatekey(2969,FALSE); //ங
-                    generatekey(3021,FALSE); //pulli
+                    generatekey(2969,TRUE); //ங
+                    generatekey(3021,TRUE); //pulli
             }
             else {
-                    generatekey(2965,FALSE); //க
-                    generatekey(3021,FALSE); //pulli
+                    generatekey(2965,TRUE); //க
+                    generatekey(3021,TRUE); //pulli
             }
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
@@ -1011,12 +1011,12 @@ void Window::implementPhonetic(){
             if( previous_1_vkCode == 0x54){
                     generatekey(8,FALSE);
                     generatekey(8,FALSE); //2 backspaces to delete ட்
-                    generatekey(2980,FALSE); //2980
-                    generatekey(3021,FALSE); //pulli
+                    generatekey(2980,TRUE); //2980
+                    generatekey(3021,TRUE); //pulli
             }
             else {
-                    generatekey(3001,FALSE); //ஹ
-                    generatekey(3021,FALSE); //pulli
+                    generatekey(3001,TRUE); //ஹ
+                    generatekey(3021,TRUE); //pulli
             }
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
@@ -1026,12 +1026,12 @@ void Window::implementPhonetic(){
             if (previous_1_vkCode == 0x4E){
                     generatekey(8,FALSE);
                     generatekey(8,FALSE);
-                    generatekey(2974,FALSE); //ஞ
-                    generatekey(3021,FALSE); //pulli
+                    generatekey(2974,TRUE); //ஞ
+                    generatekey(3021,TRUE); //pulli
             }
             else {
-                    generatekey(2972,FALSE); //ஜ
-                    generatekey(3021,FALSE); //pulli
+                    generatekey(2972,TRUE); //ஜ
+                    generatekey(3021,TRUE); //pulli
             }
 
             previous_2_vkCode = previous_1_vkCode;
@@ -1039,20 +1039,20 @@ void Window::implementPhonetic(){
             break;
 
     case 0x4B: //K/க்
-            generatekey(2965,FALSE); //க
-            generatekey(3021,FALSE); //pulli
+            generatekey(2965,TRUE); //க
+            generatekey(3021,TRUE); //pulli
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
 
     case 0x4C: //L/ல்
             if (shiftkey_pressed){
-                    generatekey(2995,FALSE); //ஸ
-                    generatekey(3021,FALSE); //pulli
+                    generatekey(2995,TRUE); //ஸ
+                    generatekey(3021,TRUE); //pulli
             }
             else {
-                    generatekey(2994,FALSE); //ல்
-                    generatekey(3021,FALSE); //pulli
+                    generatekey(2994,TRUE); //ல்
+                    generatekey(3021,TRUE); //pulli
             }
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
@@ -1060,60 +1060,60 @@ void Window::implementPhonetic(){
 
     // Z row keys
     case 0x5A: //Z / ழ்
-            generatekey(2996,FALSE); //ழ
-            generatekey(3021,FALSE); //pulli
+            generatekey(2996,TRUE); //ழ
+            generatekey(3021,TRUE); //pulli
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
 
     case 0x58: //X/க்ஷ்
-            generatekey(2965,FALSE); //க
-            generatekey(3021,FALSE); //pulli
-            generatekey(2999,FALSE); //க்ஷ
-            generatekey(3021,FALSE); //pulli
+            generatekey(2965,TRUE); //க
+            generatekey(3021,TRUE); //pulli
+            generatekey(2999,TRUE); //க்ஷ
+            generatekey(3021,TRUE); //pulli
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
 
     case 0x43: //C/ச்
-            generatekey(2970,FALSE); //ச
-            generatekey(3021,FALSE); //pulli
+            generatekey(2970,TRUE); //ச
+            generatekey(3021,TRUE); //pulli
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
 
 
     case 0x56: //V/வ்
-            generatekey(2997,FALSE); //வ
-            generatekey(3021,FALSE); //pulli
+            generatekey(2997,TRUE); //வ
+            generatekey(3021,TRUE); //pulli
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
 
 
     case 0x42: //B/ப்
-            generatekey(2986,FALSE); //ப
-            generatekey(3021,FALSE); //pulli
+            generatekey(2986,TRUE); //ப
+            generatekey(3021,TRUE); //pulli
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
 
     case 0x4E: //N/ன்
             if (shiftkey_pressed){
-                    generatekey(2979,FALSE); //ண
-                    generatekey(3021,FALSE); //pulli
+                    generatekey(2979,TRUE); //ண
+                    generatekey(3021,TRUE); //pulli
             }
             else {
-                    generatekey(2985,FALSE); //ன
-                    generatekey(3021,FALSE); //pulli
+                    generatekey(2985,TRUE); //ன
+                    generatekey(3021,TRUE); //pulli
             }
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
 
     case 0x4D: //M/ம்
-            generatekey(2990,FALSE); //ம
-            generatekey(3021,FALSE); //pulli
+            generatekey(2990,TRUE); //ம
+            generatekey(3021,TRUE); //pulli
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
