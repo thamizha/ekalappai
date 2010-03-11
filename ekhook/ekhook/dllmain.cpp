@@ -83,13 +83,12 @@ extern "C" __declspec(dllexport) void GenerateKey(int vk , bool bUnicode)
 	if(bUnicode){
 		kb.wVk    =  0;
 		kb.wScan = vk;/*enter unicode here*/;
+		kb.dwFlags = KEYEVENTF_UNICODE; // KEYEVENTF_UNICODE=4
 	}
 	else {
 		kb.wVk    =  vk;
 		kb.wScan = 0;/*enter unicode here*/;
 	}
-
-	kb.dwFlags = KEYEVENTF_UNICODE; // KEYEVENTF_UNICODE=4
 	Input.type = INPUT_KEYBOARD;
 	Input.ki = kb;
 
@@ -99,12 +98,14 @@ extern "C" __declspec(dllexport) void GenerateKey(int vk , bool bUnicode)
 	if(bUnicode){
 		kb.wVk    =  0;
 		kb.wScan = vk;/*enter unicode here*/;
+		kb.dwFlags = KEYEVENTF_UNICODE|KEYEVENTF_KEYUP; //KEYEVENTF_UNICODE=4
 	}
 	else{
 		kb.wVk    =  vk;
-		kb.wScan = 0;/*enter unicode here*/;
+		kb.wScan = 0;
+		kb.dwFlags = KEYEVENTF_KEYUP; 
 	}
-	kb.dwFlags = KEYEVENTF_UNICODE|KEYEVENTF_KEYUP; //KEYEVENTF_UNICODE=4
+
 	Input.type = INPUT_KEYBOARD;
 	Input.ki = kb;
 
