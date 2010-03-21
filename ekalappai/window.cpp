@@ -696,12 +696,16 @@ void Window::implementTamil99(){
                         previous_1_vkCode = current_vkCode;
                         break;
 
-                case 0xBC: // ,
-                        generatekey(44,FALSE);
+                case 0xBC: //comma
+                        generatekey(44,true); //comma
+                        previous_2_vkCode = previous_1_vkCode;
+                        previous_1_vkCode = current_vkCode;
                         break;
 
-                case 0xBE: // ,
-                        generatekey(46,FALSE);
+                case 0xBE: //full stop
+                        generatekey(46,true); //full stop
+                        previous_2_vkCode = previous_1_vkCode;
+                        previous_1_vkCode = current_vkCode;
                         break;
 
                 default:
@@ -1119,13 +1123,13 @@ void Window::implementPhonetic(){
             break;
 
     case 0xBC: //comma
-            generatekey(44,FALSE); //comma
+            generatekey(44,true); //comma
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
 
     case 0xBE: //full stop
-            generatekey(46,FALSE); //full stop
+            generatekey(46,true); //full stop
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
@@ -1136,7 +1140,39 @@ void Window::implementPhonetic(){
             previous_1_vkCode = current_vkCode;
             break;
 
+    case 0xDB: //[{
+            generatekey(123,true);
+            previous_2_vkCode = previous_1_vkCode;
+            previous_1_vkCode = current_vkCode;
+            break;
+
+    case 0xDD: //]}
+            generatekey(125,true);
+            previous_2_vkCode = previous_1_vkCode;
+            previous_1_vkCode = current_vkCode;
+            break;
+
+   case 0xBF: // / /?
+            generatekey(47,true);
+            previous_2_vkCode = previous_1_vkCode;
+            previous_1_vkCode = current_vkCode;
+            break;
+
+    case 0xBA: //;/?
+            generatekey(59,true);
+            previous_2_vkCode = previous_1_vkCode;
+            previous_1_vkCode = current_vkCode;
+            break;
+
+    case 0xDE: //'/?
+            generatekey(39,true);
+            previous_2_vkCode = previous_1_vkCode;
+            previous_1_vkCode = current_vkCode;
+            break;
+
+
     default:
+            //generatekey(current_vkCode,FALSE);
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
