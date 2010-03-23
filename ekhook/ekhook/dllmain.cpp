@@ -124,7 +124,7 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 	PostMessage(callapp_hInst,WM_USER+755,wParam,lParam);
 
     shiftkey_pressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
-	bool isControlKey = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
+	bool caplock_pressed = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
 	altkey_pressed = ((GetKeyState(VK_LMENU) & 0x80) == 0x80 ? true : false);
 	controlkey_pressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
 
@@ -137,7 +137,7 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 	}
 
 	//Do not handle the keystrokes if control key is pressed - let the system handle them.
-	if(isControlKey) 
+	if(controlkey_pressed) 
 	{
 		//PostMessage(callapp_hInst,WM_KEYDOWN,wParam,lParam);
 		return 0;
