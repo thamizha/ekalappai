@@ -251,8 +251,9 @@ void Window::removeHook(){
 //This function also enables or disables the keyboard by checking the shortcut keypresses.
 void Window::processKeypressEvent(){
 
-    //logic to check the keyboard status if enabled or disabled
 
+///////// Notes: keyboard status logic should be moved to exe from dll /////////
+    //logic to check the keyboard status if enabled or disabled
     bool keyboard_status;
     GetKeyboardStatus getkbstatus;
     getkbstatus = (GetKeyboardStatus) myLib->resolve( "GetKeyboardStatus" );
@@ -269,34 +270,35 @@ void Window::processKeypressEvent(){
            }
     }
 
-
-    if(current_vkCode == 0x0){
        GetKeyPress getkeypress;
        getkeypress = (GetKeyPress) myLib->resolve( "GetKeyPress" );
        current_vkCode = getkeypress();
 
+  //////// Notes: shiftkey press function should be removed from dll and it should be calculatd inside the exe itself /////////////
        //get shift key info (notes: need to find a way to get all key info together.)
        GetShiftKeyPress getshiftkeypress;
        getshiftkeypress = (GetShiftKeyPress) myLib->resolve( "GetShiftKeyPress" );
        shiftkey_pressed = getshiftkeypress();
-    }
 
-    //logic for keyboards start here...
-    if(current_vkCode > 0x0){
-        if(selected_keyboard == 1){
-            implementTamil99();
+        if(keyboard_status){      //if keyboard enabled then implement the keyboards
+            if(selected_keyboard == 1){
+                implementTamil99();
+            }
+            else if (selected_keyboard == 2 ){
+                implementPhonetic();
+            }
         }
-        else if (selected_keyboard == 2 ){
-            implementPhonetic();
-        }
-    }
-    current_vkCode = 0x0;
+}
 
+void Window::generatekey(int key,bool state){
+    generatekeyLib = (GenerateKey) myLib->resolve( "GenerateKey" );
+    generatekeyLib(key,state);
+    previous_2_character = previous_1_character;
+    previous_1_character = key;
 }
 
 void Window::implementTamil99(){
 
-    generatekey = (GenerateKey) myLib->resolve( "GenerateKey" );
                 switch (current_vkCode) {
                 //Q row keys
                 case 0x51 : //Q/?
@@ -708,17 +710,22 @@ void Window::implementTamil99(){
                         previous_1_vkCode = current_vkCode;
                         break;
 
-                default:
+                case 0x08: //backspace
+                case 0x20: //spacbar
+                case 0x0D: //enter key
                         previous_2_vkCode = previous_1_vkCode;
                         previous_1_vkCode = current_vkCode;
+                        break;
+
+                default:
+                        break;
 
                 } //switch (current_vkCode)
 
 }
 
 void Window::implementPhonetic(){
-
-    generatekey = (GenerateKey) myLib->resolve( "GenerateKey" );
+   // generatekey = (GenerateKey) myLib->resolve( "GenerateKey" );
 
     switch (current_vkCode) {
     //Q row keys
@@ -1135,7 +1142,8 @@ void Window::implementPhonetic(){
             break;
 
     case 0x08: //backspace
-            generatekey(8,FALSE); //backspace
+    case 0x20: //spacbar
+    case 0x0D: //enter key
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
@@ -1172,9 +1180,6 @@ void Window::implementPhonetic(){
 
 
     default:
-            //generatekey(current_vkCode,FALSE);
-            previous_2_vkCode = previous_1_vkCode;
-            previous_1_vkCode = current_vkCode;
             break;
 
     } //switch (current_vkCode)

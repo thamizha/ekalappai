@@ -73,6 +73,7 @@ private:
     void changeKeyboard(int index);
     void implementTamil99();
     void implementPhonetic();
+    void generatekey(int,bool);
     bool SearchArray (DWORD array[], DWORD key, int length);
     bool IsPrevkeyGrantha();
 
@@ -101,7 +102,7 @@ private:
     typedef void (*GenerateKey)(int, bool);
     typedef bool (*GetShiftKeyPress)();
 
-    GenerateKey generatekey;
+    GenerateKey generatekeyLib;
 
     BOOL shiftkey_pressed;
     DWORD current_vkCode;

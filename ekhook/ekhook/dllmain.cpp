@@ -26,6 +26,8 @@ static bool shiftkey_pressed = FALSE;
 static bool caplock_pressed = FALSE;
 static bool altkey_pressed  = FALSE;
 static bool controlkey_pressed = FALSE;
+static bool spacebar_pressed = FALSE;
+static bool backspace_pressed = FALSE;
 
 static bool keychanged = true;
 static DWORD previous_1_vkCode = NULL;
@@ -47,9 +49,9 @@ static int capslock_on = 0;
 
 #pragma comment(linker, "/SECTION:.HOOKDATA,RWS")
 
-//define visible keystrokes array other than alphabets
+//define visible keystrokes array other than alphabets & also the backspace and spacebar keys
 //[ ] ; ' \  , . /
-DWORD visiblekeys[] = { 0xDB,0xDD  , 0xDE, 0xBA, 0xDE, 0xBC, 0xBE, 0xBF };
+DWORD visiblekeys[] = { 0xDB,0xDD  , 0xDE, 0xBA, 0xDE, 0xBC, 0xBE, 0xBF};
 
 //Helper functions//
 bool SearchArray (DWORD array[], DWORD key, int length)
@@ -127,6 +129,8 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 	bool caplock_pressed = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
 	altkey_pressed = ((GetKeyState(VK_LMENU) & 0x80) == 0x80 ? true : false);
 	controlkey_pressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
+	spacebar_pressed = ((GetKeyState(VK_SPACE) & 0x80) == 0x80 ? true : false);
+	backspace_pressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
 
 	//toggle the keyboard_enabled flag based on the shortcut key placed
 	if(p->vkCode == short_cut_key){
@@ -190,7 +194,7 @@ extern "C" __declspec(dllexport) DWORD GetKeyPress()
 		return current_vkCode;
 	}
 	else {
-		return 0x0;
+		return current_vkCode;
 	}
 
 	//return 0;
