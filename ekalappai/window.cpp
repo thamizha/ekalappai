@@ -51,6 +51,7 @@ Window::Window()
     current_vkCode = 0x0;
     previous_1_vkCode = 0x0;
     shiftkey_pressed = FALSE;
+    controlkey_pressed = FALSE;
 
     createIconGroupBox();
 
@@ -280,7 +281,12 @@ void Window::processKeypressEvent(){
        getshiftkeypress = (GetShiftKeyPress) myLib->resolve( "GetShiftKeyPress" );
        shiftkey_pressed = getshiftkeypress();
 
-        if(keyboard_status){      //if keyboard enabled then implement the keyboards
+       GetControlKeyPress getcontrolkeypress;
+       getcontrolkeypress = (GetControlKeyPress) myLib->resolve( "GetControlKeyPress" );
+       controlkey_pressed = getcontrolkeypress();
+
+
+       if((keyboard_status)&& !(controlkey_pressed)){      //if keyboard enabled then implement the keyboards
             if(selected_keyboard == 1){
                 implementTamil99();
             }
@@ -293,8 +299,10 @@ void Window::processKeypressEvent(){
 void Window::generatekey(int key,bool state){
     generatekeyLib = (GenerateKey) myLib->resolve( "GenerateKey" );
     generatekeyLib(key,state);
-    previous_2_character = previous_1_character;
-    previous_1_character = key;
+    if (state){
+        previous_2_character = previous_1_character;
+        previous_1_character = key;
+    }
 }
 
 void Window::implementTamil99(){
@@ -842,7 +850,17 @@ void Window::implementPhonetic(){
                                     generatekey(3009, TRUE); //ு
                             }
                             else {
+
+                                if((previous_1_vkCode == 0x41) && !(meiezhuthukkal_phonetic.contains(previous_2_vkCode)) ){
+                                        generatekey(8,FALSE); //delete the previous a character
+                                        generatekey(2964, TRUE); //ஔ
+                                }
+                                else if ((previous_1_vkCode == 0x41) && (meiezhuthukkal_phonetic.contains(previous_2_vkCode)) ){
+                                        generatekey(3020, TRUE); //ௌ
+                                }
+                                else{
                                     generatekey(2953,TRUE); //உ
+                                }
                             }
             }
             previous_2_vkCode = previous_1_vkCode;
@@ -913,9 +931,6 @@ void Window::implementPhonetic(){
                                     generatekey(8,FALSE); //delete previous ஒ
                                     generatekey(2963,TRUE); //ஓ
                             }
-                    previous_2_vkCode = previous_1_vkCode;
-                    previous_1_vkCode = NULL;
-                    break;
             }
             else {
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
@@ -949,31 +964,37 @@ void Window::implementPhonetic(){
                                     generatekey(2950,TRUE); //ஆ
                             }
             } //shift pressed
+
             else if(previous_1_vkCode == current_vkCode) {
                             if(meiezhuthukkal_phonetic.contains(previous_2_vkCode) ){
                                     generatekey(3006, TRUE); //ா
                             }
+
                             else {
                                     generatekey(8,FALSE); //delete previous a
                                     generatekey(2950,TRUE); //ஆ
                             }
-                    previous_2_vkCode = previous_1_vkCode;
-                    previous_1_vkCode = NULL;
 
-                    break;
+                            previous_2_vkCode = previous_1_vkCode;
+                            previous_1_vkCode = NULL;
+                            break;
             }
+
             else {
                             if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
+                                    generatekey(8,FALSE); //backspace to delete the character
+                                    generatekey(previous_2_character, TRUE); // print the character again - this is one due to strang behaviour when only backspace is sent
                             }
                             else {
                                     generatekey(2949,TRUE); //அ
                             }
             }
             previous_2_vkCode = previous_1_vkCode;
-            previous_1_vkCode = current_vkCode;
-
+            previous_1_vkCode = 0x41;
             break;
+
+
 
     case 0x53: //S/ச்
             if (shiftkey_pressed){
@@ -1023,6 +1044,12 @@ void Window::implementPhonetic(){
                     generatekey(8,FALSE);
                     generatekey(8,FALSE); //2 backspaces to delete ட்
                     generatekey(2980,TRUE); //2980
+                    generatekey(3021,TRUE); //pulli
+            }
+            else if(previous_1_vkCode == 0x53) { //previouskey = s
+                    generatekey(8,FALSE);
+                    generatekey(8,FALSE); //2 backspaces to delete ச்
+                    generatekey(2999,TRUE); //ஷ
                     generatekey(3021,TRUE); //pulli
             }
             else {

@@ -101,10 +101,12 @@ private:
     typedef DWORD (*GetKeyPress)();
     typedef void (*GenerateKey)(int, bool);
     typedef bool (*GetShiftKeyPress)();
+    typedef bool (*GetControlKeyPress)();
 
     GenerateKey generatekeyLib;
 
     BOOL shiftkey_pressed;
+    BOOL controlkey_pressed;
     DWORD current_vkCode;
     DWORD previous_1_vkCode;
     DWORD previous_2_vkCode;

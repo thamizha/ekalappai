@@ -200,6 +200,12 @@ extern "C" __declspec(dllexport) DWORD GetKeyPress()
 	//return 0;
 }
 
+
+extern "C" __declspec(dllexport) bool GetControlKeyPress()
+{
+	return controlkey_pressed;
+}
+
 extern "C" __declspec(dllexport) bool GetShiftKeyPress()
 {
 	return shiftkey_pressed;
