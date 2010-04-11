@@ -76,6 +76,7 @@ private:
     void generatekey(int,bool);
     bool SearchArray (DWORD array[], DWORD key, int length);
     bool IsPrevkeyGrantha();
+    bool IsPrevkeyMey(int pos);
 
     QGroupBox *iconGroupBox;
     QLabel *iconLabel;
@@ -113,6 +114,7 @@ private:
 
     int previous_1_character;
     int previous_2_character;
+    int previous_3_character;
 
     QVector<DWORD> meiezhuthukkal;
     QVector<DWORD> meiezhuthukkal_phonetic;

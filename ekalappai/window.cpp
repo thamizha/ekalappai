@@ -300,6 +300,7 @@ void Window::generatekey(int key,bool state){
     generatekeyLib = (GenerateKey) myLib->resolve( "GenerateKey" );
     generatekeyLib(key,state);
     if (state){
+        previous_3_character = previous_2_character;
         previous_2_character = previous_1_character;
         previous_1_character = key;
     }
@@ -718,6 +719,17 @@ void Window::implementTamil99(){
                         previous_1_vkCode = current_vkCode;
                         break;
 
+                case 0xBD: //- key
+                        if (shiftkey_pressed){
+                            generatekey(95,true); // underscore _
+                        }
+                        else {
+                            generatekey(45,true); // - or minus
+                        }
+                        previous_2_vkCode = previous_1_vkCode;
+                        previous_1_vkCode = current_vkCode;
+                        break;
+
                 case 0x08: //backspace
                 case 0x20: //spacbar
                 case 0x0D: //enter key
@@ -759,7 +771,7 @@ void Window::implementPhonetic(){
 
     case 0x45 : //E/எ
             if (shiftkey_pressed){
-                            if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
+                            if(IsPrevkeyMey(1) ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(3015, TRUE); //ே
                             }
@@ -768,7 +780,7 @@ void Window::implementPhonetic(){
                             }
             } //shift pressed
             else if(previous_1_vkCode == current_vkCode) {
-                            if(meiezhuthukkal_phonetic.contains(previous_2_vkCode) ){
+                            if(IsPrevkeyMey(2)  ){
                                     generatekey(8,FALSE); //delete previous எ
                                     generatekey(3015, TRUE); //ே
                             }
@@ -781,7 +793,7 @@ void Window::implementPhonetic(){
                     break;
             }
             else {
-                            if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
+                            if(IsPrevkeyMey(1) ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(3014, TRUE); //ெ
                             }
@@ -823,7 +835,7 @@ void Window::implementPhonetic(){
 
     case 0x55 : //U/உ
             if (shiftkey_pressed){
-                            if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
+                            if(IsPrevkeyMey(1)  ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(3010, TRUE); //ூ
                             }
@@ -832,7 +844,7 @@ void Window::implementPhonetic(){
                             }
             } //shift pressed
             else if(previous_1_vkCode == current_vkCode) {
-                            if(meiezhuthukkal_phonetic.contains(previous_2_vkCode) ){
+                            if(IsPrevkeyMey(2) ){
                                     generatekey(8,FALSE); //delete previous உ
                                     generatekey(3010, TRUE); //ூ
                             }
@@ -845,17 +857,17 @@ void Window::implementPhonetic(){
                     break;
             }
             else {
-                            if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
+                            if(IsPrevkeyMey(1)  ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(3009, TRUE); //ு
                             }
                             else {
 
-                                if((previous_1_vkCode == 0x41) && !(meiezhuthukkal_phonetic.contains(previous_2_vkCode)) ){
+                                if((previous_1_vkCode == 0x41) && !(IsPrevkeyMey(2) ) ){
                                         generatekey(8,FALSE); //delete the previous a character
                                         generatekey(2964, TRUE); //ஔ
                                 }
-                                else if ((previous_1_vkCode == 0x41) && (meiezhuthukkal_phonetic.contains(previous_2_vkCode)) ){
+                                else if ((previous_1_vkCode == 0x41) && (IsPrevkeyMey(2) ) ){
                                         generatekey(3020, TRUE); //ௌ
                                 }
                                 else{
@@ -869,7 +881,7 @@ void Window::implementPhonetic(){
 
     case 0x49 : //I/இ
             if (shiftkey_pressed){
-                            if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
+                            if(IsPrevkeyMey(1)  ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(3008, TRUE); //ீ
                             }
@@ -878,7 +890,7 @@ void Window::implementPhonetic(){
                             }
             } //shift pressed
             else if(previous_1_vkCode == current_vkCode) { //double kuril press
-                            if(meiezhuthukkal_phonetic.contains(previous_2_vkCode) ){
+                            if(IsPrevkeyMey(2)  ){
                                     generatekey(8,FALSE);
                                     generatekey(3008, TRUE); //ீ
                             }
@@ -891,16 +903,16 @@ void Window::implementPhonetic(){
                     break;
             }
             else {
-                            if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
+                            if(IsPrevkeyMey(1) ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(3007, TRUE); //ி
                             }
                             else {
-                                    if((previous_1_vkCode == 0x41) && !(meiezhuthukkal_phonetic.contains(previous_2_vkCode)) ){
+                                    if((previous_1_vkCode == 0x41) && !(IsPrevkeyMey(2) ) ){
                                             generatekey(8,FALSE); //delete the previous a character
                                             generatekey(2960, TRUE); //ai
                                     }
-                                    else if ((previous_1_vkCode == 0x41) && (meiezhuthukkal_phonetic.contains(previous_2_vkCode)) ){
+                                    else if ((previous_1_vkCode == 0x41) && (IsPrevkeyMey(2) ) ){
                                             generatekey(3016, TRUE); //ை
                                     }
                                     else {
@@ -914,7 +926,7 @@ void Window::implementPhonetic(){
 
     case 0x4F : //O/ஒ
             if (shiftkey_pressed){
-                            if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
+                            if(IsPrevkeyMey(1) ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(3019, TRUE); //ோ
                             }
@@ -923,7 +935,7 @@ void Window::implementPhonetic(){
                             }
             } //shift pressed
             else if(previous_1_vkCode == current_vkCode) { //double kuril press
-                            if(meiezhuthukkal_phonetic.contains(previous_2_vkCode) ){
+                            if(IsPrevkeyMey(2) ){
                                     generatekey(8,FALSE);
                                     generatekey(3019, TRUE); //ோ
                             }
@@ -933,7 +945,7 @@ void Window::implementPhonetic(){
                             }
             }
             else {
-                            if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
+                            if(IsPrevkeyMey(1) ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(3018, TRUE); //ொ
                             }
@@ -956,7 +968,7 @@ void Window::implementPhonetic(){
     // A row keys
     case 0x41: //A/அ
             if (shiftkey_pressed){
-                            if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
+                            if(IsPrevkeyMey(1) ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(3006, TRUE); //ா
                             }
@@ -966,7 +978,7 @@ void Window::implementPhonetic(){
             } //shift pressed
 
             else if(previous_1_vkCode == current_vkCode) {
-                            if(meiezhuthukkal_phonetic.contains(previous_2_vkCode) ){
+                            if(IsPrevkeyMey(2) ){
                                     generatekey(3006, TRUE); //ா
                             }
 
@@ -981,7 +993,7 @@ void Window::implementPhonetic(){
             }
 
             else {
-                            if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ){
+                            if(IsPrevkeyMey(1) ){
                                     generatekey(8,FALSE); //backspace to delete the pulli
                                     generatekey(8,FALSE); //backspace to delete the character
                                     generatekey(previous_2_character, TRUE); // print the character again - this is one due to strang behaviour when only backspace is sent
@@ -1205,6 +1217,22 @@ void Window::implementPhonetic(){
             previous_1_vkCode = current_vkCode;
             break;
 
+    case 0xBD: //- key
+            if (shiftkey_pressed){
+                generatekey(95,true); // underscore _
+            }
+            else if(previous_1_vkCode == 0x4E){
+                generatekey(8,FALSE);
+                generatekey(8,FALSE);
+                generatekey(2984,TRUE); //ந
+                generatekey(3021,TRUE); //pulli
+            }
+            else {
+                generatekey(45,true); // - or minus
+            }
+            previous_2_vkCode = previous_1_vkCode;
+            previous_1_vkCode = current_vkCode;
+            break;
 
     default:
             break;
@@ -1251,4 +1279,25 @@ bool Window::IsPrevkeyGrantha()
         else{
                 return false;
         }
+}
+
+
+bool Window::IsPrevkeyMey(int pos)
+{
+    if(pos == 1){
+       if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ||((previous_2_character == 2984)&&(previous_1_character == 3021))){
+                return true;
+        }
+        else{
+                return false;
+        }
+    }
+    else if ( pos == 2){
+        if(meiezhuthukkal_phonetic.contains(previous_2_vkCode) ||((previous_3_character == 2984)&&(previous_2_character == 3021))){
+                 return true;
+         }
+         else{
+                 return false;
+         }
+    }
 }
