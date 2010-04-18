@@ -35,6 +35,7 @@ class QPushButton;
 class QSpinBox;
 class QTextEdit;
 class QLibrary;
+class QSettings;
 QT_END_NAMESPACE
 
 
@@ -53,6 +54,9 @@ public:
     //status of the current keyboard including no keyboard
     int current_keyboard;
 
+    //keyboard status
+    bool keyboard_status;
+
     virtual bool winEvent( MSG* message, long* result );
 
 protected:
@@ -60,12 +64,15 @@ protected:
 
 private slots:
     void setIcon(int index);
+    void setShortcut1(int index);
+    void setShortcut2(int index);
     void iconActivated(QSystemTrayIcon::ActivationReason reason);
     void showTrayMessage(int index);
     void processKeypressEvent();
 
 private:
     void createIconGroupBox();
+    void createShortcutGroupBox();
     void createActions();
     void createTrayIcon();
     void callHook(int kb_index);
@@ -83,6 +90,11 @@ private:
     QComboBox *iconComboBox;
     QCheckBox *showIconCheckBox;
 
+    QGroupBox *shortcutGroupBox;
+    QLabel *shortcutLabel1;
+    QLabel *shortcutLabel2;
+    QComboBox *shortcutComboBox1;
+    QComboBox *shortcutComboBox2;
 
     QAction *minimizeAction;
     QAction *maximizeAction;
@@ -93,6 +105,8 @@ private:
     QMenu *trayIconMenu;
 
     QLibrary *myLib;
+    QSettings *settings;
+
     HHOOK hkb;
 
     typedef HHOOK (*MyPrototype)(HINSTANCE, bool, HWND);
@@ -108,6 +122,11 @@ private:
 
     BOOL shiftkey_pressed;
     BOOL controlkey_pressed;
+
+    DWORD short_cut_key;
+    int short_cut_key_index;
+    int shortcut_modifier_key;
+
     DWORD current_vkCode;
     DWORD previous_1_vkCode;
     DWORD previous_2_vkCode;

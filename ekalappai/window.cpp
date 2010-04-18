@@ -52,8 +52,18 @@ Window::Window()
     previous_1_vkCode = 0x0;
     shiftkey_pressed = FALSE;
     controlkey_pressed = FALSE;
+    keyboard_status = TRUE;
+
+    settings = new QSettings( "settings.ini", QSettings::IniFormat );
+
+    shortcut_modifier_key = settings->value("shortcut_modifier").toInt();
+    short_cut_key_index = settings->value("shortcut").toInt();
+
+    //set the shortcut key from the index
+    setShortcut2(short_cut_key_index);
 
     createIconGroupBox();
+    createShortcutGroupBox();
 
     createActions();
     createTrayIcon();
@@ -61,11 +71,18 @@ Window::Window()
     connect(iconComboBox, SIGNAL(currentIndexChanged(int)),
             this, SLOT(setIcon(int)));
 
+    connect(shortcutComboBox1, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(setShortcut1(int)));
+
+    connect(shortcutComboBox2, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(setShortcut2(int)));
+
     connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
             this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(iconGroupBox);
+    mainLayout->addWidget(shortcutGroupBox);
     setLayout(mainLayout);
 
     iconComboBox->setCurrentIndex(1);
@@ -126,6 +143,56 @@ void Window::setIcon(int index)
     //logic to start a keyboard hook or remove keyboard hook based on the keyboard choosen
     callHook(index);
     showTrayMessage(index);
+}
+
+// This function is called when the shortcut modifier combo is changed
+void Window::setShortcut1(int index)
+{
+    shortcut_modifier_key = index;
+    settings->setValue("shortcut_modifier", index);
+}
+
+// This function is called when the shortcut combo is changed
+void Window::setShortcut2(int index)
+{
+
+    settings->setValue("shortcut", index);
+
+    switch (index) {
+    case 0 :
+            short_cut_key = 0x1B;
+            break;
+    case 1 :
+            short_cut_key = 0x31;
+            break;
+    case 2 :
+            short_cut_key = 0x32;
+            break;
+    case 3 :
+            short_cut_key = 0x33;
+            break;
+    case 4 :
+            short_cut_key = 0x34;
+            break;
+    case 5 :
+            short_cut_key = 0x35;
+            break;
+    case 6 :
+            short_cut_key = 0x36;
+            break;
+    case 7 :
+            short_cut_key = 0x37;
+            break;
+    case 8 :
+            short_cut_key = 0x38;
+            break;
+    case 9 :
+            short_cut_key = 0x39;
+            break;
+    case 10 :
+            short_cut_key = 0x30;
+            break;
+        }
 }
 
 
@@ -193,6 +260,43 @@ void Window::createIconGroupBox()
     iconGroupBox->setLayout(iconLayout);
 }
 
+void Window::createShortcutGroupBox()
+{
+    shortcutGroupBox = new QGroupBox(tr("Shortcut Setting"));
+
+    shortcutLabel1 = new QLabel("Modifier Key:");
+    shortcutLabel2 = new QLabel("Shortcut Key:");
+
+    shortcutComboBox1 = new QComboBox;
+    shortcutComboBox1->addItem(tr("None"));
+    shortcutComboBox1->addItem(tr("Control Key"));
+    shortcutComboBox1->addItem(tr("Alt Key"));
+
+    shortcutComboBox2 = new QComboBox;
+    shortcutComboBox2->addItem(tr("ESC"));
+    shortcutComboBox2->addItem(tr("1"));
+    shortcutComboBox2->addItem(tr("2"));
+    shortcutComboBox2->addItem(tr("3"));
+    shortcutComboBox2->addItem(tr("4"));
+    shortcutComboBox2->addItem(tr("5"));
+    shortcutComboBox2->addItem(tr("6"));
+    shortcutComboBox2->addItem(tr("7"));
+    shortcutComboBox2->addItem(tr("8"));
+    shortcutComboBox2->addItem(tr("9"));
+    shortcutComboBox2->addItem(tr("0"));
+
+    shortcutComboBox1->setCurrentIndex(shortcut_modifier_key);
+    shortcutComboBox2->setCurrentIndex(short_cut_key_index);
+
+    QHBoxLayout *shortcutLayout = new QHBoxLayout;
+    shortcutLayout->addWidget(shortcutLabel1);
+    shortcutLayout->addWidget(shortcutComboBox1);
+    shortcutLayout->addWidget(shortcutLabel2);
+    shortcutLayout->addWidget(shortcutComboBox2);
+    shortcutLayout->addStretch();
+    shortcutGroupBox->setLayout(shortcutLayout);
+}
+
 void Window::createActions()
 {
     minimizeAction = new QAction(tr("Mi&nimize"), this);
@@ -252,25 +356,6 @@ void Window::removeHook(){
 //This function also enables or disables the keyboard by checking the shortcut keypresses.
 void Window::processKeypressEvent(){
 
-
-///////// Notes: keyboard status logic should be moved to exe from dll /////////
-    //logic to check the keyboard status if enabled or disabled
-    bool keyboard_status;
-    GetKeyboardStatus getkbstatus;
-    getkbstatus = (GetKeyboardStatus) myLib->resolve( "GetKeyboardStatus" );
-    keyboard_status = getkbstatus();
-
-    if(keyboard_status){
-        if(current_keyboard == 0){
-            changeKeyboard(selected_keyboard);
-        }
-
-    }else{
-          if(current_keyboard > 0){
-                changeKeyboard(0);
-           }
-    }
-
        GetKeyPress getkeypress;
        getkeypress = (GetKeyPress) myLib->resolve( "GetKeyPress" );
        current_vkCode = getkeypress();
@@ -284,6 +369,33 @@ void Window::processKeypressEvent(){
        GetControlKeyPress getcontrolkeypress;
        getcontrolkeypress = (GetControlKeyPress) myLib->resolve( "GetControlKeyPress" );
        controlkey_pressed = getcontrolkeypress();
+
+
+       //toggle the keyboard_enabled flag based on the shortcut key placed
+       if((current_vkCode == short_cut_key) && (shortcut_modifier_key == 0)) {
+            if (keyboard_status)
+                 keyboard_status = false;
+             else
+                 keyboard_status = true;
+         }
+       else if ((current_vkCode == short_cut_key) && (shortcut_modifier_key == 1)&& (controlkey_pressed) ){
+           if (keyboard_status)
+                keyboard_status = false;
+            else
+                keyboard_status = true;
+       }
+
+       if(keyboard_status){
+           if(current_keyboard == 0){
+               changeKeyboard(selected_keyboard);
+           }
+
+       }else{
+             if(current_keyboard > 0){
+                   changeKeyboard(0);
+              }
+       }
+
 
 
        if((keyboard_status)&& !(controlkey_pressed)){      //if keyboard enabled then implement the keyboards
