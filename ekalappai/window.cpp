@@ -1023,8 +1023,17 @@ void Window::implementPhonetic(){
             break;
 
     case 0x54 : //T/ட்
-            generatekey(2975,TRUE); //ட
-            generatekey(3021,TRUE); //pulli
+            if(previous_1_vkCode == 0x4E){
+                generatekey(8,FALSE);
+                generatekey(8,FALSE);
+                generatekey(2984,TRUE); //ந
+                generatekey(3021,TRUE); //pulli
+                generatekey(2980,TRUE); //த
+                generatekey(3021,TRUE); //pulli
+            } else {
+                generatekey(2975,TRUE); //ட
+                generatekey(3021,TRUE); //pulli
+            }
             previous_2_vkCode = previous_1_vkCode;
             previous_1_vkCode = current_vkCode;
             break;
