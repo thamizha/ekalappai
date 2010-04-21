@@ -502,6 +502,7 @@ void Window::generatekey(int key,bool state){
     generatekeyLib = (GenerateKey) myLib->resolve( "GenerateKey" );
     generatekeyLib(key,state);
     if (state){
+        previous_4_character = previous_3_character;
         previous_3_character = previous_2_character;
         previous_2_character = previous_1_character;
         previous_1_character = key;
@@ -1103,6 +1104,19 @@ void Window::implementPhonetic(){
                     previous_2_vkCode = previous_1_vkCode;
                     previous_1_vkCode = NULL;
                     break;
+            }
+            else if ( (previous_1_vkCode == 0x52 ) && (previous_2_vkCode == 0x53 ) && (previous_4_character == 2970 )) { //ஸ்ரீ handling for sri
+                generatekey(8,FALSE);
+                generatekey(8,FALSE);
+                generatekey(8,FALSE);
+                generatekey(8,FALSE);
+                generatekey(3000,TRUE);
+                generatekey(3021,TRUE);
+                generatekey(2992,TRUE);
+                generatekey(3008,TRUE);
+                previous_2_vkCode = previous_1_vkCode;
+                previous_1_vkCode = NULL;
+                break;
             }
             else {
                             if(IsPrevkeyMey(1) ){

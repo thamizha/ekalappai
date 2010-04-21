@@ -135,6 +135,7 @@ private:
     int previous_1_character;
     int previous_2_character;
     int previous_3_character;
+    int previous_4_character;
 
     QVector<DWORD> meiezhuthukkal;
     QVector<DWORD> meiezhuthukkal_phonetic;
