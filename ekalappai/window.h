@@ -112,7 +112,7 @@ private:
     typedef HHOOK (*MyPrototype)(HINSTANCE, bool, HWND);
     typedef void (*CleanupHook)(HHOOK);
     typedef void (*DisableKeyboard)();
-    typedef bool (*GetKeyboardStatus)();
+    typedef bool (*GetAltKeyPress)();
     typedef DWORD (*GetKeyPress)();
     typedef void (*GenerateKey)(int, bool);
     typedef bool (*GetShiftKeyPress)();
@@ -122,10 +122,11 @@ private:
 
     BOOL shiftkey_pressed;
     BOOL controlkey_pressed;
+    BOOL altkey_pressed;
 
-    DWORD short_cut_key;
-    int short_cut_key_index;
-    int shortcut_modifier_key;
+    DWORD short_cut_key_hex;
+    QString short_cut_key;
+    QString shortcut_modifier_key;
 
     DWORD current_vkCode;
     DWORD previous_1_vkCode;

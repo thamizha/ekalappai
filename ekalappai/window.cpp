@@ -52,18 +52,20 @@ Window::Window()
     previous_1_vkCode = 0x0;
     shiftkey_pressed = FALSE;
     controlkey_pressed = FALSE;
+    altkey_pressed = FALSE;
     keyboard_status = TRUE;
 
     settings = new QSettings( "settings.ini", QSettings::IniFormat );
 
-    shortcut_modifier_key = settings->value("shortcut_modifier").toInt();
-    short_cut_key_index = settings->value("shortcut").toInt();
-
-    //set the shortcut key from the index
-    setShortcut2(short_cut_key_index);
+    shortcut_modifier_key = settings->value("shortcut_modifier").toString();
+    short_cut_key = settings->value("shortcut").toString();
+    short_cut_key_hex = 0x0;
 
     createIconGroupBox();
     createShortcutGroupBox();
+
+    // call set shortcut2 function so that the short_cut_key_hex value is populated as per the ini settings
+    setShortcut2(0);
 
     createActions();
     createTrayIcon();
@@ -148,51 +150,108 @@ void Window::setIcon(int index)
 // This function is called when the shortcut modifier combo is changed
 void Window::setShortcut1(int index)
 {
-    shortcut_modifier_key = index;
-    settings->setValue("shortcut_modifier", index);
+    settings->setValue("shortcut_modifier", shortcutComboBox1->currentText());
+
+    //if none is selected, the allowed single key shortcuts should change
+    if(index == 0){
+        shortcutComboBox2->clear();
+        shortcutComboBox2->addItem(tr("ESC"));
+        shortcutComboBox2->addItem(tr("F1"));
+        shortcutComboBox2->addItem(tr("F2"));
+        shortcutComboBox2->addItem(tr("F3"));
+        shortcutComboBox2->addItem(tr("F4"));
+        shortcutComboBox2->addItem(tr("F5"));
+        shortcutComboBox2->addItem(tr("F6"));
+        shortcutComboBox2->addItem(tr("F7"));
+        shortcutComboBox2->addItem(tr("F8"));
+        shortcutComboBox2->addItem(tr("F9"));
+        shortcutComboBox2->addItem(tr("F10"));
+    }
+    else {
+        shortcutComboBox2->clear();
+        shortcutComboBox2->addItem(tr("1"));
+        shortcutComboBox2->addItem(tr("2"));
+        shortcutComboBox2->addItem(tr("3"));
+        shortcutComboBox2->addItem(tr("4"));
+        shortcutComboBox2->addItem(tr("5"));
+        shortcutComboBox2->addItem(tr("6"));
+        shortcutComboBox2->addItem(tr("7"));
+        shortcutComboBox2->addItem(tr("8"));
+        shortcutComboBox2->addItem(tr("9"));
+        shortcutComboBox2->addItem(tr("0"));
+    }
 }
 
 // This function is called when the shortcut combo is changed
 void Window::setShortcut2(int index)
 {
 
-    settings->setValue("shortcut", index);
+    short_cut_key =   shortcutComboBox2->currentText();
+    settings->setValue("shortcut", short_cut_key);
 
-    switch (index) {
-    case 0 :
-            short_cut_key = 0x1B;
-            break;
-    case 1 :
-            short_cut_key = 0x31;
-            break;
-    case 2 :
-            short_cut_key = 0x32;
-            break;
-    case 3 :
-            short_cut_key = 0x33;
-            break;
-    case 4 :
-            short_cut_key = 0x34;
-            break;
-    case 5 :
-            short_cut_key = 0x35;
-            break;
-    case 6 :
-            short_cut_key = 0x36;
-            break;
-    case 7 :
-            short_cut_key = 0x37;
-            break;
-    case 8 :
-            short_cut_key = 0x38;
-            break;
-    case 9 :
-            short_cut_key = 0x39;
-            break;
-    case 10 :
-            short_cut_key = 0x30;
-            break;
+    if (short_cut_key == "ESC"){
+        short_cut_key_hex = 0x1B;
         }
+    else if (short_cut_key == "F1"){
+        short_cut_key_hex = 0x70;
+    }
+    else if (short_cut_key == "F2"){
+        short_cut_key_hex = 0x71;
+    }
+    else if (short_cut_key == "F3"){
+        short_cut_key_hex = 0x72;
+    }
+    else if (short_cut_key == "F4"){
+        short_cut_key_hex = 0x73;
+    }
+    else if (short_cut_key == "F5"){
+        short_cut_key_hex = 0x74;
+    }
+    else if (short_cut_key == "F6"){
+        short_cut_key_hex = 0x75;
+    }
+    else if (short_cut_key == "F7"){
+        short_cut_key_hex = 0x76;
+    }
+    else if (short_cut_key == "F8"){
+        short_cut_key_hex = 0x77;
+    }
+    else if (short_cut_key == "F9"){
+        short_cut_key_hex = 0x78;
+    }
+    else if (short_cut_key == "F10"){
+        short_cut_key_hex = 0x79;
+    }
+    else if (short_cut_key == "1"){
+        short_cut_key_hex = 0x31;
+    }
+    else if (short_cut_key == "2"){
+        short_cut_key_hex = 0x32;
+    }
+    else if (short_cut_key == "3"){
+        short_cut_key_hex = 0x33;
+    }
+    else if (short_cut_key == "4"){
+        short_cut_key_hex = 0x34;
+    }
+    else if (short_cut_key == "5"){
+        short_cut_key_hex = 0x35;
+    }
+    else if (short_cut_key == "6"){
+        short_cut_key_hex = 0x36;
+    }
+    else if (short_cut_key == "7"){
+        short_cut_key_hex = 0x37;
+    }
+    else if (short_cut_key == "8"){
+        short_cut_key_hex = 0x38;
+    }
+    else if (short_cut_key == "9"){
+        short_cut_key_hex = 0x39;
+    }
+    else if (short_cut_key == "0"){
+        short_cut_key_hex = 0x30;
+    }
 }
 
 
@@ -268,25 +327,43 @@ void Window::createShortcutGroupBox()
     shortcutLabel2 = new QLabel("Shortcut Key:");
 
     shortcutComboBox1 = new QComboBox;
-    shortcutComboBox1->addItem(tr("None"));
-    shortcutComboBox1->addItem(tr("Control Key"));
-    shortcutComboBox1->addItem(tr("Alt Key"));
+    shortcutComboBox1->addItem(tr("NONE"));
+    shortcutComboBox1->addItem(tr("CTRL"));
+   //shortcutComboBox1->addItem(tr("ALT"));
+
+    int index_tmp1 = shortcutComboBox1->findText(shortcut_modifier_key);
+    shortcutComboBox1->setCurrentIndex(index_tmp1);
 
     shortcutComboBox2 = new QComboBox;
-    shortcutComboBox2->addItem(tr("ESC"));
-    shortcutComboBox2->addItem(tr("1"));
-    shortcutComboBox2->addItem(tr("2"));
-    shortcutComboBox2->addItem(tr("3"));
-    shortcutComboBox2->addItem(tr("4"));
-    shortcutComboBox2->addItem(tr("5"));
-    shortcutComboBox2->addItem(tr("6"));
-    shortcutComboBox2->addItem(tr("7"));
-    shortcutComboBox2->addItem(tr("8"));
-    shortcutComboBox2->addItem(tr("9"));
-    shortcutComboBox2->addItem(tr("0"));
+    shortcutComboBox2->setMinimumContentsLength(3);
 
-    shortcutComboBox1->setCurrentIndex(shortcut_modifier_key);
-    shortcutComboBox2->setCurrentIndex(short_cut_key_index);
+    if(index_tmp1 == 0){
+        shortcutComboBox2->addItem(tr("ESC"));
+        shortcutComboBox2->addItem(tr("F1"));
+        shortcutComboBox2->addItem(tr("F2"));
+        shortcutComboBox2->addItem(tr("F3"));
+        shortcutComboBox2->addItem(tr("F4"));
+        shortcutComboBox2->addItem(tr("F5"));
+        shortcutComboBox2->addItem(tr("F6"));
+        shortcutComboBox2->addItem(tr("F7"));
+        shortcutComboBox2->addItem(tr("F8"));
+        shortcutComboBox2->addItem(tr("F9"));
+        shortcutComboBox2->addItem(tr("F10"));
+    }
+    else {
+        shortcutComboBox2->addItem(tr("1"));
+        shortcutComboBox2->addItem(tr("2"));
+        shortcutComboBox2->addItem(tr("3"));
+        shortcutComboBox2->addItem(tr("4"));
+        shortcutComboBox2->addItem(tr("5"));
+        shortcutComboBox2->addItem(tr("6"));
+        shortcutComboBox2->addItem(tr("7"));
+        shortcutComboBox2->addItem(tr("8"));
+        shortcutComboBox2->addItem(tr("9"));
+        shortcutComboBox2->addItem(tr("0"));
+    }
+    int index_tmp2 =  shortcutComboBox2->findText(short_cut_key);
+    shortcutComboBox2->setCurrentIndex(index_tmp2);
 
     QHBoxLayout *shortcutLayout = new QHBoxLayout;
     shortcutLayout->addWidget(shortcutLabel1);
@@ -370,15 +447,28 @@ void Window::processKeypressEvent(){
        getcontrolkeypress = (GetControlKeyPress) myLib->resolve( "GetControlKeyPress" );
        controlkey_pressed = getcontrolkeypress();
 
+       GetAltKeyPress getaltkeypress;
+       getaltkeypress = (GetAltKeyPress) myLib->resolve( "GetAltKeyPress" );
+       altkey_pressed = getaltkeypress();
+
+
 
        //toggle the keyboard_enabled flag based on the shortcut key placed
-       if((current_vkCode == short_cut_key) && (shortcut_modifier_key == 0)) {
+       if((current_vkCode == short_cut_key_hex) && (shortcut_modifier_key == "NONE")) {
             if (keyboard_status)
                  keyboard_status = false;
              else
                  keyboard_status = true;
          }
-       else if ((current_vkCode == short_cut_key) && (shortcut_modifier_key == 1)&& (controlkey_pressed) ){
+       //if control key is modifier
+       else if ((current_vkCode == short_cut_key_hex) && (shortcut_modifier_key == "CTRL")&& (controlkey_pressed == true ) ){
+           if (keyboard_status)
+                keyboard_status = false;
+            else
+                keyboard_status = true;
+       }
+       // if alt key is modifier
+       else if ((current_vkCode == short_cut_key_hex) && (shortcut_modifier_key == "ALT")&& (altkey_pressed == true) ){
            if (keyboard_status)
                 keyboard_status = false;
             else

@@ -1,7 +1,7 @@
 #eKalappai installer creation script
 
 Name "eKalappai"
-OutFile "eKalappai-3.0-beta1-installer.exe"
+OutFile "eKalappai-3.0-beta2-dev-installer.exe"
 
 RequestExecutionLevel admin
 
@@ -24,6 +24,7 @@ File  "app\libgcc_s_dw2-1.dll"
 File  "app\mingwm10.dll"
 File  "app\QtCore4.dll"
 File  "app\QtGui4.dll"
+File  "app\settings.ini"
 
 #Registry settings
 WriteRegStr HKEY_LOCAL_MACHINE "SOFTWARE\eKalappai" "" "$INSTDIR"
@@ -44,7 +45,7 @@ createShortCut "$DESKTOP\eKalappai.lnk" "$INSTDIR\ekalappai.exe"
 #Open an output file called "install.log" on the install directory and write installation info on it when the installation happens.
 fileOpen $0 "$INSTDIR\install.log" w
  
-fileWrite $0 "Installed version: 3.0-beta1$\r$\n"
+fileWrite $0 "Installed version: 3.0-beta2-dev$\r$\n"
 fileWrite $0 "Installed Date: $\r$\n"
  
 #Close the file
@@ -68,6 +69,7 @@ Delete "$INSTDIR\mingwm10.dll"
 Delete "$INSTDIR\QtCore4.dll"
 Delete "$INSTDIR\QtGui4.dll"
 Delete "$INSTDIR\install.log"
+Delete "$INSTDIR\settings.ini"
 RMDir $INSTDIR
 
 #Uninstall shortcuts

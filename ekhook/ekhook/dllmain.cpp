@@ -127,23 +127,19 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 
     shiftkey_pressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
 	bool caplock_pressed = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
-	altkey_pressed = ((GetKeyState(VK_LMENU) & 0x80) == 0x80 ? true : false);
+	altkey_pressed = ((GetKeyState(0x12) & 0x80 ) == 0x80  ? true : false);
 	controlkey_pressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
 	spacebar_pressed = ((GetKeyState(VK_SPACE) & 0x80) == 0x80 ? true : false);
 	backspace_pressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
 
-	//toggle the keyboard_enabled flag based on the shortcut key placed
-	if(p->vkCode == short_cut_key){
-		if (keyboard_enabled)
-			keyboard_enabled = false;
-		else
-			keyboard_enabled = true;
-	}
-
-	//Do not handle the keystrokes if control key is pressed - let the system handle them.
-	if(controlkey_pressed) 
+	//Do not handle the keystrokes if control key or ALT is pressed - let the system handle them.
+	if(controlkey_pressed)
 	{
 		//PostMessage(callapp_hInst,WM_KEYDOWN,wParam,lParam);
+		return 0;
+	}
+	if (altkey_pressed)
+	{
 		return 0;
 	}
 
@@ -181,10 +177,6 @@ extern "C" __declspec(dllexport) void Cleanup(HHOOK hkb)
        // hkb = NULL;
 }
 
-extern "C" __declspec(dllexport) bool GetKeyboardStatus()
-{
-	return keyboard_enabled;
-}
 
 extern "C" __declspec(dllexport) DWORD GetKeyPress()
 {
@@ -198,6 +190,11 @@ extern "C" __declspec(dllexport) DWORD GetKeyPress()
 	}
 
 	//return 0;
+}
+
+extern "C" __declspec(dllexport) bool GetAltKeyPress()
+{
+	return altkey_pressed;
 }
 
 
