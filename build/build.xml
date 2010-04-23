@@ -12,8 +12,7 @@
 		</description>
 		
 		<!-- CONFIG -->
-		<!-- PLEASE CHANGE THE SOURCE.ROOT VALUE ACCORDING -->
-		<property name="source.root" value="E:\ekalapaai\trunk"/>
+		<property name="source.root" value="${basedir}/.."/>
 
 
 		<property name="ekalappai.root" value="${source.root}/ekalappai"/>

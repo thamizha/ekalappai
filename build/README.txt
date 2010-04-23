@@ -21,13 +21,7 @@ README for eKalappai Build.
 	  Install and make sure "ant" and "java" is in system path.
 
 
-2. Go to build directory and edit "build.xml" for the source.root location value.
-   Edit the line for the value to your source checkedout location. Trunk is the top level directory of
-   source code.
-   <property name="source.root" value="E:\ekalapaai\trunk"/>
-
-
-3. From "build" directory, issue command as below.
+2. From "build" directory, issue command as below.
 	
    Command below will build the source code and create installer executable under ./installer directory.
    > ant 
