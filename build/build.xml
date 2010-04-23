@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+  @author <a href="mailto:vijay.gupta@gmail.com">eKalappai project</a>
+-->
+
+<project name="eKalappai" default="all" basedir=".">
+
+		<tstamp/>
+		<description>
+				eKalappai build and installer.
+		</description>
+		
+		<!-- CONFIG -->
+		<!-- PLEASE CHANGE THE SOURCE.ROOT VALUE ACCORDING -->
+		<property name="source.root" value="E:\ekalapaai\trunk"/>
+
+
+		<property name="ekalappai.root" value="${source.root}/ekalappai"/>
+		<property name="ekalappai.pro.file" value="${ekalappai.root}/ekalappai.pro"/>
+		
+		<property name="ekhookdll.root" value="${source.root}/ekhook"/>
+		<property name="ekhook.sln.file" value="${ekhookdll.root}/ekhook.sln"/>
+
+		<property name="installer.root" value="${source.root}/installer"/>
+		<property name="nsis.script" value="${source.root}/installer/ekalappai-installer-script.nsi"/>
+		<!-- CONFIG ENDS -->
+
+		<target name="init" depends="" description="removes the older artifacts before packaging to installer">
+				<delete verbose="true">
+						<fileset dir="${source.root}" includes="**/app/ekalappai.exe"/>
+						<fileset dir="${source.root}" includes="**/app/ekhook.dll"/>
+				</delete>
+		</target>
+		
+		<target name="ekalappaiexe" description="build eKalappai executable">
+				<echo> Generating Makefiles... </echo>
+				<exec executable="qmake" dir="${ekalappai.root}" failonerror="true">
+						<arg line="${ekalappai.pro.file}"/>
+				</exec>
+				<echo> Done Makefiles generation... </echo>
+
+				<exec executable="mingw32-make" dir="${ekalappai.root}" failonerror="true">
+						<arg line="-f Makefile.Release"/>
+				</exec>
+		</target>
+		
+		<target name="ekhookdll" description="build ekhook library.">
+				<exec executable="vcexpress" dir="${ekhookdll.root}" failonerror="true">
+						<arg line="/rebuild release ${ekhook.sln.file} /out log.txt"/>
+				</exec>
+		</target>
+
+		<target name="buildinstaller" depends="init, ekalappaiexe, ekhookdll" description="build installer.">
+				<copy file="${source.root}/ekalappai/release/ekalappai.exe" todir="${source.root}/installer/app"/>
+				<copy file="${source.root}/ekhook/Release/ekhook.dll" todir="${source.root}/installer/app"/>
+
+				<echo> Building eKalappai Installer...</echo>
+				<exec executable="makensis" dir="${installer.root}" failonerror="true">
+						<arg line="/V1 ${nsis.script}"/>
+				</exec>
+		</target>
+
+		<target name="build" depends="ekalappaiexe, ekhookdll" description="target which only builds the source code without invoking installer build.">
+		</target>
+
+		<target name="all" depends="buildinstaller" description="build installer and default target.">
+		</target>
+		
+		<target name="clean" description="cleans all the generated artifacts from the source root location.">
+				<delete verbose="true" includeemptydirs="true">
+						<fileset dir="${source.root}" includes="**/release/*"/>
+						<dirset dir="${source.root}" includes="**/release/"/>
+						<fileset dir="${source.root}" includes="**/Release/*"/>
+						<dirset dir="${source.root}" includes="**/Release/"/>
+						<fileset dir="${source.root}" includes="**/debug/*"/>
+						<dirset dir="${source.root}" includes="**/debug/"/>
+						<fileset dir="${source.root}" includes="**/*Makefile*"/>
+						<fileset dir="${source.root}" includes="**/installer/eKalappai*.exe"/>
+				</delete>
+		</target>
+
+</project>
