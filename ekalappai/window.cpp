@@ -37,6 +37,19 @@ Window::Window()
     //load ekalappai hook dll
     myLib = new QLibrary( "ekhook.dll" );
 
+    //store the valid keys to use in the processkey function
+    //numbers
+    valid_keys << 0x30 << 0x31 << 0x32 << 0x33 << 0x34 << 0x35 << 0x36 << 0x37 << 0x38 << 0x39;
+    //alphabets
+    valid_keys << 0x41 << 0x42 << 0x43 << 0x44 << 0x45 << 0x46 << 0x47 << 0x48 << 0x49 << 0x4A << 0x4B << 0x4C << 0x4D << 0x4E << 0x4F << 0x50 << 0x51 << 0x52 << 0x53 << 0x54 << 0x55 << 0x56 << 0x57 << 0x58 << 0x59 << 0x5A;
+    // funcion keys F1 to F12
+    valid_keys << 0x70 << 0x71 << 0x72 << 0x73 << 0x74 << 0x75 << 0x76 << 0x77 << 0x78 << 0x79 << 0x7A << 0x7B;
+    //special characters ESC ~ - + [ ] ; ' \ , . /
+    valid_keys << 0x1B << 0xC0 << 0xBB << 0xBD << 0xDB << 0xDD << 0xBA << 0xDE << 0xDC << 0xBC << 0xBF << 0xBE;
+
+    //spacebar, enterkey, backspace key
+    valid_keys << 0x20 << 0x0D << 0x08;
+
     //define meiezhuthukal keystrokes array for tamil99
     //?   ? 	   ?   ?  ?  ? 	?  ?   ?   ?   ?  ?   ?  ?  ?   ?  ?  ?
     //h   b   [   ]  o   p  l  ;  j  k   '  m  n  v   /  y  u  i
@@ -47,6 +60,7 @@ Window::Window()
     //shift+s , shift+l , shift + r , shift+ N
     meiezhuthukkal_phonetic << 0x57 << 0x52 << 0x54 << 0x59 << 0x50 << 0x53 << 0x44 << 0x46 << 0x47 << 0x48 << 0x4A << 0x4B << 0x4C << 0x5A << 0x58 << 0x43 << 0x56 << 0x42 << 0x4E << 0x4D ;
 
+
 //initialise the current keycode
     current_vkCode = 0x0;
     previous_1_vkCode = 0x0;
@@ -54,8 +68,21 @@ Window::Window()
     controlkey_pressed = FALSE;
     altkey_pressed = FALSE;
     keyboard_status = TRUE;
+    character_pressed = 0;
+    prev1_character_pressed = 0;
+    prev2_character_pressed = 0;
+    prev3_character_pressed = 0;
+    prev4_character_pressed = 0;
+    prev5_character_pressed = 0;
+
+    //This value will replace all the prev character_pressed variables. This will store upto 20 keys presssed, the last one being the latest key pressed.
+    charpressed_string20 = "";
+    prev_unicode_character_length = 0;
+    current_unicode_character_length = 0;
 
     settings = new QSettings( "settings.ini", QSettings::IniFormat );
+
+    keyrules = new QSettings( "phonetic.ini", QSettings::IniFormat );
 
     shortcut_modifier_key = settings->value("shortcut_modifier").toString();
     short_cut_key = settings->value("shortcut").toString();
@@ -116,7 +143,6 @@ bool Window::winEvent( MSG* message, long* result )
     LPARAM lparam = message->lParam;
 
 //    PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT) (lp);
-
     switch ( msg )
     {
         case WM_USER+755:
@@ -145,6 +171,7 @@ void Window::setIcon(int index)
     //logic to start a keyboard hook or remove keyboard hook based on the keyboard choosen
     callHook(index);
     showTrayMessage(index);
+    loadKeyBoard();
 }
 
 // This function is called when the shortcut modifier combo is changed
@@ -255,6 +282,59 @@ void Window::setShortcut2(int index)
 }
 
 
+void Window::loadKeyBoard(){
+    QString str1;
+    QString str2;
+    QString temp1;
+
+    int unicode_value1 = 0;
+   //add the last keystroe to the keystrokes array - we will maintain abou 6 keystrokes for now
+    //keystrokes.append(current_vkCode);
+
+    //keyrules->setValue(charpressed_string, "3002" );
+    //unicode_value1 = keyrules->value(charpressed_string).toInt();
+
+    //file handling code
+    QFile file("phonetic.txt");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+
+    QTextStream in(&file);
+    in.setAutoDetectUnicode(true);
+
+    bool line_start = FALSE;
+    bool line_end = FALSE;
+
+    //Read the file line by line & insert into keyboardmap arrays
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        str1.clear();
+        str2.clear();
+
+        //process_line(line);
+        if (line == "BEGIN_TABLE"){
+            line_start = true;
+            line_end = false;
+        }
+
+        if (line == "END_TABLE"){
+            line_end = true;
+        }
+
+        if ((line_start) && !(line_end)){
+            QRegExp sep("\\s+");
+            str1 = line.section(sep, 0, 0); // first part
+            str2 = line.section(sep, 1, 1) ; // second part
+            keyboardmap.insert(str1, str2);
+           // keyrules->setValue(str1, str2);
+        }
+
+    }
+
+
+}
+
+
 // This function is called when the tray icon is clicked
 void Window::changeKeyboard(int index)
 {
@@ -269,6 +349,7 @@ void Window::changeKeyboard(int index)
     //logic to start a keyboard hook or remove keyboard hook based on the keyboard choosen
         callHook(index);
         showTrayMessage(index);
+        loadKeyBoard();
 
 }
 
@@ -437,6 +518,10 @@ void Window::processKeypressEvent(){
        getkeypress = (GetKeyPress) myLib->resolve( "GetKeyPress" );
        current_vkCode = getkeypress();
 
+       GetCharPressed getcharpressed;
+       getcharpressed = (GetCharPressed) myLib->resolve( "GetCharPressed" );
+       character_pressed = getcharpressed();
+
   //////// Notes: shiftkey press function should be removed from dll and it should be calculatd inside the exe itself /////////////
        //get shift key info (notes: need to find a way to get all key info together.)
        GetShiftKeyPress getshiftkeypress;
@@ -450,7 +535,6 @@ void Window::processKeypressEvent(){
        GetAltKeyPress getaltkeypress;
        getaltkeypress = (GetAltKeyPress) myLib->resolve( "GetAltKeyPress" );
        altkey_pressed = getaltkeypress();
-
 
 
        //toggle the keyboard_enabled flag based on the shortcut key placed
@@ -486,14 +570,12 @@ void Window::processKeypressEvent(){
               }
        }
 
-
-
        if((keyboard_status)&& !(controlkey_pressed)){      //if keyboard enabled then implement the keyboards
             if(selected_keyboard == 1){
                 implementTamil99();
             }
             else if (selected_keyboard == 2 ){
-                implementPhonetic();
+                implementPhonetic_new();
             }
         }
 }
@@ -946,6 +1028,107 @@ void Window::implementTamil99(){
                 } //switch (current_vkCode)
 
 }
+
+
+void Window::generateUnicodeCharacters(QString characters){
+    // store the length of the characters globally
+    current_unicode_character_length = characters.length();
+
+    //Delete the previous unicode characters if both previous and current characters are present
+    if ((prev_unicode_character_length > 0) && (current_unicode_character_length > 0)){
+        int i = 0;
+        while (i < prev_unicode_character_length){
+            generatekey(8,FALSE);
+            i++;
+        }
+    }
+
+    //generate the unicode characters if the matching character is found in the keyboard file
+    if (current_unicode_character_length > 0){
+        int j = 0;
+        while (j < current_unicode_character_length){
+            generatekey(characters.at(j).unicode(),TRUE);
+            j++;
+        }
+    }
+
+    //assign the current character length to the previous length and exit the function
+    prev_unicode_character_length = current_unicode_character_length;
+}
+
+/*
+logic to use:
+
+1. store the typed values in a string continuosly updating it as we type
+2. keep the length around 20 chars... - assumption we dont need to store more than 20 chars
+3. just check the last 5 chars - this is just hardcoded for simplicity need to make it dynamic by reading the value from scim table format  & match it with the scim table
+4. if match found
+        { (step 1 starts)
+
+        check the previous number of tamil chars & delete those many chars
+        print the tamil characters
+        store the number of unicode charaters printed
+        (step1 end)
+        }
+
+        else
+        check the last 4 chars
+
+        if match found
+                repeat the steps 1
+5. continue till single char is found
+6. When single char is matched, dont delete any previous char
+*/
+void Window::implementPhonetic_new(){
+
+    if (valid_keys.contains(current_vkCode)){
+
+        //character_pressed contains the english alphabet pressed, its obtained from the hookdll
+        charpressed_string20 += ((QChar)character_pressed);
+
+        //remove extra previous characters if the string contains more than 20 characters
+        if (charpressed_string20.length() > 20){
+                charpressed_string20 = charpressed_string20.right(20);
+            }
+
+
+//        QMessageBox msgBox1;
+//        msgBox1.setText(charpressed_string20.right(5));
+//        msgBox1.exec();
+
+        QString str1;
+        QString str2;
+        QString temp1;
+
+        int unicode_value1 = 0;
+        int unicode_value2 = 0;
+        int unicode_value3 = 0;
+        int unicode_value4 = 0;
+        int unicode_value5 = 0;
+
+        if(keyboardmap.contains(charpressed_string20.right(5))){
+            generateUnicodeCharacters(keyboardmap.value(charpressed_string20.right(5)));
+        }
+        else if (keyboardmap.contains(charpressed_string20.right(4))){
+            generateUnicodeCharacters(keyboardmap.value(charpressed_string20.right(4)));
+        }
+        else if (keyboardmap.contains(charpressed_string20.right(3))){
+            generateUnicodeCharacters(keyboardmap.value(charpressed_string20.right(3)));
+        }
+        else if (keyboardmap.contains(charpressed_string20.right(2))){
+            generateUnicodeCharacters(keyboardmap.value(charpressed_string20.right(2)));
+        }
+        else if (keyboardmap.contains(charpressed_string20.right(1))){
+
+            //if it single character, there is no need to delete the previous character, so prev character length is made 0
+            prev_unicode_character_length = 0; //--- this logic doesnt work right.. need to find alternate way
+            generateUnicodeCharacters(keyboardmap.value(charpressed_string20.right(1)));
+        }
+
+         return;
+}
+}
+
 
 void Window::implementPhonetic(){
    // generatekey = (GenerateKey) myLib->resolve( "GenerateKey" );

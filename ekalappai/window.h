@@ -22,6 +22,7 @@
 #include <QSystemTrayIcon>
 #include <QDialog>
 #include <windows.h>
+#include <QMap>
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -58,6 +59,8 @@ public:
     bool keyboard_status;
 
     virtual bool winEvent( MSG* message, long* result );
+    QMap<QString, QString> keyboardmap ;
+
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -80,10 +83,13 @@ private:
     void changeKeyboard(int index);
     void implementTamil99();
     void implementPhonetic();
+    void implementPhonetic_new();
     void generatekey(int,bool);
     bool SearchArray (DWORD array[], DWORD key, int length);
     bool IsPrevkeyGrantha();
     bool IsPrevkeyMey(int pos);
+    void loadKeyBoard();
+    void generateUnicodeCharacters(QString characters);
 
     QGroupBox *iconGroupBox;
     QLabel *iconLabel;
@@ -106,6 +112,7 @@ private:
 
     QLibrary *myLib;
     QSettings *settings;
+    QSettings *keyrules;
 
     HHOOK hkb;
 
@@ -117,6 +124,7 @@ private:
     typedef void (*GenerateKey)(int, bool);
     typedef bool (*GetShiftKeyPress)();
     typedef bool (*GetControlKeyPress)();
+    typedef WORD (*GetCharPressed)();
 
     GenerateKey generatekeyLib;
 
@@ -132,13 +140,34 @@ private:
     DWORD previous_1_vkCode;
     DWORD previous_2_vkCode;
 
+    //need to store them in an array later so that the input characters length can be handled dynamically
+    WORD character_pressed;
+    WORD prev1_character_pressed;
+    WORD prev2_character_pressed;
+    WORD prev3_character_pressed;
+    WORD prev4_character_pressed;
+    WORD prev5_character_pressed;
+
+    //string that stores upto 20 characters of the english alphabets that corresponds to the keys pressed
+    QString charpressed_string20;
+
+    //need to change their names to character typed & also similarly put them in array.
     int previous_1_character;
     int previous_2_character;
     int previous_3_character;
     int previous_4_character;
 
+
+    //current and previous lengths of the unicode characters printed
+    int current_unicode_character_length;
+    int prev_unicode_character_length;
+
     QVector<DWORD> meiezhuthukkal;
     QVector<DWORD> meiezhuthukkal_phonetic;
+
+    QVector<DWORD> keystrokes;
+    QVector<DWORD> valid_keys;
+
 };
 
 #endif
