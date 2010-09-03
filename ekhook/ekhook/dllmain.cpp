@@ -36,6 +36,8 @@ static DWORD previous_2_vkCode = NULL;
 static int previous_1_character = NULL;
 static int previous_2_character = NULL;
 
+static WORD character_pressed = NULL;
+
 static DWORD short_cut_key = 0x1B; //(escape key)
 
 static HWND callapp_hInst; //Hinstance of the calling exe 
@@ -122,37 +124,50 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 	PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT) (lParam);
 
 	if (wParam == WM_KEYDOWN){
-	current_vkCode = p->vkCode ;
-	PostMessage(callapp_hInst,WM_USER+755,wParam,lParam);
+		current_vkCode = p->vkCode ;
+		PostMessage(callapp_hInst,WM_USER+755,wParam,lParam);
 
-    shiftkey_pressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
-	bool caplock_pressed = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
-	altkey_pressed = ((GetKeyState(0x12) & 0x80 ) == 0x80  ? true : false);
-	controlkey_pressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
-	spacebar_pressed = ((GetKeyState(VK_SPACE) & 0x80) == 0x80 ? true : false);
-	backspace_pressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
+		BYTE keyboard_state[256];
+		GetKeyboardState(keyboard_state);
+//		PBYTE keyboard_state;
+		WORD wCharacter = 0;
 
-	//Do not handle the keystrokes if control key or ALT is pressed - let the system handle them.
-	if(controlkey_pressed)
-	{
-		//PostMessage(callapp_hInst,WM_KEYDOWN,wParam,lParam);
-		return 0;
-	}
-	if (altkey_pressed)
-	{
-		return 0;
-	}
+//		GetKeyboardState(keyboard_state);
+		int ta = ToAscii((UINT)p->vkCode, p->scanCode,
+						 keyboard_state, &wCharacter, 0);
 
-	if((p->vkCode >= 0x41 && p->vkCode <= 0x5A  ) || (SearchArray(visiblekeys, p->vkCode, 9))){
-		if (keyboard_enabled)
-		{
-		keychanged = true;
-		return 1;		
+		if (ta > 0){
+			character_pressed = wCharacter;
 		}
-		else {
+
+		shiftkey_pressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
+		bool caplock_pressed = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
+		altkey_pressed = ((GetKeyState(0x12) & 0x80 ) == 0x80  ? true : false);
+		controlkey_pressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
+		spacebar_pressed = ((GetKeyState(VK_SPACE) & 0x80) == 0x80 ? true : false);
+		backspace_pressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
+
+		//Do not handle the keystrokes if control key or ALT is pressed - let the system handle them.
+		if(controlkey_pressed)
+		{
+			//PostMessage(callapp_hInst,WM_KEYDOWN,wParam,lParam);
 			return 0;
 		}
-	}
+		if (altkey_pressed)
+		{
+			return 0;
+		}
+
+		if((p->vkCode >= 0x41 && p->vkCode <= 0x5A  ) || (SearchArray(visiblekeys, p->vkCode, 9))){
+			if (keyboard_enabled)
+			{
+			keychanged = true;
+			return 1;		
+			}
+			else {
+				return 0;
+			}
+		}
 
 } //if wParam == WM_KEYDOWN
 
@@ -208,7 +223,10 @@ extern "C" __declspec(dllexport) bool GetShiftKeyPress()
 	return shiftkey_pressed;
 }
 
-
+extern "C" __declspec(dllexport) WORD GetCharPressed()
+{
+	return character_pressed;
+}
 
 BOOL APIENTRY DllMain( HINSTANCE  hModule,DWORD  reason, LPVOID lpReserved)
 {
@@ -230,3 +248,4 @@ BOOL APIENTRY DllMain( HINSTANCE  hModule,DWORD  reason, LPVOID lpReserved)
 }
 
 
+mugunth
