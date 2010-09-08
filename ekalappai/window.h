@@ -81,9 +81,7 @@ private:
     void callHook(int kb_index);
     void removeHook();
     void changeKeyboard(int index);
-    void implementTamil99();
-    void implementPhonetic();
-    void implementPhonetic_new();
+    void implementKeyboardLogic();
     void generatekey(int,bool);
     bool SearchArray (DWORD array[], DWORD key, int length);
     bool IsPrevkeyGrantha();
@@ -161,9 +159,6 @@ private:
     //current and previous lengths of the unicode characters printed
     int current_unicode_character_length;
     int prev_unicode_character_length;
-
-    QVector<DWORD> meiezhuthukkal;
-    QVector<DWORD> meiezhuthukkal_phonetic;
 
     QVector<DWORD> keystrokes;
     QVector<DWORD> valid_keys;

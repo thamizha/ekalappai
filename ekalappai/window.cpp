@@ -50,16 +50,6 @@ Window::Window()
     //spacebar, enterkey, backspace key
     valid_keys << 0x20 << 0x0D << 0x08;
 
-    //define meiezhuthukal keystrokes array for tamil99
-    //?   ? 	   ?   ?  ?  ? 	?  ?   ?   ?   ?  ?   ?  ?  ?   ?  ?  ?
-    //h   b   [   ]  o   p  l  ;  j  k   '  m  n  v   /  y  u  i
-    meiezhuthukkal << 0x48 << 0x42 << 0xDB << 0xDD << 0x4F << 0x50 << 0x4C << 0xBA << 0x4A << 0x4B << 0xDE << 0x4D << 0x4E << 0x56 << 0xBF << 0x59 << 0x55 << 0x49;
-
-    // meiezhuthu keystrokes for phonetic, it includes the grantha ezhuthukal also
-    //w r t y p s d f g h  j k l z x c v b n m
-    //shift+s , shift+l , shift + r , shift+ N
-    meiezhuthukkal_phonetic << 0x57 << 0x52 << 0x54 << 0x59 << 0x50 << 0x53 << 0x44 << 0x46 << 0x47 << 0x48 << 0x4A << 0x4B << 0x4C << 0x5A << 0x58 << 0x43 << 0x56 << 0x42 << 0x4E << 0x4D ;
-
 
 //initialise the current keycode
     current_vkCode = 0x0;
@@ -82,7 +72,7 @@ Window::Window()
 
     settings = new QSettings( "settings.ini", QSettings::IniFormat );
 
-    keyrules = new QSettings( "phonetic.ini", QSettings::IniFormat );
+    //keyrules = new QSettings( "phonetic.ini", QSettings::IniFormat );
 
     shortcut_modifier_key = settings->value("shortcut_modifier").toString();
     short_cut_key = settings->value("shortcut").toString();
@@ -139,8 +129,8 @@ void Window::closeEvent(QCloseEvent *event)
 bool Window::winEvent( MSG* message, long* result )
 {
     UINT msg = message->message;
-    WPARAM wparam = message->wParam;
-    LPARAM lparam = message->lParam;
+    //WPARAM wparam = message->wParam;
+    //LPARAM lparam = message->lParam;
 
 //    PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT) (lp);
     switch ( msg )
@@ -286,8 +276,9 @@ void Window::loadKeyBoard(){
     QString str1;
     QString str2;
     QString temp1;
-
-    int unicode_value1 = 0;
+    QString filename;
+    keyboardmap.clear();
+    //int unicode_value1 = 0;
    //add the last keystroe to the keystrokes array - we will maintain abou 6 keystrokes for now
     //keystrokes.append(current_vkCode);
 
@@ -295,19 +286,32 @@ void Window::loadKeyBoard(){
     //unicode_value1 = keyrules->value(charpressed_string).toInt();
 
     //file handling code
-    QFile file("phonetic.txt");
+    if(selected_keyboard == 1){
+        filename = "keyboards/tamil99.txt";
+    }
+    else if(selected_keyboard == 2){
+        filename = "keyboards/phonetic.txt";
+    }
+    else if(selected_keyboard == 3){
+        filename = "keyboards/typewriter.txt";
+    }
+    else if(selected_keyboard == 4){
+        filename = "keyboards/bamini.txt";
+    }
+
+    QFile file(filename);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
-
     QTextStream in(&file);
     in.setAutoDetectUnicode(true);
 
     bool line_start = FALSE;
     bool line_end = FALSE;
-
+    QString line;
     //Read the file line by line & insert into keyboardmap arrays
+
     while (!in.atEnd()) {
-        QString line = in.readLine();
+        line = in.readLine();
         str1.clear();
         str2.clear();
 
@@ -324,14 +328,12 @@ void Window::loadKeyBoard(){
         if ((line_start) && !(line_end)){
             QRegExp sep("\\s+");
             str1 = line.section(sep, 0, 0); // first part
-            str2 = line.section(sep, 1, 1) ; // second part
+            str2 = line.section(sep, 1, 1) ; // second part            
             keyboardmap.insert(str1, str2);
            // keyrules->setValue(str1, str2);
         }
-
+        line.clear();
     }
-
-
 }
 
 
@@ -350,7 +352,6 @@ void Window::changeKeyboard(int index)
         callHook(index);
         showTrayMessage(index);
         loadKeyBoard();
-
 }
 
 
@@ -392,6 +393,8 @@ void Window::createIconGroupBox()
     iconComboBox->addItem(QIcon(":/images/ekalappai_icons_en.png"), tr("No Keyboard"));
     iconComboBox->addItem(QIcon(":/images/ekalappai_icons_tn99.png"), tr("Tamil99"));
     iconComboBox->addItem(QIcon(":/images/ekalappai_icons_anjal.png"), tr("Phonetic"));
+    iconComboBox->addItem(QIcon(":/images/ekalappai_icons_tw.png"), tr("Typewriter"));
+    iconComboBox->addItem(QIcon(":/images/ekalappai_icons_bamini.png"), tr("Bamini"));
 
     QHBoxLayout *iconLayout = new QHBoxLayout;
     iconLayout->addWidget(iconLabel);
@@ -571,12 +574,13 @@ void Window::processKeypressEvent(){
        }
 
        if((keyboard_status)&& !(controlkey_pressed)){      //if keyboard enabled then implement the keyboards
-            if(selected_keyboard == 1){
-                implementTamil99();
-            }
-            else if (selected_keyboard == 2 ){
-                implementPhonetic_new();
-            }
+//            if(selected_keyboard == 1){
+//                implementTamil99();
+//            }
+//            else if (selected_keyboard == 2 ){
+//                implementPhonetic_new();
+//            }
+           implementKeyboardLogic();
         }
 }
 
@@ -589,444 +593,6 @@ void Window::generatekey(int key,bool state){
         previous_2_character = previous_1_character;
         previous_1_character = key;
     }
-}
-
-void Window::implementTamil99(){
-
-                switch (current_vkCode) {
-                //Q row keys
-                case 0x51 : //Q/?
-                        if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3006,TRUE); //?
-                        }
-                        else if (shiftkey_pressed){
-                                 generatekey(3000,TRUE); //?
-                        }
-                        else{
-                                 generatekey(2950,TRUE); //?
-                        }
-
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x57 : //W/?
-                        if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3008,TRUE);
-                        }
-                        else if (shiftkey_pressed){
-                                generatekey(2999,TRUE); //?
-                        }
-                        else{
-                                generatekey(2952,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x45 : //E/?
-                        if((meiezhuthukkal.contains(previous_1_vkCode) ) || (IsPrevkeyGrantha()) ){
-                                generatekey(3010,TRUE);
-                        }
-                        else if (shiftkey_pressed){
-                                generatekey(2972,TRUE); //?
-                        }
-                        else{
-                                generatekey(2954,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x52 : //R/?
-                        if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3016,TRUE);
-                        }
-                        else if (shiftkey_pressed){
-                                generatekey(3001,TRUE); //?
-                        }
-                        else{
-                                generatekey(2960,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x54 : //T/?
-                        if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3015,TRUE);
-                        }
-                        else if (shiftkey_pressed){
-                                generatekey(2965,TRUE); //???
-                                generatekey(3021,TRUE);
-                                generatekey(2999,TRUE);
-                        }
-                        else{
-                                generatekey(2959,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x59 : //Y/?
-                        //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
-                        if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,TRUE);
-                                generatekey(2995,TRUE);
-                        }
-                        else {
-                                generatekey(2995,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x55 : //U/?
-                        //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
-                        if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,TRUE);
-                                generatekey(2993,TRUE);
-                        }
-                        else {
-                                generatekey(2993,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x49 : //I/?
-                        //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
-                        if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,TRUE);
-                                generatekey(2985,TRUE);
-                        }
-                        else {
-                                generatekey(2985,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x4F : //O/?
-                        //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
-                        if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,TRUE);
-                                generatekey(2975,TRUE);
-                        }
-                        else {
-                                generatekey(2975,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x50 : //P/?
-                        //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
-                        if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,TRUE);
-                                generatekey(2979,TRUE);
-                        }
-                        else {
-                                generatekey(2979,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0xDB: //[/?
-                        //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
-                        if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,TRUE);
-                                generatekey(2970,TRUE);
-                        }
-                        else {
-                                generatekey(2970,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0xDD: //]/?
-                        //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
-                        if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,TRUE);
-                                generatekey(2974,TRUE);
-                        }
-                        else {
-                                generatekey(2974,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-
-                // A row keys
-                case 0x41: //A/?
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        generatekey(2949,TRUE);
-                        break;
-
-                case 0x53: //S/?
-                        if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3007,TRUE);
-                        }
-                        else{
-                                generatekey(2951,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x44: //D/?
-                        if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3009,TRUE);
-                        }
-                        else{
-                                generatekey(2953,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x46: //F/?
-                        if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3021,TRUE);
-                        }
-                        else{
-                                generatekey(2947,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x47: //G/?
-                        if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3014,TRUE);
-                        }
-                        else{
-                                generatekey(2958,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x48: //H/?
-                        //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
-                        if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,TRUE);
-                                generatekey(2965,TRUE);
-                        }
-                        else {
-                                generatekey(2965,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x4A: //J/?
-                        //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
-                        if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,TRUE);
-                                generatekey(2986,TRUE);
-                        }
-                        else {
-                                generatekey(2986,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x4B: //K/?
-                        //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
-                        if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,TRUE);
-                                generatekey(2990,TRUE);
-                        }
-                        else {
-                                generatekey(2990,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x4C: //L/?
-                        //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
-                        if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,TRUE);
-                                generatekey(2980,TRUE);
-                        }
-                        else if(previous_1_vkCode == 0xBA) { //if previous letter is ?, it should be made as mei
-                                generatekey(3021,TRUE);
-                                generatekey(2980,TRUE);
-                        }
-                        else {
-                                generatekey(2980,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0xBA: //;/?
-                        //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
-                        if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,TRUE);
-                                generatekey(2984,TRUE);
-                        }
-                        else {
-                                generatekey(2984,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0xDE: //'/?
-                        //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
-                        if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,TRUE);
-                                generatekey(2991,TRUE);
-                        }
-                        else {
-                                generatekey(2991,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                // Z row keys
-                case 0x5A: //Z / ?
-                        if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3020,TRUE);
-                        }
-                        else{
-                                generatekey(2964,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x58: //X/?
-                        if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3019,TRUE);
-                        }
-                        else{
-                                generatekey(2963,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x43: //C/?
-                        if((meiezhuthukkal.contains(previous_1_vkCode)) || (IsPrevkeyGrantha()) ){
-                                generatekey(3018,TRUE);
-                        }
-                        else{
-                                generatekey(2962,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x56: //V/?
-                        //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
-                        if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,TRUE);
-                                generatekey(2997,TRUE);
-                        }
-                        else {
-                                generatekey(2997,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x42: //B/?
-                        //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
-                        if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,TRUE);
-                                generatekey(2969,TRUE);
-                        }
-                        else {
-                                generatekey(2969,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x4E: //N/?
-                        //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
-                        if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,TRUE);
-                                generatekey(2994,TRUE);
-                        }
-                        else {
-                                generatekey(2994,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x4D: //M/?
-                        //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
-                        if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,TRUE);
-                                generatekey(2992,TRUE);
-                        }
-                        else {
-                                generatekey(2992,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0xBF: // / /?
-                        //??? ??? ???????????? ?????? ???? ???????, ????? ??????? ???????????
-                        if((previous_1_vkCode == current_vkCode) && (previous_2_vkCode != previous_1_vkCode) ){
-                                generatekey(3021,TRUE);
-                                generatekey(2996,TRUE);
-                        }
-                        else {
-                                generatekey(2996,TRUE);
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0xBC: //comma
-                        generatekey(44,true); //comma
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0xBE: //full stop
-                        generatekey(46,true); //full stop
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0xBD: //- key
-                        if (shiftkey_pressed){
-                            generatekey(95,true); // underscore _
-                        }
-                        else {
-                            generatekey(45,true); // - or minus
-                        }
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                case 0x08: //backspace
-                case 0x20: //spacbar
-                case 0x0D: //enter key
-                        previous_2_vkCode = previous_1_vkCode;
-                        previous_1_vkCode = current_vkCode;
-                        break;
-
-                default:
-                        break;
-
-                } //switch (current_vkCode)
-
 }
 
 
@@ -1079,7 +645,7 @@ logic to use:
 5. continue till single char is found
 6. When single char is matched, dont delete any previous char
 */
-void Window::implementPhonetic_new(){
+void Window::implementKeyboardLogic(){
 
     if (valid_keys.contains(current_vkCode)){
 
@@ -1091,7 +657,6 @@ void Window::implementPhonetic_new(){
                 charpressed_string20 = charpressed_string20.right(20);
             }
 
-
 //        QMessageBox msgBox1;
 //        msgBox1.setText(charpressed_string20.right(5));
 //        msgBox1.exec();
@@ -1100,11 +665,11 @@ void Window::implementPhonetic_new(){
         QString str2;
         QString temp1;
 
-        int unicode_value1 = 0;
-        int unicode_value2 = 0;
-        int unicode_value3 = 0;
-        int unicode_value4 = 0;
-        int unicode_value5 = 0;
+        //int unicode_value1 = 0;
+        //int unicode_value2 = 0;
+        //int unicode_value3 = 0;
+        //int unicode_value4 = 0;
+        //int unicode_value5 = 0;
 
         if(keyboardmap.contains(charpressed_string20.right(5))){
             generateUnicodeCharacters(keyboardmap.value(charpressed_string20.right(5)));
@@ -1171,23 +736,3 @@ bool Window::IsPrevkeyGrantha()
         }
 }
 
-
-bool Window::IsPrevkeyMey(int pos)
-{
-    if(pos == 1){
-       if(meiezhuthukkal_phonetic.contains(previous_1_vkCode) ||((previous_2_character == 2984)&&(previous_1_character == 3021))){
-                return true;
-        }
-        else{
-                return false;
-        }
-    }
-    else if ( pos == 2){
-        if(meiezhuthukkal_phonetic.contains(previous_2_vkCode) ||((previous_3_character == 2984)&&(previous_2_character == 3021))){
-                 return true;
-         }
-         else{
-                 return false;
-         }
-    }
-}
