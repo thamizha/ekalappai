@@ -47,14 +47,8 @@ Window::Window()
     //special characters ESC ~ - + [ ] ; ' \ , . /
     valid_keys << 0x1B << 0xC0 << 0xBB << 0xBD << 0xDB << 0xDD << 0xBA << 0xDE << 0xDC << 0xBC << 0xBF << 0xBE;
 
-    //spacebar, enterkey, backspace key
-    valid_keys << 0x20 << 0x0D << 0x08;
-
-
 //initialise the current keycode
     current_vkCode = 0x0;
-    previous_1_vkCode = 0x0;
-    shiftkey_pressed = FALSE;
     controlkey_pressed = FALSE;
     altkey_pressed = FALSE;
     keyboard_status = TRUE;
@@ -72,11 +66,10 @@ Window::Window()
 
     settings = new QSettings( "settings.ini", QSettings::IniFormat );
 
-    //keyrules = new QSettings( "phonetic.ini", QSettings::IniFormat );
-
     shortcut_modifier_key = settings->value("shortcut_modifier").toString();
     short_cut_key = settings->value("shortcut").toString();
     short_cut_key_hex = 0x0;
+    selected_keyboard = settings->value("selected_keyboard").toInt();
 
     createIconGroupBox();
     createShortcutGroupBox();
@@ -104,7 +97,7 @@ Window::Window()
     mainLayout->addWidget(shortcutGroupBox);
     setLayout(mainLayout);
 
-    iconComboBox->setCurrentIndex(1);
+    iconComboBox->setCurrentIndex(selected_keyboard);
     trayIcon->show();
 
     setWindowTitle(tr("eKalappai 3.0"));
@@ -129,10 +122,7 @@ void Window::closeEvent(QCloseEvent *event)
 bool Window::winEvent( MSG* message, long* result )
 {
     UINT msg = message->message;
-    //WPARAM wparam = message->wParam;
-    //LPARAM lparam = message->lParam;
 
-//    PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT) (lp);
     switch ( msg )
     {
         case WM_USER+755:
@@ -146,14 +136,13 @@ bool Window::winEvent( MSG* message, long* result )
     return false;
 }
 
-// This function is called when the tray icon is clicked
+// This function is called when the keyboard is changed
 void Window::setIcon(int index)
 {
     QIcon icon = iconComboBox->itemIcon(index);
     trayIcon->setIcon(icon);
     setWindowIcon(icon);
     trayIcon->setToolTip(iconComboBox->itemText(index));
-
 
     //call remove hook before cecking for the keyboard choosen .
     removeHook();
@@ -202,7 +191,6 @@ void Window::setShortcut1(int index)
 // This function is called when the shortcut combo is changed
 void Window::setShortcut2(int index)
 {
-
     short_cut_key =   shortcutComboBox2->currentText();
     settings->setValue("shortcut", short_cut_key);
 
@@ -278,25 +266,19 @@ void Window::loadKeyBoard(){
     QString temp1;
     QString filename;
     keyboardmap.clear();
-    //int unicode_value1 = 0;
-   //add the last keystroe to the keystrokes array - we will maintain abou 6 keystrokes for now
-    //keystrokes.append(current_vkCode);
-
-    //keyrules->setValue(charpressed_string, "3002" );
-    //unicode_value1 = keyrules->value(charpressed_string).toInt();
 
     //file handling code
     if(selected_keyboard == 1){
-        filename = "keyboards/tamil99.txt";
+        filename = "keyboards/Tamil-tamil99.txt.in";
     }
     else if(selected_keyboard == 2){
-        filename = "keyboards/phonetic.txt";
+        filename = "keyboards/Tamil-phonetic.txt.in";
     }
     else if(selected_keyboard == 3){
-        filename = "keyboards/typewriter.txt";
+        filename = "keyboards/Tamil-remington.txt.in";
     }
     else if(selected_keyboard == 4){
-        filename = "keyboards/bamini.txt";
+        filename = "keyboards/Tamil-inscript.txt.in";
     }
 
     QFile file(filename);
@@ -336,8 +318,7 @@ void Window::loadKeyBoard(){
     }
 }
 
-
-// This function is called when the tray icon is clicked
+// This function is called when keyboard is toggled or when keyboard is changed from setting window.
 void Window::changeKeyboard(int index)
 {
     QIcon icon = iconComboBox->itemIcon(index);
@@ -354,23 +335,24 @@ void Window::changeKeyboard(int index)
         loadKeyBoard();
 }
 
-
+// This functions is called when taskbar icon is clicked
 void Window::iconActivated(QSystemTrayIcon::ActivationReason reason)
 {
     switch (reason) {
     case QSystemTrayIcon::Trigger:
     case QSystemTrayIcon::DoubleClick:
-        iconComboBox->setCurrentIndex((iconComboBox->currentIndex() + 1)
-                                      % iconComboBox->count());
+        if (iconComboBox->currentIndex() == 0){
+            iconComboBox->setCurrentIndex(selected_keyboard);
+        } else {
+            iconComboBox->setCurrentIndex(0);
+        }
         break;
     case QSystemTrayIcon::MiddleClick:
-        showTrayMessage(iconComboBox->currentIndex());
         break;
     default:
         ;
     }
 }
-
 
 void Window::showTrayMessage(int index)
 {
@@ -394,7 +376,7 @@ void Window::createIconGroupBox()
     iconComboBox->addItem(QIcon(":/images/ekalappai_icons_tn99.png"), tr("Tamil99"));
     iconComboBox->addItem(QIcon(":/images/ekalappai_icons_anjal.png"), tr("Phonetic"));
     iconComboBox->addItem(QIcon(":/images/ekalappai_icons_tw.png"), tr("Typewriter"));
-    iconComboBox->addItem(QIcon(":/images/ekalappai_icons_bamini.png"), tr("Bamini"));
+    iconComboBox->addItem(QIcon(":/images/ekalappai_icons_inscript.png"), tr("Inscript"));
 
     QHBoxLayout *iconLayout = new QHBoxLayout;
     iconLayout->addWidget(iconLabel);
@@ -495,6 +477,7 @@ void Window::callHook(int kb_index){
     else {
         keyboard_enabled = true;
         selected_keyboard = kb_index;
+        settings->setValue("selected_keyboard", selected_keyboard);
     }
 
     myFunction = (MyPrototype) myLib->resolve( "Init_nokeyboard" );
@@ -503,7 +486,6 @@ void Window::callHook(int kb_index){
     if ( myFunction ) {
         hkb = myFunction(GetModuleHandle(0),keyboard_enabled, this->winId());
     }
-
 }
 
 void Window::removeHook(){
@@ -524,12 +506,6 @@ void Window::processKeypressEvent(){
        GetCharPressed getcharpressed;
        getcharpressed = (GetCharPressed) myLib->resolve( "GetCharPressed" );
        character_pressed = getcharpressed();
-
-  //////// Notes: shiftkey press function should be removed from dll and it should be calculatd inside the exe itself /////////////
-       //get shift key info (notes: need to find a way to get all key info together.)
-       GetShiftKeyPress getshiftkeypress;
-       getshiftkeypress = (GetShiftKeyPress) myLib->resolve( "GetShiftKeyPress" );
-       shiftkey_pressed = getshiftkeypress();
 
        GetControlKeyPress getcontrolkeypress;
        getcontrolkeypress = (GetControlKeyPress) myLib->resolve( "GetControlKeyPress" );
@@ -573,13 +549,7 @@ void Window::processKeypressEvent(){
               }
        }
 
-       if((keyboard_status)&& !(controlkey_pressed)){      //if keyboard enabled then implement the keyboards
-//            if(selected_keyboard == 1){
-//                implementTamil99();
-//            }
-//            else if (selected_keyboard == 2 ){
-//                implementPhonetic_new();
-//            }
+       if((keyboard_status)&& !(controlkey_pressed)){
            implementKeyboardLogic();
         }
 }
@@ -665,12 +635,6 @@ void Window::implementKeyboardLogic(){
         QString str2;
         QString temp1;
 
-        //int unicode_value1 = 0;
-        //int unicode_value2 = 0;
-        //int unicode_value3 = 0;
-        //int unicode_value4 = 0;
-        //int unicode_value5 = 0;
-
         if(keyboardmap.contains(charpressed_string20.right(5))){
             generateUnicodeCharacters(keyboardmap.value(charpressed_string20.right(5)));
         }
@@ -694,8 +658,6 @@ void Window::implementKeyboardLogic(){
 }
 }
 
-
-
 //Helper functions//
 bool Window::SearchArray (DWORD array[], DWORD key, int length)
 {
@@ -707,28 +669,6 @@ bool Window::SearchArray (DWORD array[], DWORD key, int length)
         }
 
         if (index < length){
-                return true;
-        }
-        else{
-                return false;
-        }
-}
-
-
-bool Window::IsPrevkeyGrantha()
-{
-        //define grantha array
-        //?  ? ? ? ???
-        int granthaezhuthukkal[] = {3000, 2999, 2972, 3001};
-
-        int index = 0;
-        while( (index < 4 ) && (previous_1_character != granthaezhuthukkal[index]))
-        {
-                if (granthaezhuthukkal[index] != previous_1_character)
-                        index++;
-        }
-
-        if (index < 4){
                 return true;
         }
         else{

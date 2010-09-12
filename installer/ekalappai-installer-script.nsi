@@ -1,7 +1,7 @@
 #eKalappai installer creation script
 
 Name "eKalappai"
-OutFile "eKalappai-3.0-beta2-dev-installer.exe"
+OutFile "eKalappai-3.0-beta3dev-installer.exe"
 
 RequestExecutionLevel admin
 
@@ -26,6 +26,10 @@ File  "app\QtCore4.dll"
 File  "app\QtGui4.dll"
 File  "app\settings.ini"
 
+SetOutPath "$INSTDIR\keyboards"
+File  "app\keyboards\*.in"
+
+
 #Registry settings
 WriteRegStr HKEY_LOCAL_MACHINE "SOFTWARE\eKalappai" "" "$INSTDIR"
 WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Uninstall\eKalappai" "DisplayName" "eKalappai (remove only)"
@@ -45,7 +49,7 @@ createShortCut "$DESKTOP\eKalappai.lnk" "$INSTDIR\ekalappai.exe"
 #Open an output file called "install.log" on the install directory and write installation info on it when the installation happens.
 fileOpen $0 "$INSTDIR\install.log" w
  
-fileWrite $0 "Installed version: 3.0-beta2-dev$\r$\n"
+fileWrite $0 "Installed version: 3.0-beta3$\r$\n"
 fileWrite $0 "Installed Date: $\r$\n"
  
 #Close the file
@@ -70,6 +74,8 @@ Delete "$INSTDIR\QtCore4.dll"
 Delete "$INSTDIR\QtGui4.dll"
 Delete "$INSTDIR\install.log"
 Delete "$INSTDIR\settings.ini"
+Delete "$INSTDIR\keyboards\*.in"
+RMDir "$INSTDIR\keyboards"
 RMDir $INSTDIR
 
 #Uninstall shortcuts
@@ -87,7 +93,7 @@ SectionEnd ; end of uninstall section
 
 /* Replace the values of the two defines below to your application's window class and window title, respectivelly. */
 !define WNDCLASS "QWidget"
-!define WNDTITLE "eKalappai 3.0b1"
+!define WNDTITLE "eKalappai 3.0b3"
  
 Function un.onInit
   FindWindow $0 "${WNDCLASS}" "${WNDTITLE}"

@@ -1,4 +1,7 @@
-﻿### File header must not be modified
+﻿### Modified by Muguntharaj to use in ekalappai from original scim table created by Red Hat.
+### Modification1 : Added pulli & comma 
+###
+### File header must not be modified
 ### This file must be encoded into UTF-8.
 ### Copyright (c) 2004-2005 Red Hat, Inc. All rights reserved.
 SCIM_Generic_Table_Phrase_Library_TEXT
@@ -464,4 +467,6 @@ L :
 < <
 > >
 ? ?
+. .
+, ,
 END_TABLE

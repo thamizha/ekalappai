@@ -28,18 +28,11 @@ static bool altkey_pressed  = FALSE;
 static bool controlkey_pressed = FALSE;
 static bool spacebar_pressed = FALSE;
 static bool backspace_pressed = FALSE;
-
 static bool keychanged = true;
-static DWORD previous_1_vkCode = NULL;
-static DWORD previous_2_vkCode = NULL;
-
 static int previous_1_character = NULL;
 static int previous_2_character = NULL;
 
 static WORD character_pressed = NULL;
-
-static DWORD short_cut_key = 0x1B; //(escape key)
-
 static HWND callapp_hInst; //Hinstance of the calling exe 
 
 //this stores the status of the keyboard which will be queried by the Qt application at regular intervals
@@ -52,8 +45,8 @@ static int capslock_on = 0;
 #pragma comment(linker, "/SECTION:.HOOKDATA,RWS")
 
 //define visible keystrokes array other than alphabets & also the backspace and spacebar keys
-//[ ] ; ' \  , . /
-DWORD visiblekeys[] = { 0xDB,0xDD  , 0xDE, 0xBA, 0xDE, 0xBC, 0xBE, 0xBF, 0xBD};
+//[ ] ; ' \  , . / - + 0 1 2 3 4 5 6 7 8 9
+DWORD visiblekeys[] = { 0xDB,0xDD  , 0xDE, 0xBA, 0xDE, 0xBC, 0xBE, 0xBF, 0xBD, 0xBB, 0x30, 0x31, 0x32, 0x33,0x34,0x35, 0x36, 0x37, 0x38, 0x39 };
 
 //Helper functions//
 bool SearchArray (DWORD array[], DWORD key, int length)
@@ -123,16 +116,14 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 
 	PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT) (lParam);
 
-	if (wParam == WM_KEYDOWN){
+	if (wParam == WM_KEYDOWN ){
 		current_vkCode = p->vkCode ;
 		PostMessage(callapp_hInst,WM_USER+755,wParam,lParam);
 
 		BYTE keyboard_state[256];
 		GetKeyboardState(keyboard_state);
-//		PBYTE keyboard_state;
 		WORD wCharacter = 0;
 
-//		GetKeyboardState(keyboard_state);
 		int ta = ToAscii((UINT)p->vkCode, p->scanCode,
 						 keyboard_state, &wCharacter, 0);
 
@@ -150,7 +141,6 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 		//Do not handle the keystrokes if control key or ALT is pressed - let the system handle them.
 		if(controlkey_pressed)
 		{
-			//PostMessage(callapp_hInst,WM_KEYDOWN,wParam,lParam);
 			return 0;
 		}
 		if (altkey_pressed)
@@ -158,7 +148,7 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 			return 0;
 		}
 
-		if((p->vkCode >= 0x41 && p->vkCode <= 0x5A  ) || (SearchArray(visiblekeys, p->vkCode, 9))){
+		if((p->vkCode >= 0x41 && p->vkCode <= 0x5A  ) || (SearchArray(visiblekeys, p->vkCode, 20))){
 			if (keyboard_enabled)
 			{
 			keychanged = true;
@@ -169,7 +159,16 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 			}
 		}
 
-} //if wParam == WM_KEYDOWN
+	} //if wParam == WM_KEYDOWN
+	//This portion is written to prevent the bug in which the shift key was not cleared untill 2 keys are pressed. 
+	//It handles key up events and doesnt call Postmessage so that no keystroke is sent to the appliction during key up. 
+	//only character_pressed variale is set, which helps us to clear the keys like shiftkey correctly
+	else if (wParam == WM_KEYUP ){
+		current_vkCode = p->vkCode ;
+		BYTE keyboard_state[256];
+		GetKeyboardState(keyboard_state);
+		shiftkey_pressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
+	}
 
 	return CallNextHookEx(NULL, nCode, wParam, lParam);
 }
@@ -186,10 +185,7 @@ extern "C" __declspec(dllexport) HHOOK Init_nokeyboard(HINSTANCE hInstance, bool
 
 extern "C" __declspec(dllexport) void Cleanup(HHOOK hkb)
 {
-        //if( hkb != NULL )
-         UnhookWindowsHookEx( hkb );
-
-       // hkb = NULL;
+	UnhookWindowsHookEx( hkb );
 }
 
 

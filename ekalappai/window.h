@@ -84,8 +84,6 @@ private:
     void implementKeyboardLogic();
     void generatekey(int,bool);
     bool SearchArray (DWORD array[], DWORD key, int length);
-    bool IsPrevkeyGrantha();
-    bool IsPrevkeyMey(int pos);
     void loadKeyBoard();
     void generateUnicodeCharacters(QString characters);
 
@@ -126,7 +124,6 @@ private:
 
     GenerateKey generatekeyLib;
 
-    BOOL shiftkey_pressed;
     BOOL controlkey_pressed;
     BOOL altkey_pressed;
 
@@ -135,8 +132,6 @@ private:
     QString shortcut_modifier_key;
 
     DWORD current_vkCode;
-    DWORD previous_1_vkCode;
-    DWORD previous_2_vkCode;
 
     //need to store them in an array later so that the input characters length can be handled dynamically
     WORD character_pressed;
