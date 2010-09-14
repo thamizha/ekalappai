@@ -64,7 +64,7 @@ Window::Window()
     prev_unicode_character_length = 0;
     current_unicode_character_length = 0;
 
-    settings = new QSettings( "settings.ini", QSettings::IniFormat );
+    settings = new QSettings( "eksettings.ini", QSettings::IniFormat );
 
     shortcut_modifier_key = settings->value("shortcut_modifier").toString();
     short_cut_key = settings->value("shortcut").toString();
@@ -587,9 +587,6 @@ void Window::generateUnicodeCharacters(QString characters){
             j++;
         }
     }
-
-    //assign the current character length to the previous length and exit the function
-    prev_unicode_character_length = current_unicode_character_length;
 }
 
 /*
@@ -601,7 +598,11 @@ logic to use:
 4. if match found
         { (step 1 starts)
 
-        check the previous number of tamil chars & delete those many chars
+        //check the previous number of tamil chars
+check the previous english letter combination
+check the number of English characters in previous combinations used again in the current combination. And arrive at the number of tamil characters for the overlapped in prev english combination
+ & delete those many chars
+
         print the tamil characters
         store the number of unicode charaters printed
         (step1 end)
@@ -633,18 +634,26 @@ void Window::implementKeyboardLogic(){
 
         QString str1;
         QString str2;
-        QString temp1;
+        QString prev_char_to_delete;
 
         if(keyboardmap.contains(charpressed_string20.right(5))){
+            prev_char_to_delete = keyboardmap.value(charpressed_string20.right(5).left(4));
+            prev_unicode_character_length = prev_char_to_delete.length();
             generateUnicodeCharacters(keyboardmap.value(charpressed_string20.right(5)));
         }
         else if (keyboardmap.contains(charpressed_string20.right(4))){
+            prev_char_to_delete = keyboardmap.value(charpressed_string20.right(4).left(3));
+            prev_unicode_character_length = prev_char_to_delete.length();
             generateUnicodeCharacters(keyboardmap.value(charpressed_string20.right(4)));
         }
         else if (keyboardmap.contains(charpressed_string20.right(3))){
+            prev_char_to_delete = keyboardmap.value(charpressed_string20.right(3).left(2));
+            prev_unicode_character_length = prev_char_to_delete.length();
             generateUnicodeCharacters(keyboardmap.value(charpressed_string20.right(3)));
         }
         else if (keyboardmap.contains(charpressed_string20.right(2))){
+            prev_char_to_delete = keyboardmap.value(charpressed_string20.right(2).left(1));
+            prev_unicode_character_length = prev_char_to_delete.length();
             generateUnicodeCharacters(keyboardmap.value(charpressed_string20.right(2)));
         }
         else if (keyboardmap.contains(charpressed_string20.right(1))){
@@ -653,7 +662,6 @@ void Window::implementKeyboardLogic(){
             prev_unicode_character_length = 0; //--- this logic doesnt work right.. need to find alternate way
             generateUnicodeCharacters(keyboardmap.value(charpressed_string20.right(1)));
         }
-
          return;
 }
 }

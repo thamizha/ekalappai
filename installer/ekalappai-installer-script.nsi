@@ -24,11 +24,11 @@ File  "app\libgcc_s_dw2-1.dll"
 File  "app\mingwm10.dll"
 File  "app\QtCore4.dll"
 File  "app\QtGui4.dll"
-File  "app\settings.ini"
+File  "app\eksettings.ini"
 
 SetOutPath "$INSTDIR\keyboards"
 File  "app\keyboards\*.in"
-
+SetOutPath "$INSTDIR"
 
 #Registry settings
 WriteRegStr HKEY_LOCAL_MACHINE "SOFTWARE\eKalappai" "" "$INSTDIR"
@@ -73,7 +73,11 @@ Delete "$INSTDIR\mingwm10.dll"
 Delete "$INSTDIR\QtCore4.dll"
 Delete "$INSTDIR\QtGui4.dll"
 Delete "$INSTDIR\install.log"
-Delete "$INSTDIR\settings.ini"
+Delete "$INSTDIR\eksettings.ini"
+StrCpy $2 $INSTDIR "" 3
+Delete "$LOCALAPPDATA\\VirtualStore\\$2\\eksettings.ini"
+RMDir "$LOCALAPPDATA\\VirtualStore\\$2\\" 
+
 Delete "$INSTDIR\keyboards\*.in"
 RMDir "$INSTDIR\keyboards"
 RMDir $INSTDIR
