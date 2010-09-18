@@ -263,8 +263,12 @@ void Window::loadKeyBoard(){
         filename = "keyboards/Tamil-remington.txt.in";
     }
     else if(selected_keyboard == 4){
+        filename = "keyboards/Tamil-bamini.txt.in";
+    }
+    else if(selected_keyboard == 5){
         filename = "keyboards/Tamil-inscript.txt.in";
     }
+
 
     QFile file(filename);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -376,6 +380,7 @@ void Window::createIconGroupBox()
     iconComboBox->addItem(QIcon(":/images/ekalappai_icons_tn99.png"), tr("Tamil99"));
     iconComboBox->addItem(QIcon(":/images/ekalappai_icons_anjal.png"), tr("Phonetic"));
     iconComboBox->addItem(QIcon(":/images/ekalappai_icons_tw.png"), tr("Typewriter"));
+    iconComboBox->addItem(QIcon(":/images/ekalappai_icons_bamini.png"), tr("Bamini"));
     iconComboBox->addItem(QIcon(":/images/ekalappai_icons_inscript.png"), tr("Inscript"));
 
     QHBoxLayout *iconLayout = new QHBoxLayout;
