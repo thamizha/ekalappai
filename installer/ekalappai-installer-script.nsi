@@ -1,7 +1,7 @@
 #eKalappai installer creation script
 
 Name "eKalappai"
-OutFile "eKalappai-3.0-beta3dev-installer.exe"
+OutFile "eKalappai-3.0-beta3-installer.exe"
 
 RequestExecutionLevel admin
 
