@@ -46,6 +46,8 @@ Window::Window()
     valid_keys << 0x70 << 0x71 << 0x72 << 0x73 << 0x74 << 0x75 << 0x76 << 0x77 << 0x78 << 0x79 << 0x7A << 0x7B;
     //special characters ESC ~ - + [ ] ; ' \ , . /
     valid_keys << 0x1B << 0xC0 << 0xBB << 0xBD << 0xDB << 0xDD << 0xBA << 0xDE << 0xDC << 0xBC << 0xBF << 0xBE;
+    //enter, space, backspace keys
+    valid_keys << 0x20 << 0x0D << 0x08 ;
 
 //initialise the current keycode
     current_vkCode = 0x0;
@@ -312,9 +314,9 @@ void Window::changeKeyboard(int index)
     removeHook();
 
     //logic to start a keyboard hook or remove keyboard hook based on the keyboard choosen
-        callHook(index);
-        showTrayMessage(index);
-        loadKeyBoard();
+    callHook(index);
+    showTrayMessage(index);
+    loadKeyBoard();
 }
 
 
