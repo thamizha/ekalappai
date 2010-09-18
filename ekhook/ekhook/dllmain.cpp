@@ -45,8 +45,8 @@ static int capslock_on = 0;
 #pragma comment(linker, "/SECTION:.HOOKDATA,RWS")
 
 //define visible keystrokes array other than alphabets & also the backspace and spacebar keys
-//[ ] ; ' \  , . / - + 0 1 2 3 4 5 6 7 8 9
-DWORD visiblekeys[] = { 0xDB,0xDD  , 0xDE, 0xBA, 0xDC, 0xDE, 0xBC, 0xBE, 0xBF, 0xBD, 0xBB, 0x30, 0x31, 0x32, 0x33,0x34,0x35, 0x36, 0x37, 0x38, 0x39 };
+//` [ ] ; ' \  , . / - + 0 1 2 3 4 5 6 7 8 9
+DWORD visiblekeys[] = { 0xC0, 0xDB,0xDD  , 0xDE, 0xBA, 0xDC, 0xDE, 0xBC, 0xBE, 0xBF, 0xBD, 0xBB, 0x30, 0x31, 0x32, 0x33,0x34,0x35, 0x36, 0x37, 0x38, 0x39 };
 
 //Helper functions//
 bool SearchArray (DWORD array[], DWORD key, int length)
@@ -148,7 +148,7 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 			return 0;
 		}
 
-		if((p->vkCode >= 0x41 && p->vkCode <= 0x5A  ) || (SearchArray(visiblekeys, p->vkCode, 21))){
+		if((p->vkCode >= 0x41 && p->vkCode <= 0x5A  ) || (SearchArray(visiblekeys, p->vkCode, 22))){
 			if (keyboard_enabled)
 			{
 			keychanged = true;

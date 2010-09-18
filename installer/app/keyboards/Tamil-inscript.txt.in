@@ -1,4 +1,7 @@
-﻿### File header must not be modified
+﻿### Modified by Muguntharaj to use in ekalappai from original scim table.
+### Modification1 :v V mistake corrected, added shri , added M -> sha
+###
+### File header must not be modified
 ### This file must be encoded into UTF-8.
 ### This file is derived from iiimf unitLE's Tamil inscript layout.
 ### Copyright (c) 2003 Sun Microsystems, Inc. All Rights Reserved.
@@ -188,19 +191,19 @@ X X
 x x
 C ண
 c ம
-V ன
-v ந
+V ந
+v ன
 B ழ
 b வ
 N ள
 n ல
-M M
+M ஷ
 m ஸ
 < ஷ
 , ,
 > >
 . .
 / ய
-* ஷ்ர
+* ஸ்ரீ
 ? ?
 END_TABLE
