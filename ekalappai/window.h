@@ -66,12 +66,12 @@ protected:
     void closeEvent(QCloseEvent *event);
 
 private slots:
-    void setIcon(int index);
     void setShortcut1(int index);
     void setShortcut2(int index);
     void iconActivated(QSystemTrayIcon::ActivationReason reason);
     void showTrayMessage(int index);
     void processKeypressEvent();
+    void changeKeyboard(int index);
 
 private:
     void createIconGroupBox();
@@ -80,12 +80,12 @@ private:
     void createTrayIcon();
     void callHook(int kb_index);
     void removeHook();
-    void changeKeyboard(int index);
     void implementKeyboardLogic();
     void generatekey(int,bool);
     bool SearchArray (DWORD array[], DWORD key, int length);
     void loadKeyBoard();
     void generateUnicodeCharacters(QString characters);
+    void DebugMessageBox(QString message);
 
     QGroupBox *iconGroupBox;
     QLabel *iconLabel;

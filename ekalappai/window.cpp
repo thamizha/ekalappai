@@ -81,7 +81,7 @@ Window::Window()
     createTrayIcon();
 
     connect(iconComboBox, SIGNAL(currentIndexChanged(int)),
-            this, SLOT(setIcon(int)));
+            this, SLOT(changeKeyboard(int)));
 
     connect(shortcutComboBox1, SIGNAL(currentIndexChanged(int)),
             this, SLOT(setShortcut1(int)));
@@ -134,23 +134,6 @@ bool Window::winEvent( MSG* message, long* result )
     }
 
     return false;
-}
-
-// This function is called when the keyboard is changed
-void Window::setIcon(int index)
-{
-    QIcon icon = iconComboBox->itemIcon(index);
-    trayIcon->setIcon(icon);
-    setWindowIcon(icon);
-    trayIcon->setToolTip(iconComboBox->itemText(index));
-
-    //call remove hook before cecking for the keyboard choosen .
-    removeHook();
-
-    //logic to start a keyboard hook or remove keyboard hook based on the keyboard choosen
-    callHook(index);
-    showTrayMessage(index);
-    loadKeyBoard();
 }
 
 // This function is called when the shortcut modifier combo is changed
@@ -312,7 +295,6 @@ void Window::loadKeyBoard(){
             str1 = line.section(sep, 0, 0); // first part
             str2 = line.section(sep, 1, 1) ; // second part            
             keyboardmap.insert(str1, str2);
-           // keyrules->setValue(str1, str2);
         }
         line.clear();
     }
@@ -335,22 +317,39 @@ void Window::changeKeyboard(int index)
         loadKeyBoard();
 }
 
+
+
 // This functions is called when taskbar icon is clicked
 void Window::iconActivated(QSystemTrayIcon::ActivationReason reason)
 {
+
     switch (reason) {
-    case QSystemTrayIcon::Trigger:
+
     case QSystemTrayIcon::DoubleClick:
-        if (iconComboBox->currentIndex() == 0){
-            iconComboBox->setCurrentIndex(selected_keyboard);
-        } else {
-            iconComboBox->setCurrentIndex(0);
+        break;
+    case QSystemTrayIcon::Trigger:
+        {
+            if (keyboard_status)
+                 keyboard_status = false;
+             else
+                 keyboard_status = true;
+
+             if(keyboard_status){
+                 if(current_keyboard == 0){
+                     changeKeyboard(selected_keyboard);
+                 }
+
+             }else{
+                   if(current_keyboard > 0){
+                         changeKeyboard(0);
+                    }
+             }
         }
         break;
     case QSystemTrayIcon::MiddleClick:
         break;
     default:
-        ;
+        break;
     }
 }
 
@@ -363,7 +362,6 @@ void Window::showTrayMessage(int index)
     message = iconComboBox->itemText(index)+ " set";
     trayIcon->showMessage("eKalappai 3.0",message, icon, 100);
 }
-
 
 void Window::createIconGroupBox()
 {
@@ -628,10 +626,6 @@ void Window::implementKeyboardLogic(){
                 charpressed_string20 = charpressed_string20.right(20);
             }
 
-//        QMessageBox msgBox1;
-//        msgBox1.setText(charpressed_string20.right(5));
-//        msgBox1.exec();
-
         QString str1;
         QString str2;
         QString prev_char_to_delete;
@@ -684,3 +678,10 @@ bool Window::SearchArray (DWORD array[], DWORD key, int length)
         }
 }
 
+//Debug function to show a message box with require debug message. Used while debugging
+void Window::DebugMessageBox(QString message)
+{
+    QMessageBox msgBox1;
+    msgBox1.setText(message);
+    msgBox1.exec();
+}
