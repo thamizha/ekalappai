@@ -1,5 +1,6 @@
 ﻿### This file must be encoded into UTF-8.
-### Copyright (C) 2010, Muguntharaj Subramanian
+### Copyright (c) 2010 http://thamizha.com/
+### License : GNU/GPL v3 or (at your option) any later version.
 ### This file is part of eKalappai.
 ###
 ### eKalappai is free software: you can redistribute it and/or modify
@@ -14,113 +15,29 @@
 ###
 ### You should have received a copy of the GNU General Public License version 3
 ### along with eKalappai.  If not, see <http://www.gnu.org/licenses/>.
-SCIM_Generic_Table_Phrase_Library_TEXT
-VERSION_1_0
-
-### Begin Table definition.
-BEGIN_DEFINITION
-
-### An unique id to distinguish this table among others.
-### Use uuidgen to generate this kind of id.
-UUID = fbe3eb20-c2ed-11df-851a-0800200c9a66
-
-### A unique number indicates the version of this file.
-### For example the last modified date of this file.
-### This number must be less than 2^32.
-SERIAL_NUMBER = 20100918
-
-ICON = 
-
-### The default name of this table
-NAME = Bamini
-
-### The local names of this table 
-NAME.ta_IN = பாமினி
-
-### Supported languages of this table
-LANGUAGES = ta
-
-### The author of this table
-AUTHOR = Muguntharaj(mugunth <at> gmail <dot> com )
-
-### Prompt string to be displayed in the status area.
-STATUS_PROMPT = Ta
-
-### If true then the first candidate phrase
-### will be selected automatically during inputing.
-AUTO_SELECT = TRUE
-
-### If true then a multi wildcard will be appended
-### at the end of inputing string automatically.
-AUTO_WILDCARD = FALSE
-
-### If true then the result string will be committed to client automatically.
-### This should be used with AUTO_SELECT = TRUE.
-AUTO_COMMIT = TRUE
-
-### If true then the inputted string will be automatically splitted during inputing.
-AUTO_SPLIT = TRUE
-
-### If true then the phrases' frequencies will be adjusted dynamically.
-DYNAMIC_ADJUST = FALSE
-
-### If true then the preedit area will be filled up by the current candidate phrase automatically.
-AUTO_FILL = TRUE
-
-### Whether to discard invalid key automatically.
-### This takes effact only when AUTO_FILL and AUTO_COMMIT is true.
-DISCARD_INVALID_KEY = TRUE
-
-### If true then the lookup table will always be shown if there is any candidate phrase.
-### Otherwise the lookup table won't be shown unless the user requires it by moving the preedit caret left.
-ALWAYS_SHOW_LOOKUP = FALSE
-
-### Enable full width punctuation property
-USE_FULL_WIDTH_PUNCT = FALSE
-
-### Use full width punctuation by default
-DEF_FULL_WIDTH_PUNCT = FALSE
-
-### Enable full width letter property
-USE_FULL_WIDTH_LETTER = FALSE
-
-### Use full width letter by default
-DEF_FULL_WIDTH_LETTER = FALSE
-
-### The maxmium length of a key.
-MAX_KEY_LENGTH = 3
-
-### Valid input chars.
-VALID_INPUT_CHARS = abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`1234567890-=~!@#$%^&*()_+[]{}|\;':"<>?,./
-
-### Single wildcard char, can have multiple chars.
-###SINGLE_WILDCARD_CHAR = ?
-
-### Multi wildcard char.
-###MULTI_WILDCARD_CHAR = *
-
-### The key strokes to split inputted string.
-###SPLIT_KEYS = quoteright
-
-### The key strokes to commit the convert result to client.
-COMMIT_KEYS = VoidSymbol
-
-### The key strokes to forward the inputted string to client.
-FORWARD_KEYS = VoidSymbol
-
-### The key strokes to select candidiate phrases.
-SELECT_KEYS = VoidSymbol
-
-### The key strokes to page up the lookup table.
-PAGE_UP_KEYS = VoidSymbol
-
-### The key strokes to page down the lookup table.
-PAGE_DOWN_KEYS = VoidSymbol
-
-END_DEFINITION
+### NAME = Uni-Bamini-var
+### NAME.ta_IN = யூனி-பாமினி-மாறி
+### AUTHOR = K. Sethu <skhome@gmail.com> 
+### ***************************************
+### Author's Note:
+### This keymap table is written for use with eKalappai - 3.0. 
+##  The structure of table for eKalappai-3.0 is based on that of scim-tables IME 
+### This keymap is built from draft version of "Balini" scim-tables created by M. Mauran in 2007
+### by including (in addition to legacy basic Bamini keystrokes) Suratha's enhancements that are 
+### in "Bamuni" of earlier eKallappai-2.0.
+### The keymap still lacks key assignments for the new "SHA" (U+0BB6) and a correct definiton of
+### "Shrii" based on it. These issues and other detailed information on the keymap will be covered
+### in a topic for this keymap in the wiki page : http://code.google.com/p/ekalappai/w/list
+### K. Sethu 30-09-2010
+### ************************************
 
 ### Begin Table data.
 BEGIN_TABLE
+
+p ி
+pp ீ 
+P ீ
+h ா
 1 1
 2 2
 3 3
@@ -132,89 +49,848 @@ BEGIN_TABLE
 9 9
 0 0
 - -
-= ஸ்ரீ
-` ஹ
-~ ‘
+~ ~
 ! !
-@ ;
-# சூ
-$ கூ
-% மூ
-^ டூ
-& ரூ
-* ழூ
+@ @
 ( (
 ) )
-_ ூ
-+ ூ
-q ங
-w ற
-e ந
-r ச
-t வ
-y ல
-u ர
-i ‌ை
-o ழ
-p ி
-[ ஜ
-] ஸ
-Q ஞ
-W று
-E நு
-R சு
-T வு
-Y லு
-U ரு
-I ஐ
-O ழு
-P ீ
-{ ு
-} ூ
-a ய
-s ள
-d ன
-f க
-g ப
-h ா
-j த
-k ம
-l ட
-; ்
-' “
-\ ஷ
-A யு
-S ளு
-D னு
-F கு
-G பு
-H ர்
-J து
-K மு
-L டு
-: :
-" ”
-| ’
-\ ஷ
-z ண
-x ஒ
-c உ
-v எ
-b டி
-n ‌ெ
-m அ
-, இ
-. .
-/ ஃ
-| ’
-Z ணு
-X ஓ
-C ஊ
-V ஏ
-B டீ
-N ‌ே
-M ஆ
-< ஈ
-> ,
+_ _
++ +
+{ {
+} }
+| |
 ? ?
+/ ஃ
+. .
+> ,
+; ;
+" "
+' '
+: :
+
+hp ரி
+hP ரீ
+h; ர்
+H ர்
+
+f; க்
+f க
+F கு
+$ கூ
+Fh கூ
+f- கு
+f-- கூ
+nf கெ
+Nf கே
+if கை
+nfh கொ
+Nfh கோ
+nfs கௌ
+
+q; ங்
+q ங
+q{ ஙு
+q_ ஙூ
+q{_ ஙூ
+q{h ஙூ
+q- ஙு
+q-- ஙூ
+nq ஙெ
+Nq ஙே
+iq ஙை
+nqh ஙொ
+Nqh ஙோ
+nqs ஙௌ
+
+r; ச்
+r ச
+R சு
+# சூ
+Rh சூ
+r- சு
+r-- சூ
+nr செ
+Nr சே
+ir சை
+nrs சௌ
+Nrh சோ
+nrh சொ
+
+[; ஜ்
+[ ஜ
+[{ ஜு
+[_ ஜூ
+[- ஜு
+[-- ஜூ
+n[ ஜெ
+N[ ஜே
+i[ ஜை
+n[h ஜொ
+N[h ஜோ
+n[s ஜௌ
+
+Q; ஞ்
+Q ஞ
+Q{ ஞு
+Q_ ஞூ
+Q{_ ஞூ
+Q{h ஞூ
+Q- ஞு
+Q-- ஞூ
+nQ ஞெ
+NQ ஞே
+iQ ஞை
+nQh ஞொ
+NQh ஞோ
+nQs ஞௌ
+
+l; ட்
+l ட
+b டி
+B டீ
+L டு
+^ டூ
+Lh டூ
+l- டு
+l-- டூ
+nl டெ
+Nl டே
+il டை
+nlh டொ
+nls டௌ
+Nlh டோ
+
+z; ண்
+z ண
+Z ணு
+Z} ணூ
+Zh ணூ
+z- ணு
+z-- ணூ
+nz ணெ
+Nz ணே
+iz ணை
+nzh ணொ
+Nzh ணோ
+nzs ணௌ
+
+j; த்
+j த
+J து
+J} தூ
+Jh தூ
+j- து
+j-- தூ
+nj தெ
+Nj தே
+ij தை
+njh தொ
+Njh தோ
+njs தௌ
+
+e; ந்
+e ந
+E நு
+E} நூ
+Eh நூ
+e- நு
+e-- நூ
+ne நெ
+Ne நே
+ie நை
+neh நொ
+Neh நோ
+nes நௌ
+
+d; ன்
+d ன
+D னு
+Dh னூ
+D} னூ
+d- னு
+d-- னூ
+nd னெ
+Nd னே
+id னை
+ndh னொ
+Ndh னோ
+nds னௌ
+
+g; ப்
+g ப
+G பு
+Gh பூ
+G+ பூ
+g- பு
+g-- பூ
+ng பெ
+Ng பே
+ig பை
+ngh பொ
+Ngh போ
+ngs பௌ
+
+k; ம்
+k ம
+K மு
+% மூ
+Kh மூ
+k- மு
+k-- மூ
+nk மெ
+Nk மே
+ik மை
+nkh மொ
+Nkh மோ
+nks மௌ
+
+a; ய்
+a ய
+A யு
+A+ யூ
+Ah யூ
+a- யு
+a-- யூ
+na யெ
+Na யே
+ia யை
+nah யொ 
+Nah யோ
+nas யௌ
+
+u; ர்  
+u ர
+U ரு
+& ரூ
+Uh ரூ
+u- ரு
+u-- ரூ
+nu ரெ
+Nu ரே
+iu ரை
+nuh ரொ
+Nuh ரோ
+nus ரௌ
+
+y; ல்
+y ல
+Y லு
+Y} லூ
+Yh லூ
+y- லு
+y-- லூ
+ny லெ
+Ny லே
+iy லை
+nyh லொ
+Nyh லோ
+nys லௌ
+
+s; ள்
+s ள
+S ளு
+Sh ளூ
+s- ளு
+s-- ளூ
+ns ளெ
+Ns ளே
+is ளை
+nsh ளொ
+Nsh ளோ
+nss ளௌ
+
+t; வ்
+t வ
+T வு
+T+ வூ
+Th வூ
+t- வு
+t-- வூ
+nt வெ
+Nt வே
+it வை
+nth வொ
+Nth வோ
+nts வௌ
+
+o; ழ்
+o ழ
+O ழு
+* ழூ
+Oh ழூ
+o- ழு
+o-- ழூ
+no ழெ
+No ழே
+io ழை
+noh ழொ
+Noh ழோ
+nos ழௌ
+
+w; ற்
+w ற
+W று
+W} றூ
+Wh றூ
+w- று
+w-- றூ
+nw றெ
+Nw றே
+iw றை
+nws றௌ
+Nwh றோ
+nwh றொ
+
+`; ஹ்
+` ஹ
+`- ஹு
+`-- ஹூ
+n` ஹெ
+N` ஹே
+i` ஹை
+n`h ஹொ
+N`h ஹோ
+n`s ஹௌ
+
+n\s ஷௌ
+N\h ஷோ
+n\h ஷொ
+
+\; ஷ்
+\ ஷ
+\- ஷு
+\-- ஷூ
+n\ ஷெ
+N\ ஷே
+i\ ஷை
+n\h ஷொ
+N\h ஷோ
+n\s ஷௌ
+
+]; ஸ்
+] ஸ
+]- ஸு
+]-- ஸூ
+N] ஸே
+n] ஸெ
+i] ஸை
+n]h ஸொ
+N]h ஸோ
+n]s ஸௌ
+
+= ஸ்ரீ
+
+m அ
+mm ஆ
+M ஆ
+, இ
+,, ஈ
+< ஈ
+c உ
+cc ஊ
+C ஊ
+v எ
+vv ஏ
+V ஏ
+I ஐ
+x ஒ
+xx ஓ
+X ஓ
+xs ஔ
+
+xs; ஒள்
+xsh ஒளா
+xsp ஒளி
+xspp ஒளீ
+xsP ஒளீ
+xs- ஒளு
+xs-- ஒளூ
+
+nfs; கெள்
+nfsh கெளா
+nfsp கெளி
+nfspp கெளீ
+nfsP கெளீ
+nfs- கெளு
+
+
+nqs; ஙெள்
+nqsh ஙெளா
+nqsp ஙெளி
+nqspp ஙெளீ
+nqsP ஙெளீ
+nqs- ஙெளு
+nqs-- ஙெளூ
+
+nrs; செள்
+nrsh செளா
+nrsp செளி
+nrspp செளீ
+nrsP செளீ
+nrs- செளு
+nrs-- செளூ
+
+n[s; ஜெள்
+n[sh ஜெளா
+n[sp ஜெளி
+n[spp ஜெளீ
+n[sP ஜெளீ
+n[s- ஜெளு
+n[s-- ஜெளூ
+
+nQs; ஞெள்
+nQsh ஞெளா 
+nQsp ஞெளி
+nQspp ஞெளீ
+nQsP ஞெளீ
+nQs- ஞெளு
+nQs-- ஞெளூ
+
+nls; டெள்
+nlsh டெளா
+nlsp டெளி
+nlspp டெளீ
+nlsP டெளீ
+nls- டெளு
+nls-- டெளூ
+
+nzs; ணெள் 
+nzsh ணெளா
+nzsp ணெளி
+nzspp ணெளீ
+nzsP ணெளீ
+nzs- ணெளு
+nzs-- ணெளூ
+
+njs; தெள்
+njsh தெளா
+njsp தெளி
+njspp தெளீ
+njsP தெளீ
+njs- தெளு
+njs-- தெளூ
+
+nes; நெள்
+nesh நெளா
+nesp நெளி
+nespp நெளீ
+nesP நெளீ
+nes- நெளு
+nes-- நெளூ
+
+nds; னெள்
+ndsh னெளா
+ndsp னெளி
+ndspp னெளீ
+ndsP னெளீ
+nds- னெளு
+nds-- னெளூ
+
+ngs; பெள்
+ngsh பெளா
+ngsp பெளி
+ngspp பெளீ
+ngsP பெளீ
+ngs- பெளு
+ngs-- பெளூ
+
+nks; மெள்
+nksh மெளா
+nksp மெளி
+nkspp மெளீ
+nksP மெளீ
+nks- மெளு
+nks-- மெளூ
+
+nas; யெள்
+nash யெளா
+nasp யெளி
+naspp யெளீ
+nasP யெளீ
+nas- யெளு
+nsa-- யெளூ
+
+nus; ரெள்
+nush ரெளா  
+nusp ரெளி
+nuspp ரெளீ
+nusP ரெளீ
+nus- ரெளு
+nus-- ரெளூ
+
+nys; லெள்
+nysh லெளா
+nysp லெளி
+nyspp லெளீ
+nysP லெளீ
+nys- லெளு
+nys-- லெளூ
+
+nss; ளெள்
+nssh ளெளா
+nssp ளெளி
+nsspp ளெளீ
+nssP ளெளீ
+nss- ளெளு
+nss-- ளெளூ
+
+nts; வெள்
+ntsh வெளா
+ntsp வெளி
+ntspp வெளீ
+ntsP வெளீ
+nts- வெளு
+nts-- வெளூ
+
+nos; ழெள்
+nosh ழெளா
+nosp ழெளி
+nospp ழெளீ
+nosP ழெளீ
+nos- ழெளு
+nos-- ழெளூ
+
+nws; றெள்
+nwsh றெளா
+nwsp றெளி
+nwspp றெளீ
+nwsP றெளீ
+nws- றெளு
+nws-- றெளூ
+
+n`s; ஹெள்
+n`sh ஹெளா
+n`sp ஹெளி
+n`spp ஹெளீ
+n`sP ஹெளீ
+n`s- ஹெளு
+n`s-- ஹெளூ
+
+n\s; ஷெள்
+n\sh ஷெளா
+n\sp ஷெளி
+n\spp ஷெளீ
+n\sP ஷெளீ
+n\s- ஷெளு
+n\s-- ஷெளூ
+
+n]s; ஸெள்
+n]sh ஸெளா
+n]sp ஸெளி
+n]spp ஸெளீ
+n]sP ஸெளீ
+n]- ஸெளு
+n]-- ஸெளூ
+
+nfh; கெர்
+nfhp கெரி
+nfhpp கெரீ
+nfhP கெரீ
+
+nqh; ஙெர்
+nqhp ஙெரி
+nqhpp ஙெரீ
+nqhP ஙெரீ
+
+nrh; செர்
+nrhp செரி
+nrhpp செரீ
+nrhP செரீ
+
+n[h; ஜெர்
+n[hp ஜெரி
+n[hpp ஜெரீ
+n[hP ஜெரீ
+
+nQh; ஞெர்
+nQhp ஞெரி
+nQhpp ஞெரீ
+nQhP ஞெரீ
+
+nlh; டெர்
+nlhp டெரி
+nlhp டெரீ
+nlhP டெரீ
+
+nzh; ணெர் 
+nzhp ணெரி
+nzhpp ணெரீ
+nzhP ணெரீ
+
+njh; தெர்
+njhp தெரி
+njhpp தெரீ
+njhP தெரீ
+
+neh; நெர்
+nehp நெரி
+nehpp நெரீ
+nehP நெரீ
+
+ndh; னெர்
+ndhp னெரி
+ndhpp னெரீ
+ndhP னெரீ
+
+ngh; பெர்
+nghp பெரி
+nghpp பெரீ
+nghP பெரீ
+
+nkh; மெர்
+nkhp மெரி
+nkhpp மெரீ
+nkhP மெரீ
+
+nah; யெர்
+nahp யெரி
+nahP யெரீ
+
+nuh; ரெர்
+nuhp ரெரி
+nuhpp ரெரீ
+nuhP ரெரீ
+
+nyh; லெர்
+nyhp லெரி
+nyhpp லெரீ
+nyhP லெரீ
+
+nsh; ளெர்
+nshp ளெரி
+nshpp ளெரீ
+nshP ளெரீ
+
+nth; வெர்
+nthp வெரி
+nthpp வெரீ
+nthP வெரீ
+
+noh; ழெர்
+nohp ழெரி
+nohpp ழெரீ
+nohP ழெரீ
+
+nwh; றெர்
+nwhp றெரி
+nwhpp றெரீ
+nwhP றெரீ
+
+n`h; ஹெர்
+n`hp ஹெரி
+n`hpp ஹெரீ
+n`hP ஹெரீ
+
+n\h; ஷெர்
+n\hp ஷெரி
+n\hpp ஷெரீ
+n\hP ஷெரீ
+
+n]h; ஸெர்
+n]hp ஸெரி
+n]hpp ஸெரீ
+n]hP ஸெரீ
+
+Nfh; கேர்
+Nfhp கேரி
+Nfhpp கேரீ
+NfhP கேரீ
+
+Nqh; ஙேர்
+Nqhp ஙேரி
+Nqhpp ஙேரீ
+NqhP ஙேரீ
+
+Nrh; சேர்
+Nrhp சேரி
+Nrhpp சேரீ
+NrhP சேரீ
+
+N[h; ஜேர்
+N[hp ஜேரி
+N[hpp ஜேரீ
+N[hP ஜேரீ
+
+NQh; ஞேர்
+NQhp ஞேரி
+NQhpp ஞேரீ
+NQhP ஞேரீ
+
+Nlh; டேர்
+Nlhp டேரி
+Nlhpp டேரீ
+NlhP டேரீ
+
+Nzh; ணேர் 
+Nzhp ணேரி
+Nzhpp ணேரீ
+NzhP ணேரீ
+
+Njh; தேர்
+Njhp தேரி
+Njhpp தேரீ
+NjhP தேரீ
+
+Neh; நேர்
+Nehp நேரி
+NehP நேரீ
+
+Ndh; னேர்
+Ndhp னேரி
+NdhP னேரீ
+
+Ngh; பேர்
+Nghp பேரி
+Nghpp பேரீ
+NghP பேரீ
+
+Nkh; மேர்
+Nkhp மேரி
+NkhP மேரீ
+
+Nah; யேர்
+Nahp யேரி
+Nahpp யேரீ
+NahP யேரீ
+
+Nuh; ரேர்
+Nuhp ரேரி
+Nuhpp ரேரீ
+NuhP ரேரீ
+
+Nyh; லேர்
+Nyhp லேரி
+Nyhpp லேரீ
+NyhP லேரீ
+
+Nsh; ளேர்
+Nshp ளேரி
+Nshpp ளேரீ
+NshP ளேரீ
+
+Nth; வேர்
+Nthp வேரி
+Nthpp வேரீ
+NthP வேரீ
+
+Noh; ழேர்
+Nohp ழேரி
+Nohpp ழேரீ
+NohP ழேரீ
+
+Nwh; றேர்
+Nwhp றேரி
+Nwhpp றேரீ
+NwhP றேரீ
+
+N`h; ஹேர்
+N`hp ஹேரி
+N`hpp ஹேரீ
+N`hP ஹேரீ
+
+N\h; ஷேர்
+N\hp ஷேரி
+N\hpp ஷேரீ
+N\hP ஷேரீ
+
+N]h; ஸேர்
+N]hp ஸேரி
+N]hpp ஸேரீ
+N]hP ஸேரீ
+
+Fh; குர்
+Fhp குரி
+Fhpp குரீ
+FhP குரீ
+
+qh; ஙுர்
+qhp ஙுரி
+qhpp ஙுரீ
+qhP ஙுரீ
+
+rh; சுர்
+rhp சுரி
+rhpp சுரீ
+rhP சுரீ
+
+[h; ஜுர்
+[hp ஜுரி
+[hpp ஜுரீ
+[hP ஜுரீ
+
+Qh; ஞுர்
+Qhp ஞுரி
+Qhpp ஞுரீ
+QhP ஞுரீ
+
+lh; டுர்
+lhp டுரி
+lhpp டுரீ
+lhP டுரீ
+
+zh; ணுர்
+zhp ணுரி
+zhpp ணுரீ
+zhP ணுரீ
+
+jh; துர்
+jhp துரி
+jhpp துரீ
+jhP துரீ
+
+eh; நுர்
+ehp நுரி
+ehpp நுரீ
+ehP நுரீ
+
+dh; னுர்
+dhp னுரி
+dhpp னுரீ
+dhP னுரீ
+
+gh; புர்
+ghp புரி
+ghpp புரீ
+ghP புரீ
+
+kh; முர்
+khp முரி
+khpp முரீ
+khP முரீ
+
+ah; யுர்
+ahp யுரி
+ahpp யுரீ
+ahP யுரீ
+
+uh; ருர்
+uhp ருரி
+uhpp ருரீ
+uhP ருரீ
+
+yh; லுர்
+yhp லுரி
+yhpp லுரீ
+yhP லுரீ
+
+sh; ளுர்
+shp ளுரி
+shpp ளுரீ
+shP ளுரீ
+
+th; வுர்
+thp வுரி
+thpp வுரீ
+thP வுரீ
+
+oh; ழுர்
+ohp ழுரி
+ohpp ழுரீ
+ohP ழுரீ
+
+wh; றுர்
+whp றுரி
+whpp றுரீ
+whP றுரீ
+
 END_TABLE

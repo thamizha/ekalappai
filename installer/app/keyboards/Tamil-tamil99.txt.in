@@ -1,118 +1,39 @@
-﻿### Modified by Muguntharaj to use in ekalappai from original scim table created by Red Hat.
-### Modification1 : Added pulli & comma 
+﻿### This file must be encoded into UTF-8.
+### Copyright (c) 2010 http://thamizha.com/
+### License : GNU/GPL v3 or (at your option) any later version.
+### This file is part of eKalappai.
 ###
-### File header must not be modified
-### This file must be encoded into UTF-8.
-### Copyright (c) 2004-2005 Red Hat, Inc. All rights reserved.
-SCIM_Generic_Table_Phrase_Library_TEXT
-VERSION_1_0
-
-### Begin Table definition.
-BEGIN_DEFINITION
-
-### An unique id to distinguish this table among others.
-### Use uuidgen to generate this kind of id.
-UUID = 886aaf00-fd86-46c9-a8c6-f170ec9dedbf
-
-### A unique number indicates the version of this file.
-### For example the last modified date of this file.
-### This number must be less than 2^32.
-SERIAL_NUMBER = 20070502
-
-ICON = /usr/share/scim/icons/Tamil-tamil99.png
-
-### The default name of this table
-NAME = Tamil99
-
-### The local names of this table 
-NAME.ta_IN = தமிழ்99
-
-### Supported languages of this table
-LANGUAGES = ta
-
-### The author of this table
-AUTHOR = Sudhakar U,BOSS(GNU/Linux) Team,C-DAC <sudhakaru@cdac.in>
-
-### Prompt string to be displayed in the status area.
-STATUS_PROMPT = Ta
-
-### If true then the first candidate phrase
-### will be selected automatically during inputing.
-AUTO_SELECT = TRUE
-
-### If true then a multi wildcard will be appended
-### at the end of inputing string automatically.
-AUTO_WILDCARD = FALSE
-
-### If true then the result string will be committed to client automatically.
-### This should be used with AUTO_SELECT = TRUE.
-AUTO_COMMIT = TRUE
-
-### If true then the inputted string will be automatically splitted during inputing.
-AUTO_SPLIT = TRUE
-
-### If true then the phrases' frequencies will be adjusted dynamically.
-DYNAMIC_ADJUST = FALSE
-
-### If true then the preedit area will be filled up by the current candidate phrase automatically.
-AUTO_FILL = TRUE
-
-### Whether to discard invalid key automatically.
-### This takes effact only when AUTO_FILL and AUTO_COMMIT is true.
-DISCARD_INVALID_KEY = TRUE
-
-### If true then the lookup table will always be shown if there is any candidate phrase.
-### Otherwise the lookup table won't be shown unless the user requires it by moving the preedit caret left.
-ALWAYS_SHOW_LOOKUP = FALSE
-
-### Enable full width punctuation property
-USE_FULL_WIDTH_PUNCT = FALSE
-
-### Use full width punctuation by default
-DEF_FULL_WIDTH_PUNCT = FALSE
-
-### Enable full width letter property
-USE_FULL_WIDTH_LETTER = FALSE
-
-### Use full width letter by default
-DEF_FULL_WIDTH_LETTER = FALSE
-
-### The maxmium length of a key.
-MAX_KEY_LENGTH = 2
-
-### Valid input chars.
-VALID_INPUT_CHARS = abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
-
-### Single wildcard char, can have multiple chars.
-###SINGLE_WILDCARD_CHAR = ?
-
-### Multi wildcard char.
-###MULTI_WILDCARD_CHAR = *
-
-### The key strokes to split inputted string.
-###SPLIT_KEYS = quoteright
-
-### The key strokes to commit the convert result to client.
-COMMIT_KEYS = space
-
-### The key strokes to forward the inputted string to client.
-FORWARD_KEYS = VoidSymbol
-
-### The key strokes to select candidiate phrases.
-SELECT_KEYS = VoidSymbol
-
-### The key strokes to page up the lookup table.
-PAGE_UP_KEYS = VoidSymbol
-
-### The key strokes to page down the lookup table.
-PAGE_DOWN_KEYS = VoidSymbol
-
-END_DEFINITION
+### eKalappai is free software: you can redistribute it and/or modify
+### it under the terms of the GNU General Public License as published by
+### the Free Software Foundation, either version 3 of the License, or
+### (at your option) any later version.
+###
+### eKalappai is distributed in the hope that it will be useful,
+### but WITHOUT ANY WARRANTY; without even the implied warranty of
+### MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+### GNU General Public License for more details.
+###
+### You should have received a copy of the GNU General Public License version 3
+### along with eKalappai.  If not, see <http://www.gnu.org/licenses/>.
+###
+### NAME = Uni-Tamil99-var
+### NAME.ta_IN = யூனி-தமிழ்99-மாறி
+### AUTHOR = K. Sethu <skhome@gmail.com> 
+### ***************************************
+### Author's Note:
+### This keymap table is written for use with eKalappai - 3.0. 
+##  The structure of table for eKalappai-3.0 is based on that of scim-tables IME 
+### This keymap was modified from Tamil99 scim-tables authored by Sudhakar U [BOSS(GNU/Linux] Team,C-DAC) 
+### - by removing number of bugs as well as newly including coding for mei-mayakkams (auto-pulli) and
+### extensions and changes for Tamil 99 standard as per the G.O.(Ms)-29 (dated  23.06.2010) of the state government of Tamil Nadu. 
+### The keymap is to very large extent is conformant to current standard as per the G.O.(Ms) 29 of 23.06.2010; and the
+### the few exceptional varaitions will be discussed in http://code.google.com/p/ekalappai/wiki/tamil99_keyboard_details  wherein 
+### comprehensive information for the keymap usage, issues and  future plans are to be be covered.
+### K. Sethu 30-09-2010
+### ************************************
 
 ### Begin Table data.
 BEGIN_TABLE
-` `
-~ ~
 ! !
 1 1
 @ @
@@ -123,8 +44,8 @@ $ $
 4 4
 % %
 5 5
-^ ^
 6 6
+
 & &
 7 7
 8 8
@@ -136,6 +57,15 @@ _ _
 - -
 + +
 = =
+. .
+, ,
+~ ~
+| |
+\ \
+< <
+> >
+? ?
+
 a அ
 q ஆ
 s இ
@@ -148,12 +78,12 @@ r ஐ
 c ஒ
 x ஓ
 z ஔ
+
 F ஃ
 f  ்
+
 hf க்
 h க
-hh க்க
-hhh க்கக
 hq கா
 hs கி
 hw கீ
@@ -165,10 +95,9 @@ hr கை
 hc கொ
 hx கோ
 hz கௌ
+
 bf ங்
 b ங
-bb ங்ங
-bbb ங்ஙங
 bq ஙா
 bs ஙி
 bw ஙீ
@@ -180,10 +109,9 @@ br ஙை
 bc ஙொ
 bx ஙோ
 bz ஙௌ
+
 [f ச்
 [ ச
-[[ ச்ச
-[[[ ச்சச
 [q சா
 [s சி
 [w சீ
@@ -195,10 +123,9 @@ bz ஙௌ
 [c சொ
 [x சோ
 [z சௌ
+
 ]f ஞ்
 ] ஞ
-]]] ஞ்ஞஞ
-]] ஞ்ஞ
 ]q ஞா
 ]s ஞி 
 ]w ஞீ
@@ -210,10 +137,9 @@ bz ஙௌ
 ]c ஞொ
 ]x ஞோ
 ]z ஞௌ
+
 of ட்
 o ட
-oo ட்ட
-ooo ட்டட
 oq டா
 os டி
 ow டீ
@@ -225,10 +151,9 @@ or டை
 oc டொ
 ox டோ
 oz டௌ
+
 pf ண்
 p ண
-ppp ண்ணண
-pp ண்ண
 pq ணா
 ps ணி
 pw ணீ
@@ -240,10 +165,9 @@ pr ணை
 pc ணொ
 px ணோ
 pz ணௌ
+
 lf த்
 l த
-ll த்த
-lll த்தத
 lq தா
 ls தி
 lw தீ
@@ -255,10 +179,9 @@ lr தை
 lc தொ
 lx தோ
 lz தௌ
+
 ;f ந் 
-;  ந 
-;; ந்ந
-;;; ந்நந
+;  ந
 ;q நா
 ;s நி
 ;w நீ
@@ -270,10 +193,9 @@ lz தௌ
 ;c நொ
 ;x நோ
 ;z நௌ
+
 jf ப்
 j ப
-jj ப்ப
-jjj ப்பப
 jq பா
 js பி
 jw பீ
@@ -285,10 +207,9 @@ jr பை
 jc பொ
 jx போ
 jz பௌ
+
 kf ம்
 k ம
-kk ம்ம
-kkk ம்மம
 kq மா
 ks மி
 kw மீ
@@ -300,10 +221,9 @@ kr மை
 kc மொ
 kx மோ
 kz மௌ
+
 'f ய்
 '  ய
-'' ய்ய
-''' ய்யய
 'q யா
 's யி
 'w யீ
@@ -315,10 +235,9 @@ kz மௌ
 'c யொ
 'x யோ
 'z யௌ
+
 mf ர்
 m ர
-mm ர்ர
-mmm ர்ரர
 mq ரா
 ms ரி
 mw ரீ
@@ -330,10 +249,9 @@ mr ரை
 mc ரொ
 mx ரோ
 mz ரௌ
+
 nf ல்
 n ல
-nn ல்ல
-nnn ல்லல
 nq லா
 ns லி
 nw லீ
@@ -345,10 +263,9 @@ nr லை
 nc லொ
 nx லோ
 nz லௌ
+
 vf வ்
 v வ
-vv வ்வ
-vvv வ்வவ
 vq வா
 vs வி
 vw வீ
@@ -360,10 +277,9 @@ vr வை
 vc வொ
 vx வோ
 vz வௌ
+
 /f ழ்
 /  ழ
-// ழ்ழ
-/// ழ்ழழ
 /q ழா
 /s ழி
 /w ழீ
@@ -375,10 +291,9 @@ vz வௌ
 /c ழொ
 /x ழோ
 /z ழௌ
+
 yf ள்
 y ள
-yy ள்ள
-yyy ள்ளள
 yq ளா
 ys ளி
 yw ளீ
@@ -390,10 +305,9 @@ yr ளை
 yc ளொ
 yx ளோ
 yz ளௌ
+
 uf ற்
 u ற
-uu ற்ற
-uuu ற்றற
 uq றா
 us றி
 uw றீ
@@ -405,10 +319,9 @@ ur றை
 uc றொ
 ux றோ
 uz றௌ
+
 if ன்
 i ன
-ii ன்ன
-iii ன்னன
 iq னா
 is னி
 iw னீ
@@ -420,10 +333,9 @@ ir னை
 ic னொ
 ix னோ
 iz னௌ
+
 Ef ஜ்
 E ஜ
-EE ஜ்ஜ
-EEE ஜ்ஜஜ
 Eq ஜா
 Es ஜி
 Ew ஜீ
@@ -435,10 +347,23 @@ Er ஜை
 Ec ஜொ
 Ex ஜோ
 Ez ஜௌ
+
+Uf ஶ்
+U ஶ
+Uq ஶா
+Us ஶி
+Uw ஶீ
+Ud ஶு
+Ue ஶூ
+Ug ஶெ
+Ut ஶே
+Ur ஶை
+Uc ஶொ
+Ux ஶோ
+Uz ஶௌ
+
 Wf ஷ்
 W ஷ
-WW ஷ்ஷ
-WWW ஷ்ஷஷ
 Wq ஷா
 Ws ஷி
 Ww ஷீ
@@ -450,10 +375,9 @@ Wr ஷை
 Wc ஷொ
 Wx ஷோ
 Wz ஷௌ
+
 Qf ஸ்
 Q ஸ
-QQ ஸ்ஸ
-QQQ ஸ்ஸஸ
 Qq ஸா
 Qs ஸி
 Qw ஸீ
@@ -465,24 +389,23 @@ Qr ஸை
 Qc ஸொ
 Qx ஸோ
 Qz ஸௌ
+
 Rf ஹ்
 R ஹ
-RR ஹ்ஹ
-RRR ஹ்ஹஹ
 Rq ஹா
 Rs ஹி
-Rw ஹு
+Rw ஹீ
 Rd ஹூ
-Re ஹெ
+Re ஹூ
+Rg ஹெ
 Rt ஹே
 Rr ஹை
 Rc ஹொ
 Rx ஹோ
 Rz ஹௌ
+
 Tf க்ஷ்
 T க்ஷ
-TT க்ஷ்க்ஷ
-TTT க்ஷ்க்ஷக்ஷ
 Tq க்ஷா
 Ts க்ஷி
 Tw க்ஷீ
@@ -494,15 +417,202 @@ Tr க்ஷை
 Tc க்ஷொ
 Tx க்ஷோ
 Tz க்ஷௌ
-Y ஸ்ரீ
-A ∑
-S ¼
-D ½
-Z ¾
-X ∏ 
-C ∝
-V ∞
-B ∫
+Y ஶ்ரீ
+
+hhhhhh க்கக்கக்க
+hhhhh க்கக்கக
+hhhh க்கக்க
+hhh க்கக
+hh க்க
+ha க
+haa கஅ
+
+bb ங்ங
+bbb ங்ஙங
+bbbb ங்ஙங்ங
+ba ங
+baa ஙஅ
+
+bhbh ங்கங்க
+bhb ங்கங
+bh ங்க
+bha ங்க
+bhaa ங்கஅ
+
+[[[[ ச்சச்ச
+[[[ ச்சச
+[[ ச்ச
+[a ச
+[aa சஅ
+
+]]]] ஞ்ஞஞ்ஞ
+]]] ஞ்ஞஞ
+]] ஞ்ஞ
+]a ஞ
+]aa ஞஅ
+
+][][ ஞ்சஞ்ச
+][] ஞ்சஞ
+][ ஞ்ச
+][a ஞ்ச
+][aa ஞ்சஅ
+
+oooo ட்டட்ட
+ooo ட்டட
+oo ட்ட
+oa ட
+oaa டஅ
+
+pp ண்ண
+ppp ண்ணண
+pppp ண்ணண்ண
+pa ண
+paa ணஅ
+
+popo ண்டண்ட
+pop ண்டண
+po ண்ட
+poa ண்ட
+poaa ண்டஅ
+
+llll த்தத்த
+lll த்தத
+ll த்த
+la த
+laa தஅ
+
+;; ந்ந
+;;; ந்நந
+;;;; ந்நந்ந
+;a ந
+;aa நஅ
+
+;l;l ந்தந்த
+;l; ந்தந
+;l ந்த
+;la ந்த
+;laa ந்தஅ
+
+jjjj ப்பப்ப
+jjj ப்பப
+jj ப்ப
+ja ப
+jaa பஅ
+
+kk ம்ம
+kkk ம்மம
+kkkk ம்மம்ம
+ka ம
+kaa மஅ
+
+kjkj ம்பம்ப
+kjk ம்பம
+kj ம்ப
+kja ம்ப
+kjaa ம்பஅ
+
+uuuu ற்றற்ற
+uuu ற்றற
+uu ற்ற
+ua ற
+uaa றஅ
+
+ii ன்ன
+iii ன்னன
+iiii ன்னன்ன
+ia ன
+iaa னஅ
+
+iuiu ன்றன்ற
+iui ன்றன
+iu ன்ற
+iua ன்ற
+iuaa ன்றஅ
+
+'''' ய்யய்ய
+''' ய்யய
+'' ய்ய
+'a ய
+'aa யஅ
+
+mm ர்ர
+mmm ர்ரர
+mmmm ர்ரர்ர
+ma ர
+maa ரஅ
+
+nnnn ல்லல்ல
+nnn ல்லல
+nn ல்ல
+na ல
+naa லஅ
+
+vv வ்வ
+vvv வ்வவ
+vvvv வ்வவ்வ
+va வ
+vaa வஅ
+
+//// ழ்ழழ்ழ
+/// ழ்ழழ
+// ழ்ழ
+/a ழ
+/aa ழஅ
+
+yy ள்ள
+yyy ள்ளள
+yyyy ள்ளள்ள
+ya ள
+yaa ளஅ
+
+EEEE ஜ்ஜஜ்ஜ
+EEE ஜ்ஜஜ
+EE ஜ்ஜ
+Ea ஜ
+Eaa ஜஅ
+
+UU ஶ்ஶ
+UUU ஶ்ஶஶ
+UUUU ஶ்ஶஶ்ஶ
+Ua ஶ
+Uaa ஶஅ
+
+WWWW ஷ்ஷஷ்ஷ
+WWW ஷ்ஷஷ
+WW ஷ்ஷ
+Wa ஷ
+Waa ஷஅ
+
+QQ ஸ்ஸ
+QQQ ஸ்ஸஸ
+QQQQ ஸ்ஸஸ்ஸ
+Qa ஸ
+Qaa ஸஅ
+
+RRRR ஹ்ஹஹ்ஹ
+RRR ஹ்ஹஹ
+RR ஹ்ஹ
+Ra ஹ
+Raa ஹஅ
+
+TT க்ஷ்க்ஷ
+TTT க்ஷ்க்ஷக்ஷ
+TTTT க்ஷ்க்ஷக்ஷ்க்ஷ
+Ta க்ஷ
+Taa க்ஷஅ
+
+hfW க்‌ஷ
+
+Z ௳
+X ௴
+C ௵
+V ௶
+B ௷
+D ௸
+A ௹
+S ௺
+N ௐ
+
 O [
 P ]
 { {
@@ -511,11 +621,83 @@ K "
 L :
 : ;
 " '
-| |
-\ \
-< <
-> >
-? ?
-. .
-, ,
+
+^q ா
+^s ி
+^w ீ
+^d ு
+^e ூ
+^f ்
+^g ெ
+^t ே
+^r ை
+^c ொ
+^x ோ
+^z ௌ
+
+^2 ½
+^3 ¾
+^4 ¼
+^7 ‘
+^8 ’
+^9 “
+^0 ”
+^S ­
+^. •
+^C ©
+^^ ^
+
+^^q ^ஆ
+^^s ^இ
+^^w ^ஈ
+^^d ^உ
+^^e ^ஊ
+^^f ^்
+^^g ^எ
+^^t ^ஏ
+^^r ^ஐ
+^^c ^ஒ
+^^x ^ஓ
+^^z ^ஔ
+
+^^2 ^2
+^^3 ^3
+^^4 ^4
+^^7 ^7
+^^8 ^8
+^^9 ^9
+^^0 ^0
+^^S ^S
+^^. ^.
+^^C ^C
+
+`0 ௦
+`1 ௧
+`2 ௨
+`3 ௩
+`4 ௪
+`5 ௫
+`6 ௬
+`7 ௭
+`8 ௮
+`9 ௯
+`10 ௰
+`100 ௱
+`1000 ௲
+
+`` `
+``0 `0
+``1 `1
+``2 `2
+``3 `3
+``4 `4
+``5 `5
+``6 `6
+``7 `7
+``8 `8
+``9 `9
+``10 `10
+``100 `100
+``1000 `1000
+
 END_TABLE

@@ -33,10 +33,7 @@ int main(int argc, char *argv[])
 
     QSplashScreen splash(pix);
     splash.show();
-
     Sleep(2000);
-    splash.showMessage("Ready!");
-    Sleep(500);
     splash.hide();
 
     if (!QSystemTrayIcon::isSystemTrayAvailable()) {
