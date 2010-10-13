@@ -133,7 +133,7 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 
 		shiftkey_pressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
 		bool caplock_pressed = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
-		altkey_pressed = ((GetKeyState(0x12) & 0x80 ) == 0x80  ? true : false);
+		altkey_pressed = ((GetKeyState(VK_LMENU) & 0x80 ) == 0x80  ? true : false);
 		controlkey_pressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
 		spacebar_pressed = ((GetKeyState(VK_SPACE) & 0x80) == 0x80 ? true : false);
 		backspace_pressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
@@ -168,6 +168,8 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 		BYTE keyboard_state[256];
 		GetKeyboardState(keyboard_state);
 		shiftkey_pressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
+		controlkey_pressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
+		altkey_pressed = ((GetKeyState(VK_LMENU) & 0x80 ) == 0x80  ? true : false);
 	}
 
 	return CallNextHookEx(NULL, nCode, wParam, lParam);

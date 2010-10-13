@@ -400,7 +400,7 @@ void Window::createShortcutGroupBox()
     shortcutComboBox1 = new QComboBox;
     shortcutComboBox1->addItem(tr("NONE"));
     shortcutComboBox1->addItem(tr("CTRL"));
-   //shortcutComboBox1->addItem(tr("ALT"));
+    //shortcutComboBox1->addItem(tr("ALT"));
 
     int index_tmp1 = shortcutComboBox1->findText(shortcut_modifier_key);
     shortcutComboBox1->setCurrentIndex(index_tmp1);
@@ -530,13 +530,6 @@ void Window::processKeypressEvent(){
          }
        //if control key is modifier
        else if ((current_vkCode == short_cut_key_hex) && (shortcut_modifier_key == "CTRL")&& (controlkey_pressed == true ) ){
-           if (keyboard_status)
-                keyboard_status = false;
-            else
-                keyboard_status = true;
-       }
-       // if alt key is modifier
-       else if ((current_vkCode == short_cut_key_hex) && (shortcut_modifier_key == "ALT")&& (altkey_pressed == true) ){
            if (keyboard_status)
                 keyboard_status = false;
             else
