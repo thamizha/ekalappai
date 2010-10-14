@@ -1,0 +1,743 @@
+﻿### This file must be encoded into UTF-8.
+### Copyright (c) 2010 http://thamizha.com/
+### License : GNU/GPL v3 or (at your option) any later version.
+### This file is part of eKalappai.
+###
+### eKalappai is free software: you can redistribute it and/or modify
+### it under the terms of the GNU General Public License as published by
+### the Free Software Foundation, either version 3 of the License, or
+### (at your option) any later version.
+###
+### eKalappai is distributed in the hope that it will be useful,
+### but WITHOUT ANY WARRANTY; without even the implied warranty of
+### MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+### GNU General Public License for more details.
+###
+### You should have received a copy of the GNU General Public License version 3
+### along with eKalappai.  If not, see <http://www.gnu.org/licenses/>.
+###
+### NAME = Uni-Phonetic
+### NAME.ta_IN = 
+### AUTHORS = Muguntharaj <mugunth@gmail.com>, K. Sethu <skhome@gmail.com> 
+### ***************************************
+### Authors' Notes:
+### This keymap table is written for use with eKalappai - 3.0. 
+###  The structure of table for eKalappai-3.0 is based on that of scim-tables IME 
+###  This keymap is substantially modified from Tamil99 scim-tables authored by Jatin Nansi / Red Hat Inc 2004 - 2005
+###  The keymap now includes further key / keystroke assignments for
+###  	All Tamil symbols
+###     Tamil Digits and Numbers
+###     Separate key (x) for conjunct KSS (க்ஷ்) with default keystroke ksh (= க்+ஷ்) mapping to split form: க்‌ஷ்
+###     Keystroke SH for ஶ் (U+0BB6 U+0BCD) 
+###     Keystrokes for uyirmei syllables of SH (ஶ்) and KSS (க்ஷ்) formed in same way as other uyirmeis
+###               for e.g. SHa -> ஶ , SHaa -> ஶா , SHA -> ஶா , SHi -> ஶி  etc
+###                         xa -> க்ஷ xaa ->  க்ஷா xaA -> க்ஷா , xi -> க்ஷி etc
+###     Default short keystroke "sri" to obtain Shrii is now mapped to ஶ் + ரீ  as per Unicode standard 
+###     For those who want to continue using old definition of ஸ்+ரீ for shrii till its deprectaion use generic key sequnce : Srii
+### For more detailed and other information see : http://code.google.com/p/ekalappai/wiki/phonetic_layout_details (content creation pending)
+### Notes written by : K. Sethu 2010-10-07
+### ***************************************
+
+### Begin Table data.
+BEGIN_TABLE
+a அ
+A ஆ
+i இ
+I ஈ
+u உ
+U ஊ
+e எ
+E ஏ
+o ஒ
+O ஓ
+q ஃ
+aa ஆ
+ii ஈ
+uu ஊ
+ee ஏ
+oo ஓ
+ai ஐ
+au ஔ
+
+k க்
+ka க
+kaa கா
+kA கா
+ki கி
+kii கீ
+kI கீ
+ku கு
+kuu கூ
+kU கூ
+ke கெ
+kee கே
+kE கே
+kai கை
+ko கொ
+koo கோ
+kO கோ
+kau கௌ
+
+ng ங்
+nga ங
+ngaa ஙா
+ngA ஙா
+ngi ஙி
+ngii ஙீ
+ngI ஙீ
+ngu ஙு
+nguu ஙூ
+ngU ஙூ
+nge ஙெ
+ngee ஙே
+ngE ஙே
+ngai ஙை
+ngo ஙொ
+ngoo ஙோ
+ngO ஙோ
+ngau ஙௌ
+
+c ச்
+ca ச
+caa சா
+cA சா
+ci சி
+cii சீ
+cI சீ
+cu சு
+cuu சூ
+cU சூ
+ce செ
+cee சே
+cE சே
+cai சை
+co சொ
+coo சோ
+cO சோ
+cau சௌ
+
+s ச்
+sa ச
+saa சா
+sA சா
+si சி
+sii சீ
+sI சீ
+su சு
+suu சூ
+sU சூ
+se செ
+see சே
+sE சே
+sai சை
+so சொ
+soo சோ
+sO சோ
+sau சௌ
+
+nj ஞ்
+nja ஞ
+njaa ஞா
+njA ஞா
+nji ஞி 
+njii ஞீ
+njI ஞீ
+nju ஞு
+njuu ஞூ
+njU ஞூ
+nje ஞெ
+njee ஞே
+njE ஞே
+njai ஞை
+njo ஞொ
+njoo ஞோ
+njO ஞோ
+njau ஞௌ
+
+t ட்
+ta ட
+taa டா
+tA டா
+ti டி
+tii டீ
+tI டீ
+tu டு
+tuu டூ
+tU டூ
+te டெ
+tee டே
+tE டே
+tai டை
+to டொ
+too டோ
+tO டோ
+tau டௌ
+
+d ட்
+da ட
+daa டா
+dA டா
+di டி
+dii டீ
+dI டீ
+du டு
+duu டூ
+dU டூ
+de டெ
+dee டே
+dE டே
+dai டை
+do டொ
+doo டோ
+dO டோ
+dau டௌ
+
+N ண்
+Na ண
+Naa ணா
+NA ணா
+Ni ணி
+Nii ணீ
+NI ணீ
+Nu ணு
+Nuu ணூ
+NU ணூ
+Ne ணெ
+Nee ணே
+NE ணே
+Nai ணை
+No ணொ
+Noo ணோ
+NO ணோ
+Nau ணௌ
+
+th த்
+tha த
+thaa தா
+thA தா
+thi தி
+thii தீ
+thI தீ
+thu து
+thuu தூ
+thU தூ
+the தெ
+thee தே
+thE தே
+thai தை
+tho தொ
+thoo தோ
+thO தோ
+thau தௌ
+
+w ந் 
+wa ந
+waa நா
+wA நா
+wi நி
+wii நீ
+wI நீ
+wu நு
+wuu நூ
+wU நூ
+we நெ
+wee நே
+wE நே
+wai நை
+wo நொ
+woo நோ
+wO நோ
+wau நௌ
+
+n- ந் 
+n-a ந
+n-aa நா
+n-A நா
+n-i நி
+n-ii நீ
+n-I நீ
+n-u நு
+n-uu நூ
+n-U நூ
+n-e நெ
+n-ee நே
+n-E நே
+n-ai நை
+n-o நொ
+n-oo நோ
+n-O நோ
+n-au நௌ
+
+p ப்
+pa ப
+paa பா
+pA பா
+pi பி
+pii பீ
+pI பீ
+pu பு
+puu பூ
+pU பூ
+pe பெ
+pee பே
+pE பே
+pai பை
+po பொ
+poo போ
+pO போ
+pau பௌ
+
+f ஃப்
+fa ஃப
+faa ஃபா
+fA ஃபா
+fi ஃபி
+fii ஃபீ
+fI ஃபீ
+fu ஃபு
+fuu ஃபூ
+fU ஃபூ
+fe ஃபெ
+fee ஃபே
+fE ஃபே
+fai ஃபை
+fo ஃபொ
+foo ஃபோ
+fO ஃபோ
+fau ஃபௌ
+
+m ம்
+ma ம
+maa மா
+mA மா
+mi மி
+mii மீ
+mI மீ
+mu மு
+muu மூ
+mU மூ
+me மெ
+mee மே
+mE மே
+mai மை
+mo மொ
+moo மோ
+mO மோ
+mau மௌ
+
+y ய்
+ya ய
+yaa யா
+yA யா
+yi யி
+yii யீ
+yI யீ
+yu யு
+yuu யூ
+yU யூ
+ye யெ
+yee யே
+yE யே
+yai யை
+yo யொ
+yoo யோ
+yO யோ
+yau யௌ
+
+r ர்
+ra ர
+raa ரா
+rA ரா
+ri ரி
+rii ரீ
+rI ரீ
+ru ரு
+ruu ரூ
+rU ரூ
+re ரெ
+ree ரே
+rE ரே
+rai ரை
+ro ரொ
+roo ரோ
+rO ரோ
+rau ரௌ
+
+l ல்
+la ல
+laa லா
+lA லா
+li லி
+lii லீ
+lI லீ
+lu லு
+luu லூ
+lU லூ
+le லெ
+lee லே
+lE லே
+lai லை
+lo லொ
+loo லோ
+lO லோ
+lau லௌ
+
+v வ்
+va வ
+vaa வா
+vA வா
+vi வி
+vii வீ
+vI வீ
+vu வு
+vuu வூ
+vU வூ
+ve வெ
+vee வே
+vE வே
+vai வை
+vo வொ
+voo வோ
+vO வோ
+vau வௌ
+
+z ழ்
+za ழ
+zaa ழா
+zA ழா
+zi ழி
+zii ழீ
+zI ழீ
+zu ழு
+zuu ழூ
+zU ழூ
+ze ழெ
+zee ழே
+zE ழே
+zai ழை
+zo ழொ
+zoo ழோ
+zO ழோ
+zau ழௌ
+
+L ள்
+La ள
+Laa ளா
+LA ளா
+Li ளி
+Lii ளீ
+LI ளீ
+Lu ளு
+Luu ளூ
+LU ளூ
+Le ளெ
+Lee ளே
+LE ளே
+Lai ளை
+Lo ளொ
+Loo ளோ
+LO ளோ
+Lau ளௌ
+
+R ற்
+Ra ற
+Raa றா
+RA றா
+Ri றி
+Rii றீ
+RI றீ
+Ru று
+Ruu றூ
+RU றூ
+Re றெ
+Ree றே
+RE றே
+Rai றை
+Ro றொ
+Roo றோ
+RO றோ
+Rau றௌ
+
+n ன்
+na ன
+naa னா
+nA னா
+ni னி
+nii னீ
+nI னீ
+nu னு
+nuu னூ
+nU னூ
+ne னெ
+nee னே
+nE னே
+nai னை
+no னொ
+noo னோ
+nO னோ
+nau னௌ
+
+j ஜ்
+ja ஜ
+jaa ஜா
+jA ஜா
+ji ஜி
+jii ஜீ
+jI ஜீ
+ju ஜு
+juu ஜூ
+jU ஜூ
+je ஜெ
+jee ஜே
+jE ஜே
+jai ஜை
+jo ஜொ
+joo ஜோ
+jO ஜோ
+jau ஜௌ
+
+SH ஶ்
+SHa ஶ
+SHaa ஶா
+SHA ஶா
+SHi ஶி
+SHii ஶீ
+SHI ஶீ
+SHu ஶு
+SHuu ஶூ
+SHU ஶூ
+SHe ஶெ
+SHee ஶே
+SHE ஶே
+SHai ஶை
+SHo ஶொ
+SHoo ஶோ
+SHO ஶோ
+SHau ஶௌ
+
+sh ஷ்
+sha ஷ
+shaa ஷா
+shA ஷா
+shi ஷி
+shii ஷீ
+shI ஷீ
+shu ஷு
+shuu ஷூ
+shU ஷூ
+she ஷெ
+shee ஷே
+shE ஷே
+shai ஷை
+sho ஷொ
+shoo ஷோ
+shO ஷோ
+shau ஷௌ
+
+S ஸ்
+Sa ஸ
+Saa ஸா
+SA ஸா
+Si ஸி
+Sii ஸீ
+SI ஸீ
+Su ஸு
+Suu ஸூ
+SU ஸூ
+Se ஸெ
+See ஸே
+SE ஸே
+Sai ஸை
+So ஸொ
+Soo ஸோ
+SO ஸோ
+Sau ஸௌ
+
+h ஹ்
+ha ஹ
+haa ஹா
+hA ஹா
+hi ஹி
+hii ஹீ
+hI ஹீ
+hu ஹு
+huu ஹூ
+hU ஹூ
+he ஹெ
+hee ஹே
+hE ஹே
+hai ஹை
+ho ஹொ
+hoo ஹோ
+hO ஹோ
+hau ஹௌ
+
+ks க்ச்
+ksh க்‌ஷ்
+ksha க்‌ஷ
+kshaa க்‌ஷா
+kshA க்‌ஷா
+kshi க்‌ஷி
+kshii க்‌ஷீ
+kshI க்‌ஷீ
+kshu க்‌ஷு
+kshuu க்‌ஷூ
+kshU க்‌ஷூ
+kshe க்‌ஷெ
+kshee க்‌ஷே
+kshE க்‌ஷே
+kshai க்‌ஷை
+ksho க்‌ஷொ
+kshoo க்‌ஷோ
+kshO க்‌ஷோ
+kshau க்‌ஷௌ
+
+x க்ஷ்
+xa க்ஷ
+xaa க்ஷா
+xA க்ஷா
+xi க்ஷி
+xii க்ஷீ
+xI க்ஷீ
+xu க்ஷு
+xuu க்ஷூ
+xU க்ஷூ
+xe க்ஷெ
+xee க்ஷே
+xE க்ஷே
+xai க்ஷை
+xo க்ஷொ
+xoo க்ஷோ
+xO க்ஷோ
+xau க்ஷௌ
+
+sr  ச்ர்
+sri ஶ்ரீ
+
+^^ ^
+^a ^அ
+^aa ா
+^A ா
+^i ி
+^ii ீ
+^I ீ
+^u ு
+^uu ூ
+^U ூ
+^e ெ
+^ee ே
+^E ே
+^ai ை
+^o ொ
+^oo ோ
+^O ோ
+^au ௌ
+
+^2 ½
+^3 ¾
+^4 ¼
+
+^^a ^அ
+^^aa ^ஆ
+^^A ^ஆ
+^^i ^இ
+^^ii ^ஈ
+^^I ^ஈ
+^^u ^உ
+^^uu ^ஊ
+^^U ^ஊ
+^^e ^எ
+^^ee ^ஏ
+^^E ^ஏ
+^^ai ^ஐ
+^^o ^ஒ
+^^oo ^ஓ
+^^O ^ஓ
+^^au ^ஔ
+^^2 ^2
+^^3 ^3
+^^4 ^4
+
+`` `
+
+`0 ௦
+`1 ௧
+`2 ௨
+`3 ௩
+`4 ௪
+`5 ௫
+`6 ௬
+`7 ௭
+`8 ௮
+`9 ௯
+`10 ௰
+`100 ௱
+`1000 ௲
+
+``0 `0
+``1 `1
+``2 `2
+``3 `3
+``4 `4
+``5 `5
+``6 `6
+``7 `7
+``8 `8
+``9 `9
+``10 `10
+``100 `100
+``1000 `1000
+
+Z ௳
+X ௴
+C ௵
+
+D ௶
+F ௷
+G ௸
+H ௹
+J ௺
+K ௐ
+
+~ ~
+! !
+1 1
+@ @
+2 2
+# #
+3 3
+$ $
+4 4
+% %
+5 5
+
+6 6
+& &
+7 7
+* *
+8 8
+( (
+9 9
+) )
+0 0
+_ _
+- -
++ +
+= =
+[ [
+] ]
+{ {
+} }
+: :
+; ;
+" "
+' '
+| |
+\ \
+< <
+, ,
+> >
+. .
+? ?
+/ /
+END_TABLE

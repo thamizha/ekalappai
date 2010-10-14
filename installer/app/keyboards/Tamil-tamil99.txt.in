@@ -1,0 +1,703 @@
+﻿### This file must be encoded into UTF-8.
+### Copyright (c) 2010 http://thamizha.com/
+### License : GNU/GPL v3 or (at your option) any later version.
+### This file is part of eKalappai.
+###
+### eKalappai is free software: you can redistribute it and/or modify
+### it under the terms of the GNU General Public License as published by
+### the Free Software Foundation, either version 3 of the License, or
+### (at your option) any later version.
+###
+### eKalappai is distributed in the hope that it will be useful,
+### but WITHOUT ANY WARRANTY; without even the implied warranty of
+### MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+### GNU General Public License for more details.
+###
+### You should have received a copy of the GNU General Public License version 3
+### along with eKalappai.  If not, see <http://www.gnu.org/licenses/>.
+###
+### NAME = Uni-Tamil99-var
+### NAME.ta_IN = யூனி-தமிழ்99-மாறி
+### AUTHOR = K. Sethu <skhome@gmail.com> 
+### ***************************************
+### Author's Note:
+### This keymap table is written for use with eKalappai - 3.0. 
+##  The structure of table for eKalappai-3.0 is based on that of scim-tables IME 
+### This keymap was modified from Tamil99 scim-tables authored by Sudhakar U [BOSS(GNU/Linux] Team,C-DAC) 
+### - by removing number of bugs as well as newly including coding for mei-mayakkams (auto-pulli) and
+### extensions and changes for Tamil 99 standard as per the G.O.(Ms)-29 (dated  23.06.2010) of the state government of Tamil Nadu. 
+### The keymap is to very large extent is conformant to current standard as per the G.O.(Ms) 29 of 23.06.2010; and the
+### the few exceptional varaitions will be discussed in http://code.google.com/p/ekalappai/wiki/tamil99_keyboard_details  wherein 
+### comprehensive information for the keymap usage, issues and  future plans are to be be covered.
+### K. Sethu 30-09-2010
+### ************************************
+
+### Begin Table data.
+BEGIN_TABLE
+! !
+1 1
+@ @
+2 2
+# #
+3 3
+$ $
+4 4
+% %
+5 5
+6 6
+
+& &
+7 7
+8 8
+( (
+9 9
+) )
+0 0
+_ _
+- -
++ +
+= =
+. .
+, ,
+~ ~
+| |
+\ \
+< <
+> >
+? ?
+
+a அ
+q ஆ
+s இ
+w ஈ
+d உ
+e ஊ
+g எ
+t ஏ
+r ஐ
+c ஒ
+x ஓ
+z ஔ
+
+F ஃ
+f  ்
+
+hf க்
+h க
+hq கா
+hs கி
+hw கீ
+hd கு
+he கூ
+hg கெ
+ht கே
+hr கை
+hc கொ
+hx கோ
+hz கௌ
+
+bf ங்
+b ங
+bq ஙா
+bs ஙி
+bw ஙீ
+bd ஙு
+be ஙூ
+bg ஙெ
+bt ஙே
+br ஙை
+bc ஙொ
+bx ஙோ
+bz ஙௌ
+
+[f ச்
+[ ச
+[q சா
+[s சி
+[w சீ
+[d சு
+[e சூ
+[g செ
+[t சே
+[r சை
+[c சொ
+[x சோ
+[z சௌ
+
+]f ஞ்
+] ஞ
+]q ஞா
+]s ஞி 
+]w ஞீ
+]d ஞு
+]e ஞூ
+]g ஞெ
+]t ஞே
+]r ஞை
+]c ஞொ
+]x ஞோ
+]z ஞௌ
+
+of ட்
+o ட
+oq டா
+os டி
+ow டீ
+od டு
+oe டூ
+og டெ
+ot டே
+or டை
+oc டொ
+ox டோ
+oz டௌ
+
+pf ண்
+p ண
+pq ணா
+ps ணி
+pw ணீ
+pd ணு
+pe ணூ
+pg ணெ
+pt ணே
+pr ணை
+pc ணொ
+px ணோ
+pz ணௌ
+
+lf த்
+l த
+lq தா
+ls தி
+lw தீ
+ld து
+le தூ
+lg தெ
+lt தே
+lr தை
+lc தொ
+lx தோ
+lz தௌ
+
+;f ந் 
+;  ந
+;q நா
+;s நி
+;w நீ
+;d நு
+;e நூ
+;g நெ
+;t நே
+;r நை
+;c நொ
+;x நோ
+;z நௌ
+
+jf ப்
+j ப
+jq பா
+js பி
+jw பீ
+jd பு
+je பூ
+jg பெ
+jt பே
+jr பை
+jc பொ
+jx போ
+jz பௌ
+
+kf ம்
+k ம
+kq மா
+ks மி
+kw மீ
+kd மு
+ke மூ
+kg மெ
+kt மே
+kr மை
+kc மொ
+kx மோ
+kz மௌ
+
+'f ய்
+'  ய
+'q யா
+'s யி
+'w யீ
+'d யு
+'e யூ
+'g யெ
+'t யே
+'r யை
+'c யொ
+'x யோ
+'z யௌ
+
+mf ர்
+m ர
+mq ரா
+ms ரி
+mw ரீ
+md ரு
+me ரூ
+mg ரெ
+mt ரே
+mr ரை
+mc ரொ
+mx ரோ
+mz ரௌ
+
+nf ல்
+n ல
+nq லா
+ns லி
+nw லீ
+nd லு
+ne லூ
+ng லெ
+nt லே
+nr லை
+nc லொ
+nx லோ
+nz லௌ
+
+vf வ்
+v வ
+vq வா
+vs வி
+vw வீ
+vd வு
+ve வூ
+vg வெ
+vt வே
+vr வை
+vc வொ
+vx வோ
+vz வௌ
+
+/f ழ்
+/  ழ
+/q ழா
+/s ழி
+/w ழீ
+/d ழு
+/e ழூ
+/g ழெ
+/t ழே
+/r ழை
+/c ழொ
+/x ழோ
+/z ழௌ
+
+yf ள்
+y ள
+yq ளா
+ys ளி
+yw ளீ
+yd ளு
+ye ளூ
+yg ளெ
+yt ளே
+yr ளை
+yc ளொ
+yx ளோ
+yz ளௌ
+
+uf ற்
+u ற
+uq றா
+us றி
+uw றீ
+ud று
+ue றூ
+ug றெ
+ut றே
+ur றை
+uc றொ
+ux றோ
+uz றௌ
+
+if ன்
+i ன
+iq னா
+is னி
+iw னீ
+id னு
+ie னூ
+ig னெ
+it னே
+ir னை
+ic னொ
+ix னோ
+iz னௌ
+
+Ef ஜ்
+E ஜ
+Eq ஜா
+Es ஜி
+Ew ஜீ
+Ed ஜு
+Ee ஜூ
+Eg ஜெ
+Et ஜே
+Er ஜை
+Ec ஜொ
+Ex ஜோ
+Ez ஜௌ
+
+Uf ஶ்
+U ஶ
+Uq ஶா
+Us ஶி
+Uw ஶீ
+Ud ஶு
+Ue ஶூ
+Ug ஶெ
+Ut ஶே
+Ur ஶை
+Uc ஶொ
+Ux ஶோ
+Uz ஶௌ
+
+Wf ஷ்
+W ஷ
+Wq ஷா
+Ws ஷி
+Ww ஷீ
+Wd ஷு
+We ஷூ
+Wg ஷெ
+Wt ஷே
+Wr ஷை
+Wc ஷொ
+Wx ஷோ
+Wz ஷௌ
+
+Qf ஸ்
+Q ஸ
+Qq ஸா
+Qs ஸி
+Qw ஸீ
+Qd ஸு
+Qe ஸூ
+Qg ஸெ
+Qt ஸே
+Qr ஸை
+Qc ஸொ
+Qx ஸோ
+Qz ஸௌ
+
+Rf ஹ்
+R ஹ
+Rq ஹா
+Rs ஹி
+Rw ஹீ
+Rd ஹூ
+Re ஹூ
+Rg ஹெ
+Rt ஹே
+Rr ஹை
+Rc ஹொ
+Rx ஹோ
+Rz ஹௌ
+
+Tf க்ஷ்
+T க்ஷ
+Tq க்ஷா
+Ts க்ஷி
+Tw க்ஷீ
+Td க்ஷு
+Te க்ஷூ
+Tg க்ஷெ
+Tt க்ஷே
+Tr க்ஷை
+Tc க்ஷொ
+Tx க்ஷோ
+Tz க்ஷௌ
+Y ஶ்ரீ
+
+hhhhhh க்கக்கக்க
+hhhhh க்கக்கக
+hhhh க்கக்க
+hhh க்கக
+hh க்க
+ha க
+haa கஅ
+
+bb ங்ங
+bbb ங்ஙங
+bbbb ங்ஙங்ங
+ba ங
+baa ஙஅ
+
+bhbh ங்கங்க
+bhb ங்கங
+bh ங்க
+bha ங்க
+bhaa ங்கஅ
+
+[[[[ ச்சச்ச
+[[[ ச்சச
+[[ ச்ச
+[a ச
+[aa சஅ
+
+]]]] ஞ்ஞஞ்ஞ
+]]] ஞ்ஞஞ
+]] ஞ்ஞ
+]a ஞ
+]aa ஞஅ
+
+][][ ஞ்சஞ்ச
+][] ஞ்சஞ
+][ ஞ்ச
+][a ஞ்ச
+][aa ஞ்சஅ
+
+oooo ட்டட்ட
+ooo ட்டட
+oo ட்ட
+oa ட
+oaa டஅ
+
+pp ண்ண
+ppp ண்ணண
+pppp ண்ணண்ண
+pa ண
+paa ணஅ
+
+popo ண்டண்ட
+pop ண்டண
+po ண்ட
+poa ண்ட
+poaa ண்டஅ
+
+llll த்தத்த
+lll த்தத
+ll த்த
+la த
+laa தஅ
+
+;; ந்ந
+;;; ந்நந
+;;;; ந்நந்ந
+;a ந
+;aa நஅ
+
+;l;l ந்தந்த
+;l; ந்தந
+;l ந்த
+;la ந்த
+;laa ந்தஅ
+
+jjjj ப்பப்ப
+jjj ப்பப
+jj ப்ப
+ja ப
+jaa பஅ
+
+kk ம்ம
+kkk ம்மம
+kkkk ம்மம்ம
+ka ம
+kaa மஅ
+
+kjkj ம்பம்ப
+kjk ம்பம
+kj ம்ப
+kja ம்ப
+kjaa ம்பஅ
+
+uuuu ற்றற்ற
+uuu ற்றற
+uu ற்ற
+ua ற
+uaa றஅ
+
+ii ன்ன
+iii ன்னன
+iiii ன்னன்ன
+ia ன
+iaa னஅ
+
+iuiu ன்றன்ற
+iui ன்றன
+iu ன்ற
+iua ன்ற
+iuaa ன்றஅ
+
+'''' ய்யய்ய
+''' ய்யய
+'' ய்ய
+'a ய
+'aa யஅ
+
+mm ர்ர
+mmm ர்ரர
+mmmm ர்ரர்ர
+ma ர
+maa ரஅ
+
+nnnn ல்லல்ல
+nnn ல்லல
+nn ல்ல
+na ல
+naa லஅ
+
+vv வ்வ
+vvv வ்வவ
+vvvv வ்வவ்வ
+va வ
+vaa வஅ
+
+//// ழ்ழழ்ழ
+/// ழ்ழழ
+// ழ்ழ
+/a ழ
+/aa ழஅ
+
+yy ள்ள
+yyy ள்ளள
+yyyy ள்ளள்ள
+ya ள
+yaa ளஅ
+
+EEEE ஜ்ஜஜ்ஜ
+EEE ஜ்ஜஜ
+EE ஜ்ஜ
+Ea ஜ
+Eaa ஜஅ
+
+UU ஶ்ஶ
+UUU ஶ்ஶஶ
+UUUU ஶ்ஶஶ்ஶ
+Ua ஶ
+Uaa ஶஅ
+
+WWWW ஷ்ஷஷ்ஷ
+WWW ஷ்ஷஷ
+WW ஷ்ஷ
+Wa ஷ
+Waa ஷஅ
+
+QQ ஸ்ஸ
+QQQ ஸ்ஸஸ
+QQQQ ஸ்ஸஸ்ஸ
+Qa ஸ
+Qaa ஸஅ
+
+RRRR ஹ்ஹஹ்ஹ
+RRR ஹ்ஹஹ
+RR ஹ்ஹ
+Ra ஹ
+Raa ஹஅ
+
+TT க்ஷ்க்ஷ
+TTT க்ஷ்க்ஷக்ஷ
+TTTT க்ஷ்க்ஷக்ஷ்க்ஷ
+Ta க்ஷ
+Taa க்ஷஅ
+
+hfW க்‌ஷ
+
+Z ௳
+X ௴
+C ௵
+V ௶
+B ௷
+D ௸
+A ௹
+S ௺
+N ௐ
+
+O [
+P ]
+{ {
+} }
+K "
+L :
+: ;
+" '
+
+^q ா
+^s ி
+^w ீ
+^d ு
+^e ூ
+^f ்
+^g ெ
+^t ே
+^r ை
+^c ொ
+^x ோ
+^z ௌ
+
+^2 ½
+^3 ¾
+^4 ¼
+^7 ‘
+^8 ’
+^9 “
+^0 ”
+^S ­
+^. •
+^C ©
+^^ ^
+
+^^q ^ஆ
+^^s ^இ
+^^w ^ஈ
+^^d ^உ
+^^e ^ஊ
+^^f ^்
+^^g ^எ
+^^t ^ஏ
+^^r ^ஐ
+^^c ^ஒ
+^^x ^ஓ
+^^z ^ஔ
+
+^^2 ^2
+^^3 ^3
+^^4 ^4
+^^7 ^7
+^^8 ^8
+^^9 ^9
+^^0 ^0
+^^S ^S
+^^. ^.
+^^C ^C
+
+`0 ௦
+`1 ௧
+`2 ௨
+`3 ௩
+`4 ௪
+`5 ௫
+`6 ௬
+`7 ௭
+`8 ௮
+`9 ௯
+`10 ௰
+`100 ௱
+`1000 ௲
+
+`` `
+``0 `0
+``1 `1
+``2 `2
+``3 `3
+``4 `4
+``5 `5
+``6 `6
+``7 `7
+``8 `8
+``9 `9
+``10 `10
+``100 `100
+``1000 `1000
+
+END_TABLE
