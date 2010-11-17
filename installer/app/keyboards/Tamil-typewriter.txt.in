@@ -1,0 +1,535 @@
+﻿### This file must be encoded into UTF-8.
+### Copyright (c) 2010 http://thamizha.com/
+### License : GNU/GPL v3 or (at your option) any later version.
+### This file is part of eKalappai.
+###
+### eKalappai is free software: you can redistribute it and/or modify
+### it under the terms of the GNU General Public License as published by
+### the Free Software Foundation, either version 3 of the License, or
+### (at your option) any later version.
+###
+### eKalappai is distributed in the hope that it will be useful,
+### but WITHOUT ANY WARRANTY; without even the implied warranty of
+### MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+### GNU General Public License for more details.
+###
+### You should have received a copy of the GNU General Public License version 3
+### along with eKalappai.  If not, see <http://www.gnu.org/licenses/>.
+###
+### NAME = Tamil-Typewriter-var-TAU
+### NAME.ta_IN = தமிழ்-தட்டச்சு-வேறி-த.ஒ.கு.
+### AUTHOR = K. Sethu <skhome@gmail.com> 
+### ***************************************
+### Author's Note:
+### This keymap table for Tamil Unicode range is written for use with eKalappai - 3.0. 
+###
+### The structure of table for eKalappai-3.0 is based on that of scim-tables IME 
+### This keymap was modified from Remington scim-tables authored by H Parimala <nhk_mala(at)rediffmail(dot)com> R Hariram Aatreya <rhariram(at)gmail(dot)com>
+###
+### A Number of modifications have been made to include keymap assigment changes and extensions for Tamil Typewriter standard of TN Government; 
+### as per keystrokes tables and layouts published in 'TENDER DOCUMENT for Development of Tamil Fonts and Tamil Keyboard driver for 16-bit encodings (Unicode and TACE16)' 
+### [Tender Ref. TVA/SW/2010-11] :  http://tamilvu.org/coresite/download/Teder_Document_for_Tamil_fonts_and_kbd_driver.pdf
+### as well as per general principlas in G.O.(Ms)-29 (dated  23.06.2010) of TN Government:
+### http://tamilvu.org/coresite/download/Tamil_Unicode_G.O.zip
+###  
+### The keymap to a very large extent is conformant to current standard as per above documents of TN Government; and 
+### any varaitions will be discussed in http://code.google.com/p/ekalappai/wiki/typewriter_keyboard_details  wherein 
+### comprehensive information for the keymap usage, issues and  future plans are to be be covered.
+### K. Sethu 2010.11.01
+### *************************************
+
+### Begin Table data.
+BEGIN_TABLE
+m அ
+M ஆ
+, இ
+< ஈ
+c உ
+C ஊ
+v எ
+V ஏ
+I ஐ
+x ஒ
+X ஓ
+xs ஔ
+` ஃ
+
+b ◌ெ
+n ◌ே
+i ◌ை
+h ◌ா
+
+;f க்
+f க
+fh கா
+pf கி
+Pf கீ
+F கு
+T கூ
+bf கெ
+nf கே
+if கை
+bfh கொ
+nfh கோ
+bfs கௌ
+
+;' ங்
+' ங
+'h ஙா
+p' ஙி
+P' ஙீ
+[' ஙு
+{' ஙூ
+b' ஙெ
+n' ஙே
+i' ஙை
+b'h ஙொ
+n'h ஙோ
+b's ஙௌ
+
+;r ச்
+r ச
+rh சா
+pr சி
+Pr சீ
+R சு
+N சூ
+br செ
+nr சே
+ir சை
+brh சொ
+nrh சோ
+brs சௌ
+
+;" ஞ்
+" ஞ
+"h ஞா
+p" ஞி
+P" ஞீ
+Q ஞு
+Q} ஞூ
+[" ஞு
+{" ஞூ
+
+b" ஞெ
+n" ஞே
+i" ஞை
+b"h ஞொ
+n"h ஞோ
+b"s ஞௌ
+
+;l ட்
+l ட
+lh டா
+o டி
+pl டி
+O டீ
+Pl டீ
+L டு
+:L டூ
+bl டெ
+nl டே
+il டை
+blh டொ
+nlh டோ
+bls டௌ
+
+;z ண்
+zh ணா
+pz ணி
+Pz ணீ
+q ணு
+q} ணூ
+bz ணெ
+nz ணே
+iz ணை
+bzh ணொ
+nzh ணோ
+bzs ணௌ
+
+;j த்
+j த
+jh தா
+pj தி
+Pj தீ
+J து
+J} தூ
+bj தெ
+nj தே
+ij தை
+bjh தொ
+njh தோ
+bjs தௌ
+
+;e ந்
+e ந
+eh நா
+pe நி
+Pe நீ
+E நு
+E} நூ
+be நெ
+ne நே
+ie நை
+beh நொ
+neh நோ
+bes நௌ
+
+;g ப்
+g ப
+gh பா
+pg பி
+Pg பீ
+[g பு
+{g பூ
+bg பெ
+ng பே
+ig பை
+bgh பொ
+ngh போ
+bgs பௌ
+
+;k ம்
+k ம
+kh மா
+pk மி
+Pk மீ
+K மு
+:K மூ
+bk மெ
+nk மே
+ik மை
+bkh மொ
+nkh மோ
+bks மௌ
+
+;a ய்
+a ய
+ah யா
+pa யி
+Pa யீ
+[a யு
+{a யூ
+ba யெ
+na யே
+ia யை
+bah யொ
+nah யோ
+bas யௌ
+
+;u ர்
+u ர
+uh ரா
+pu ரி
+Pu ரீ
+U ரு
+:U ரூ
+bu ரெ
+nu ரே
+iu ரை
+buh ரொ
+nuh ரோ
+bns ரௌ
+
+;y ல்
+y ல
+yh லா
+py லி
+Py லீ
+Y லு
+Y} லூ
+by லெ
+ny லே
+iy லை
+byh லொ
+nyh லோ
+bys லௌ
+
+;t வ்
+t வ
+th வா
+pt வி
+Pt வீ
+[t வு
+{t வூ
+bt வெ
+nt வே
+it வை
+bth வொ
+nth வோ
+bts வௌ
+
+;H ழ்
+H ழ
+Hh ழா
+pH ழி
+PH ழீ
+G ழு
+:G ழூ
+{H ழூ
+bH ழெ
+nH ழே
+iH ழை
+bHh ழொ
+nHh ழோ
+bHs ழௌ
+
+;s ள்
+s ள
+sh ளா
+ps ளி
+Ps ளீ
+S ளு
+:S ளூ
+bs ளெ
+ns ளே
+is ளை
+]s ளை
+bsh ளொ
+nsh ளோ
+bss ளௌ
+
+;w ற்
+w ற
+wh றா
+pw றி
+Pw றீ
+W று
+W} றூ
+bw றெ
+nw றே
+iw றை
+bwh றொ
+nwh றோ
+bws றௌ
+
+;d ன்
+d ன
+dh னா
+pd னி
+Pd னீ
+D னு
+D} னூ
+bd னெ
+nd னே
+id னை
+bdh னொ
+ndh னோ
+bds னௌ
+
+;$ ஜ்
+$ ஜ
+$h ஜா
+p$ ஜி
+P$ ஜீ
+$% ஜு
+$^ ஜூ
+b$ ஜெ
+n$ ஜே
+i$ ஜை
+b$h ஜொ
+n$h ஜோ
+b$s ஜௌ
+
+;AY ஶ்
+AY ஶ
+AYh ஶா
+pAY ஶி
+PAY ஶீ
+AY% ஶு
+AY^ ஶூ
+bAY ஶெ
+nAY ஶே
+iAY ஶை
+bAYh ஶொ
+nAYh ஶோ
+bAYs ஶௌ
+
+;Z ஷ்
+Z ஷ
+Zh ஷா
+pZ ஷி
+PZ ஷீ
+Z% ஷு
+Z^ ஷூ
+bZ ஷெ
+nZ ஷே
+iZ ஷை
+bZh ஷொ
+nZh ஷோ
+bZs ஷௌ
+
+;! ஸ்
+! ஸ
+!h ஸா
+p! ஸி
+P! ஸீ
+!% ஸு
+!^ ஸூ
+b! ஸெ
+n! ஸே
+i! ஸை
+b!h ஸொ
+n!h ஸோ
+b!s ஸௌ
+
+;] ஹ்
+] ஹ
+]h ஹா
+p] ஹி
+P] ஹீ
+]% ஹு
+]^ ஹூ
+b] ஹெ
+n] ஹே
+i] ஹை
+b]h ஹொ
+n]h ஹோ
+b]s ஹௌ
+
+;f; க்
+;f;Z க்‌ஷ்
+;fZ க்‌ஷ
+;fZh க்‌ஷா
+;fp க்
+;fpZ க்‌ஷி
+;fP க்
+;fPZ க்‌ஷீ
+;fZ% க்‌ஷு
+;fZ^ க்‌ஷூ
+;fb க்
+;fbZ க்‌ஷெ
+;fn க்
+;fnZ க்‌ஷே
+;fi க்
+;fiZ க்‌ஷை
+;fbZh க்‌ஷொ
+;fnZh க்‌ஷோ
+;fbZs க்‌ஷௌ
+
+;B க்ஷ்
+B க்ஷ
+Bh க்ஷா
+pB க்ஷி
+PB க்ஷீ
+B% க்ஷு
+B^ க்ஷூ
+bB க்ஷெ
+nB க்ஷே
+iB க்ஷை
+bBh க்ஷொ
+nBh க்ஷோ
+bBs க்ஷௌ
+
+_ ஶ்ரீ
+A_ ஸ்ரீ
+
+AZ ௳
+AX ௴
+AC ௵
+AV ௶
+AB ௷
+AD ௸
+AA ௹
+AS ௺
+AF ௐ
+
+A[ [
+A] ]
+A {
+A }
+A" "
+A: :
+A; ;
+A" "
+A< <
+A> >
+A? ?
+
+A2 ½
+A3 ¾
+A4 ¼
+AO ‘
+AP ’
+AU “
+AI ”
+As ­
+A. •
+Ac ©
+A^ ^
+
+Al ◌்
+Ah ◌ா
+Ap ◌ி
+Ao ◌ீ
+Au ◌ு
+Ay ◌ூ
+Ab ◌ெ
+An ◌ே
+Ai ◌ை
+Ax ◌ொ
+Az ◌ோ
+Av ◌ௌ
+
+A~ ~
+A` `
+
+#0 ௦
+#1 ௧
+#2 ௨
+#3 ௩
+#4 ௪
+#5 ௫
+#6 ௬
+#7 ௭
+#8 ௮
+#9 ௯
+#10 ௰
+#100 ௱
+#1000 ௲
+
+## #
+##0 #0
+##1 #1
+##2 #2
+##3 #3
+##4 #4
+##5 #5
+##6 #6
+##7 #7
+##8 #8
+##9 #9
+##10 #10
+##100 #100
+##1000 #1000
+
+~ *
+@ @
+# %
+& &
+* *
+- /
+( (
+) )
++ +
+1 1
+2 2
+3 3
+4 4
+5 5
+6 6
+7 7
+8 8
+9 9
+0 0
+= =
+| |
+\ \
+. ,
+/ .
+> ?
+? -
+
+A
+
+END_TABLE

@@ -16,8 +16,8 @@
 ### You should have received a copy of the GNU General Public License version 3
 ### along with eKalappai.  If not, see <http://www.gnu.org/licenses/>.
 ###
-### NAME = Uni-Phonetic
-### NAME.ta_IN = 
+### NAME = Tamingilam-TAU
+### NAME.ta_IN = தமிங்கிலம் - த.ஒ.கு
 ### AUTHORS = Muguntharaj <mugunth@gmail.com>, K. Sethu <skhome@gmail.com> 
 ### ***************************************
 ### Authors' Notes:
@@ -35,7 +35,7 @@
 ###     Default short keystroke "sri" to obtain Shrii is now mapped to ஶ் + ரீ  as per Unicode standard 
 ###     For those who want to continue using old definition of ஸ்+ரீ for shrii till its deprectaion use generic key sequnce : Srii
 ### For more detailed and other information see : http://code.google.com/p/ekalappai/wiki/phonetic_layout_details (content creation pending)
-### Notes written by : K. Sethu 2010-10-07
+### Notes written by : K. Sethu 2010.11.01
 ### ***************************************
 
 ### Begin Table data.
@@ -615,23 +615,23 @@ sr  ச்ர்
 sri ஶ்ரீ
 
 ^^ ^
-^a ^அ
-^aa ா
-^A ா
-^i ி
-^ii ீ
-^I ீ
-^u ு
-^uu ூ
-^U ூ
-^e ெ
-^ee ே
-^E ே
-^ai ை
-^o ொ
-^oo ோ
-^O ோ
-^au ௌ
+^a ◌்
+^aa ◌ா
+^A ◌ா
+^i ◌ி
+^ii ◌ீ
+^I ◌ீ
+^u ◌ு
+^uu ◌ூ
+^U ◌ூ
+^e ◌ெ
+^ee ◌ே
+^E ◌ே
+^ai ◌ை
+^o ◌ொ
+^oo ◌ோ
+^O ◌ோ
+^au ◌ௌ
 
 ^2 ½
 ^3 ¾

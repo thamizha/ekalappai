@@ -260,7 +260,7 @@ void Window::loadKeyBoard(){
         filename = "keyboards/Tamil-phonetic.txt.in";
     }
     else if(selected_keyboard == 3){
-        filename = "keyboards/Tamil-remington.txt.in";
+        filename = "keyboards/Tamil-typewriter.txt.in";
     }
     else if(selected_keyboard == 4){
         filename = "keyboards/Tamil-bamini.txt.in";

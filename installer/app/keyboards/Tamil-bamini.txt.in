@@ -15,8 +15,8 @@
 ###
 ### You should have received a copy of the GNU General Public License version 3
 ### along with eKalappai.  If not, see <http://www.gnu.org/licenses/>.
-### NAME = Uni-Bamini-var
-### NAME.ta_IN = யூனி-பாமினி-மாறி
+### NAME = Bamini-var-TAU
+### NAME.ta_IN = பாமினி-மாறி-த.ஒ.கு.
 ### AUTHOR = K. Sethu <skhome@gmail.com> 
 ### ***************************************
 ### Author's Note:
@@ -25,19 +25,26 @@
 ### This keymap is built from draft version of "Balini" scim-tables created by M. Mauran in 2007
 ### by including (in addition to legacy basic Bamini keystrokes) Suratha's enhancements that are 
 ### in "Bamuni" of earlier eKallappai-2.0.
-### The keymap still lacks key assignments for the new "SHA" (U+0BB6) and a correct definiton of
-### "Shrii" based on it. These issues and other detailed information on the keymap will be covered
-### in a topic for this keymap in the wiki page : http://code.google.com/p/ekalappai/w/list
-### K. Sethu 30-09-2010
+###
+### Introduced new in this keymap is the assignment of the keystrole sequence ~]for the new "SHA" (U+0BB6) consonant which was introduced to Unicode in the year 2004
+###
+### The equal sign key (=) assgined for Shrii is changed to have currntly correct Unicode definiton for Shrii whoich is "SHA"+Pulli+ரீ (U+0BB6 U+0BCD U+0BB0)
+### For "Srii" based on the old definiton (before year 2004) of ஸ்+ரீ (U+0BB8 U+0BCD U+0BB0) the keystroke sequence provided is ஸ followed by = key. i.e. ]=  
+###
+### The sequence of 2 keys க் followed by ஷ  (f;\) is mapped to non-conjunct form of க்ஷ that is க்‌ஷ (U+0B95 U+0BCD U+200C U+0BB7) that is using ZWNJ (200C) between க் and ஷ
+### For users of conjunct form of க்ஷ the keystroke sequence is ~\    
+###
+### Issues and other detailed information on the keymap will be covered in a topic for this keymap in the wiki page : http://code.google.com/p/ekalappai/w/list
+### K. Sethu 2010.11.01
 ### ************************************
-
+###
 ### Begin Table data.
 BEGIN_TABLE
 
 p ி
 pp ீ 
 P ீ
-h ா
+
 1 1
 2 2
 3 3
@@ -49,7 +56,6 @@ h ா
 9 9
 0 0
 - -
-~ ~
 ! !
 @ @
 ( (
@@ -58,7 +64,6 @@ _ _
 + +
 { {
 } }
-| |
 ? ?
 / ஃ
 . .
@@ -68,6 +73,8 @@ _ _
 ' '
 : :
 
+h ◌ா
+
 hp ரி
 hP ரீ
 h; ர்
@@ -75,6 +82,7 @@ H ர்
 
 f; க்
 f க
+fh கா
 F கு
 $ கூ
 Fh கூ
@@ -89,6 +97,7 @@ nfs கௌ
 
 q; ங்
 q ங
+qh ஙா
 q{ ஙு
 q_ ஙூ
 q{_ ஙூ
@@ -104,6 +113,7 @@ nqs ஙௌ
 
 r; ச்
 r ச
+rh சா
 R சு
 # சூ
 Rh சூ
@@ -118,6 +128,7 @@ nrh சொ
 
 [; ஜ்
 [ ஜ
+[h ஜா
 [{ ஜு
 [_ ஜூ
 [- ஜு
@@ -131,6 +142,7 @@ n[s ஜௌ
 
 Q; ஞ்
 Q ஞ
+Qh ஞா
 Q{ ஞு
 Q_ ஞூ
 Q{_ ஞூ
@@ -146,6 +158,7 @@ nQs ஞௌ
 
 l; ட்
 l ட
+lh டா
 b டி
 B டீ
 L டு
@@ -162,6 +175,7 @@ Nlh டோ
 
 z; ண்
 z ண
+zh ணா
 Z ணு
 Z} ணூ
 Zh ணூ
@@ -176,6 +190,7 @@ nzs ணௌ
 
 j; த்
 j த
+jh தா
 J து
 J} தூ
 Jh தூ
@@ -190,6 +205,7 @@ njs தௌ
 
 e; ந்
 e ந
+eh நா
 E நு
 E} நூ
 Eh நூ
@@ -204,6 +220,7 @@ nes நௌ
 
 d; ன்
 d ன
+dh னா
 D னு
 Dh னூ
 D} னூ
@@ -218,6 +235,7 @@ nds னௌ
 
 g; ப்
 g ப
+gh பா
 G பு
 Gh பூ
 G+ பூ
@@ -232,6 +250,7 @@ ngs பௌ
 
 k; ம்
 k ம
+kh மா
 K மு
 % மூ
 Kh மூ
@@ -246,6 +265,7 @@ nks மௌ
 
 a; ய்
 a ய
+ah யா
 A யு
 A+ யூ
 Ah யூ
@@ -260,6 +280,7 @@ nas யௌ
 
 u; ர்  
 u ர
+uh ரா
 U ரு
 & ரூ
 Uh ரூ
@@ -274,6 +295,7 @@ nus ரௌ
 
 y; ல்
 y ல
+yh லா
 Y லு
 Y} லூ
 Yh லூ
@@ -288,6 +310,7 @@ nys லௌ
 
 s; ள்
 s ள
+sh ளா
 S ளு
 Sh ளூ
 s- ளு
@@ -301,6 +324,7 @@ nss ளௌ
 
 t; வ்
 t வ
+th வா
 T வு
 T+ வூ
 Th வூ
@@ -315,6 +339,7 @@ nts வௌ
 
 o; ழ்
 o ழ
+oh ழா
 O ழு
 * ழூ
 Oh ழூ
@@ -329,6 +354,7 @@ nos ழௌ
 
 w; ற்
 w ற
+wh றா
 W று
 W} றூ
 Wh றூ
@@ -343,6 +369,7 @@ nwh றொ
 
 `; ஹ்
 ` ஹ
+`h ஹா
 `- ஹு
 `-- ஹூ
 n` ஹெ
@@ -358,6 +385,7 @@ n\h ஷொ
 
 \; ஷ்
 \ ஷ
+\h ஷா
 \- ஷு
 \-- ஷூ
 n\ ஷெ
@@ -369,6 +397,7 @@ n\s ஷௌ
 
 ]; ஸ்
 ] ஸ
+]h ஸா
 ]- ஸு
 ]-- ஸூ
 N] ஸே
@@ -378,7 +407,46 @@ n]h ஸொ
 N]h ஸோ
 n]s ஸௌ
 
-= ஸ்ரீ
+~ 
+~~ ~
+~]; ஶ்
+~] ஶ
+~]h ஶா
+~]- ஶு
+~]-- ஶூ
+N~] ஶே
+n~] ஶெ
+i~] ஶை
+n~]h ஶொ
+N~]h ஶோ
+n~]s ஶௌ
+
+= ஶ்ரீ
+]= ஸ்ரீ
+
+~\; க்ஷ்
+~\ க்ஷ
+~\h க்ஷா
+~\- க்ஷு
+~\-- க்ஷூ
+N~\ க்ஷே
+n~\ க்ஷெ
+i~\ க்ஷை
+n~\h க்ஷொ
+N~\h க்ஷோ
+n~\s க்ஷௌ
+
+f;\; க்‌ஷ்
+f;\ க்‌ஷ
+f;\h க்‌ஷா
+f;\- க்‌ஷு
+f;\-- க்‌ஷூ
+f;n\ க்‌ஷெ
+f;N\ க்‌ஷே
+f;i\ க்‌ஷை
+f;n\h க்‌ஷொ
+f;N\h க்‌ஷோ
+f;n\s க்‌ஷௌ
 
 m அ
 mm ஆ

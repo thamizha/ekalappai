@@ -16,20 +16,24 @@
 ### You should have received a copy of the GNU General Public License version 3
 ### along with eKalappai.  If not, see <http://www.gnu.org/licenses/>.
 ###
-### NAME = Uni-Tamil99-var
-### NAME.ta_IN = யூனி-தமிழ்99-மாறி
+### NAME = Tamil99-var-TAU
+### NAME.ta_IN = தமிழ்99-வேறி-த.ஒ.கு.
 ### AUTHOR = K. Sethu <skhome@gmail.com> 
 ### ***************************************
 ### Author's Note:
 ### This keymap table is written for use with eKalappai - 3.0. 
 ##  The structure of table for eKalappai-3.0 is based on that of scim-tables IME 
-### This keymap was modified from Tamil99 scim-tables authored by Sudhakar U [BOSS(GNU/Linux] Team,C-DAC) 
-### - by removing number of bugs as well as newly including coding for mei-mayakkams (auto-pulli) and
-### extensions and changes for Tamil 99 standard as per the G.O.(Ms)-29 (dated  23.06.2010) of the state government of Tamil Nadu. 
-### The keymap is to very large extent is conformant to current standard as per the G.O.(Ms) 29 of 23.06.2010; and the
-### the few exceptional varaitions will be discussed in http://code.google.com/p/ekalappai/wiki/tamil99_keyboard_details  wherein 
+### This keymap was modified and from Tamil99 scim-tables authored by Sudhakar U [BOSS(GNU/Linux] Team,C-DAC) 
+### - by removing number of bugs in the original table as well as newly including coding for mei-mayakkams (auto-pulli) and
+### including for the extensions and changes for Tamil 99 standard as per the following two documents:
+###
+### G.O.(Ms)-29 (dated  23.06.2010) of the state government of Tamil Nadu.: http://tamilvu.org/coresite/download/Tamil_Unicode_G.O.zip
+### 'TENDER DOCUMENT for Development of Tamil Fonts and Tamil Keyboard driver for 16-bit encodings (Unicode and TACE16)' [Tender Ref. TVA/SW/2010-11] :  http://tamilvu.org/coresite/download/Teder_Document_for_Tamil_fonts_and_kbd_driver.pdf 
+###
+### The keymap is to very large extent is conformant to current standard as per the G.O.(Ms) 29 of 23.06.2010; and any
+### exceptional varaitions will be discussed in http://code.google.com/p/ekalappai/wiki/tamil99_keyboard_details  wherein 
 ### comprehensive information for the keymap usage, issues and  future plans are to be be covered.
-### K. Sethu 30-09-2010
+### K. Sethu 2010.11.01
 ### ************************************
 
 ### Begin Table data.
@@ -80,7 +84,7 @@ x ஓ
 z ஔ
 
 F ஃ
-f  ்
+f ஃ
 
 hf க்
 h க
@@ -622,18 +626,18 @@ L :
 : ;
 " '
 
-^q ா
-^s ி
-^w ீ
-^d ு
-^e ூ
-^f ்
-^g ெ
-^t ே
-^r ை
-^c ொ
-^x ோ
-^z ௌ
+^q ◌ா
+^s ◌ி
+^w ◌ீ
+^d ◌ு
+^e ◌ூ
+^f ◌்
+^g ◌ெ
+^t ◌ே
+^r ◌ை
+^c ◌ொ
+^x ◌ோ
+^z ◌ௌ
 
 ^2 ½
 ^3 ¾
@@ -671,6 +675,37 @@ L :
 ^^. ^.
 ^^C ^C
 
+^# 
+^#0 
+^#1 
+^#2 
+^#3 
+^#4 
+^#5 
+^#6 
+^#7 
+^#8 
+^#9 
+^#10 
+^#100 
+^#1000 
+
+^#0# ௦
+^#1# ௧
+^#2# ௨
+^#3# ௩
+^#4# ௪
+^#5# ௫
+^#6# ௬
+^#7# ௭
+^#8# ௮
+^#9# ௯
+^#10# ௰
+^#100# ௱
+^#1000# ௲
+
+`` `
+
 `0 ௦
 `1 ௧
 `2 ௨
@@ -685,7 +720,6 @@ L :
 `100 ௱
 `1000 ௲
 
-`` `
 ``0 `0
 ``1 `1
 ``2 `2
@@ -699,5 +733,7 @@ L :
 ``10 `10
 ``100 `100
 ``1000 `1000
+
+
 
 END_TABLE
