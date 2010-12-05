@@ -740,4 +740,8 @@ _ _
 . .
 ? ?
 / /
+### Added to take care of nth - note: here nt is also added, since current keyboard engine looks for previous combination to compute number of backspaces. 
+### so we introduce nt to tell the engine to delete ன்ட் before printing ந்த் .
+nt ன்ட்
+nth ந்த் 
 END_TABLE

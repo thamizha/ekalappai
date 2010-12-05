@@ -296,7 +296,8 @@ void Window::loadKeyBoard(){
             line_end = true;
         }
 
-        if ((line_start) && !(line_end)){
+        //if the line is between begin_table & end_table and not a comment, then process that line
+        if ((line_start) && !(line_end) && (line.left(3) != "###")){
             QRegExp sep("\\s+");
             str1 = line.section(sep, 0, 0); // first part
             str2 = line.section(sep, 1, 1) ; // second part            
