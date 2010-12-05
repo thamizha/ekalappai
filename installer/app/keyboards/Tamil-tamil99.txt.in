@@ -33,7 +33,7 @@
 ### The keymap is to very large extent is conformant to current standard as per the G.O.(Ms) 29 of 23.06.2010; and any
 ### exceptional varaitions will be discussed in http://code.google.com/p/ekalappai/wiki/tamil99_keyboard_details  wherein 
 ### comprehensive information for the keymap usage, issues and  future plans are to be be covered.
-### K. Sethu 2010.11.01
+### K. Sethu 2010.11.18
 ### ************************************
 
 ### Begin Table data.
@@ -539,9 +539,6 @@ iuaa ன்றஅ
 'a ய
 'aa யஅ
 
-mm ர்ர
-mmm ர்ரர
-mmmm ர்ரர்ர
 ma ர
 maa ரஅ
 
@@ -557,9 +554,6 @@ vvvv வ்வவ்வ
 va வ
 vaa வஅ
 
-//// ழ்ழழ்ழ
-/// ழ்ழழ
-// ழ்ழ
 /a ழ
 /aa ழஅ
 
@@ -646,7 +640,7 @@ L :
 ^8 ’
 ^9 “
 ^0 ”
-^S ­
+^S  
 ^. •
 ^C ©
 ^^ ^
@@ -734,6 +728,7 @@ L :
 ``100 `100
 ``1000 `1000
 
+`Y ஸ்ரீ
 
 
 END_TABLE
