@@ -37,6 +37,11 @@
 ### comprehensive information for the keymap usage, issues and  future plans are to be be covered.
 ### K. Sethu 2010.11.01
 ### *************************************
+### Update - 2011.03.07
+### Bug Fixes. Bug discussed in the following issue is fixed in this update
+### http://code.google.com/p/ekalappai/issues/detail?id=67
+### K. Sethu 2011.03.07
+### ************************************
 
 ### Begin Table data.
 BEGIN_TABLE
@@ -135,6 +140,7 @@ nlh டோ
 bls டௌ
 
 ;z ண்
+z ண
 zh ணா
 pz ணி
 Pz ணீ

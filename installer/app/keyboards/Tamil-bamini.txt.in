@@ -37,7 +37,12 @@
 ### Issues and other detailed information on the keymap will be covered in a topic for this keymap in the wiki page : http://code.google.com/p/ekalappai/w/list
 ### K. Sethu 2010.11.01
 ### ************************************
-###
+### Update - 2011.03.07
+### Bug Fixes. Bugs discussed in the following two issues are fixed in this update
+### Issue 66 [http://code.google.com/p/ekalappai/issues/detail?id=66]
+### Issue 71 [http://code.google.com/p/ekalappai/issues/detail?id=71]
+### K. Sethu 2011.03.07
+### ************************************
 ### Begin Table data.
 BEGIN_TABLE
 
@@ -86,13 +91,16 @@ fh கா
 F கு
 $ கூ
 Fh கூ
+F+ கூ
 f- கு
 f-- கூ
 nf கெ
+nnf கே
 Nf கே
 if கை
 nfh கொ
 Nfh கோ
+nnfh கோ
 nfs கௌ
 
 q; ங்
@@ -105,10 +113,12 @@ q{h ஙூ
 q- ஙு
 q-- ஙூ
 nq ஙெ
+nnq ஙே
 Nq ஙே
 iq ஙை
 nqh ஙொ
 Nqh ஙோ
+nnqh ஙோ
 nqs ஙௌ
 
 r; ச்
@@ -120,10 +130,12 @@ Rh சூ
 r- சு
 r-- சூ
 nr செ
+nnr சே
 Nr சே
 ir சை
 nrs சௌ
 Nrh சோ
+nnrh சோ
 nrh சொ
 
 [; ஜ்
@@ -135,9 +147,11 @@ nrh சொ
 [-- ஜூ
 n[ ஜெ
 N[ ஜே
+nn[ ஜே
 i[ ஜை
 n[h ஜொ
 N[h ஜோ
+nn[h ஜோ
 n[s ஜௌ
 
 Q; ஞ்
@@ -145,15 +159,16 @@ Q ஞ
 Qh ஞா
 Q{ ஞு
 Q_ ஞூ
-Q{_ ஞூ
 Q{h ஞூ
 Q- ஞு
 Q-- ஞூ
 nQ ஞெ
 NQ ஞே
+nnQ ஞே
 iQ ஞை
 nQh ஞொ
 NQh ஞோ
+nnQh ஞோ
 nQs ஞௌ
 
 l; ட்
@@ -164,14 +179,17 @@ B டீ
 L டு
 ^ டூ
 Lh டூ
+L+ டூ
 l- டு
 l-- டூ
 nl டெ
 Nl டே
+nnl டே
 il டை
 nlh டொ
 nls டௌ
 Nlh டோ
+nnlh டோ
 
 z; ண்
 z ண
@@ -183,9 +201,11 @@ z- ணு
 z-- ணூ
 nz ணெ
 Nz ணே
+nnz ணே
 iz ணை
 nzh ணொ
 Nzh ணோ
+nnzh ணோ
 nzs ணௌ
 
 j; த்
@@ -198,9 +218,11 @@ j- து
 j-- தூ
 nj தெ
 Nj தே
+nnj தே
 ij தை
 njh தொ
 Njh தோ
+nnjh தோ
 njs தௌ
 
 e; ந்
@@ -213,9 +235,11 @@ e- நு
 e-- நூ
 ne நெ
 Ne நே
+nne நே
 ie நை
 neh நொ
 Neh நோ
+nneh நோ
 nes நௌ
 
 d; ன்
@@ -228,9 +252,11 @@ d- னு
 d-- னூ
 nd னெ
 Nd னே
+nnd னே
 id னை
 ndh னொ
 Ndh னோ
+nndh னோ
 nds னௌ
 
 g; ப்
@@ -243,9 +269,11 @@ g- பு
 g-- பூ
 ng பெ
 Ng பே
+nng பே
 ig பை
 ngh பொ
 Ngh போ
+nngh போ
 ngs பௌ
 
 k; ம்
@@ -254,13 +282,16 @@ kh மா
 K மு
 % மூ
 Kh மூ
+K+ மூ
 k- மு
 k-- மூ
 nk மெ
 Nk மே
+nnk மே
 ik மை
 nkh மொ
 Nkh மோ
+nnkh மோ
 nks மௌ
 
 a; ய்
@@ -273,9 +304,11 @@ a- யு
 a-- யூ
 na யெ
 Na யே
+nna யே
 ia யை
 nah யொ 
 Nah யோ
+nnah யோ
 nas யௌ
 
 u; ர்  
@@ -284,13 +317,16 @@ uh ரா
 U ரு
 & ரூ
 Uh ரூ
+U+ ரூ
 u- ரு
 u-- ரூ
 nu ரெ
 Nu ரே
+nnu ரே
 iu ரை
 nuh ரொ
 Nuh ரோ
+nnuh ரோ
 nus ரௌ
 
 y; ல்
@@ -303,9 +339,11 @@ y- லு
 y-- லூ
 ny லெ
 Ny லே
+nny லே
 iy லை
 nyh லொ
 Nyh லோ
+nnyh லோ
 nys லௌ
 
 s; ள்
@@ -313,13 +351,16 @@ s ள
 sh ளா
 S ளு
 Sh ளூ
+S+ ளூ
 s- ளு
 s-- ளூ
 ns ளெ
 Ns ளே
+nns ளே
 is ளை
 nsh ளொ
 Nsh ளோ
+nnsh ளோ
 nss ளௌ
 
 t; வ்
@@ -332,9 +373,11 @@ t- வு
 t-- வூ
 nt வெ
 Nt வே
+nnt வே
 it வை
 nth வொ
 Nth வோ
+nnth வோ
 nts வௌ
 
 o; ழ்
@@ -343,13 +386,16 @@ oh ழா
 O ழு
 * ழூ
 Oh ழூ
+O+ ழூ
 o- ழு
 o-- ழூ
 no ழெ
 No ழே
+nno ழே
 io ழை
 noh ழொ
 Noh ழோ
+nnoh ழோ
 nos ழௌ
 
 w; ற்
@@ -362,9 +408,11 @@ w- று
 w-- றூ
 nw றெ
 Nw றே
+nnw றே
 iw றை
 nws றௌ
 Nwh றோ
+nnwh றோ
 nwh றொ
 
 `; ஹ்
@@ -374,14 +422,12 @@ nwh றொ
 `-- ஹூ
 n` ஹெ
 N` ஹே
+nn` ஹே
 i` ஹை
 n`h ஹொ
 N`h ஹோ
+nn`h ஹோ
 n`s ஹௌ
-
-n\s ஷௌ
-N\h ஷோ
-n\h ஷொ
 
 \; ஷ்
 \ ஷ
@@ -390,9 +436,11 @@ n\h ஷொ
 \-- ஷூ
 n\ ஷெ
 N\ ஷே
+nn\ ஷே
 i\ ஷை
 n\h ஷொ
 N\h ஷோ
+nn\h ஷோ
 n\s ஷௌ
 
 ]; ஸ்
@@ -401,10 +449,12 @@ n\s ஷௌ
 ]- ஸு
 ]-- ஸூ
 N] ஸே
+nn] ஸே
 n] ஸெ
 i] ஸை
 n]h ஸொ
 N]h ஸோ
+nn]h ஸோ
 n]s ஸௌ
 
 ~ 
@@ -415,10 +465,12 @@ n]s ஸௌ
 ~]- ஶு
 ~]-- ஶூ
 N~] ஶே
+nn~] ஶே
 n~] ஶெ
 i~] ஶை
 n~]h ஶொ
 N~]h ஶோ
+nn~]h ஶோ
 n~]s ஶௌ
 
 = ஶ்ரீ
@@ -430,10 +482,12 @@ n~]s ஶௌ
 ~\- க்ஷு
 ~\-- க்ஷூ
 N~\ க்ஷே
+nn~\ க்ஷே
 n~\ க்ஷெ
 i~\ க்ஷை
 n~\h க்ஷொ
 N~\h க்ஷோ
+nn~\h க்ஷோ
 n~\s க்ஷௌ
 
 f;\; க்‌ஷ்
@@ -443,9 +497,11 @@ f;\- க்‌ஷு
 f;\-- க்‌ஷூ
 f;n\ க்‌ஷெ
 f;N\ க்‌ஷே
+f;nn\ க்‌ஷே
 f;i\ க்‌ஷை
 f;n\h க்‌ஷொ
 f;N\h க்‌ஷோ
+f;nn\h க்‌ஷோ
 f;n\s க்‌ஷௌ
 
 m அ
@@ -759,6 +815,204 @@ n]hp ஸெரி
 n]hpp ஸெரீ
 n]hP ஸெரீ
 
+nnfs கேள
+nnfs; கேள்
+nnfsh கேளா
+nnfsp கேளி
+nnfspp கேளீ
+nnfsP கேளீ
+nnfs- கேளு
+nnfs-- கேழூ
+
+nnqs ஙேள
+nnqs; ஙேள்
+nnqsh ஙேளா
+nnqsp ஙேளி
+nnqspp ஙேளீ
+nnqsP ஙேளீ
+nnqs- ஙேளு
+nnqs-- ஙேளூ
+
+nnrs சேள
+nnrs; சேள்
+nnrsh சேளா
+nnrsp சேளி
+nnrspp சேளீ
+nnrsP சேளீ
+nnrs- சேளு
+nnrs-- சேளூ
+
+nn[s ஜேள
+nn[s; ஜேள்
+nn[sh ஜேளா
+nn[sp ஜேளி
+nn[spp ஜேளீ
+nn[sP ஜேளீ
+nn[s- ஜேளு
+nn[s-- ஜேளூ
+
+nnQs ஞேள
+nnQs; ஞேள்
+nnQsh ஞேளா 
+nnQsp ஞேளி
+nnQspp ஞேளீ
+nnQsP ஞேளீ
+nnQs- ஞேளு
+nnQs-- ஞேளூ
+
+nnls டேள
+nnls; டேள்
+nnlsh டேளா
+nnlsp டேளி
+nnlspp டேளீ
+nnlsP டேளீ
+nnls- டேளு
+nnls-- டேளூ
+
+nnzs ணேள
+nnzs; ணேள்
+nnzsh ணேளா
+nnzsp ணேளி
+nnzspp ணேளீ
+nnzsP ணேளீ
+nnzs- ணேளு
+nnzs-- ணேளூ
+
+nnjs தேள
+nnjs; தேள்
+nnjsh தேளா
+nnjsp தேளி
+nnjspp தேளீ
+nnjsP தேளீ
+nnjs- தேளு
+nnjs-- தேளூ
+
+nnes நேள
+nnes; நேள்
+nnesh நேளா
+nnesp நேளி
+nnespp நேளீ
+nnesP நேளீ
+nnes- நேளு
+nnes-- நேளூ
+
+nnds னேள
+nnds; னேள்
+nndsh னேளா
+nndsp னேளி
+nndspp னேளீ
+nndsP னேளீ
+nnds- னேளு
+nnds-- னேளூ
+
+nngs பேள
+nngs; பேள்
+nngsh பேளா
+nngsp பேளி
+nngspp பேளீ
+nngsP பேளீ
+nngs- பேளு
+nngs-- பேளூ
+
+nnks மேள
+nnks; மேள்
+nnksh மேளா
+nnksp மேளி
+nnkspp மேளீ
+nnksP மேளீ
+nnks- மேளு
+nnks-- மேளூ
+
+nnas யேள
+nnas; யேள்
+nnash யேளா
+nnasp யேளி
+nnaspp யேளீ
+nnasP யேளீ
+nnas- யேளு
+nnsa-- யேளூ
+
+nnus ரேள
+nnus; ரேள்
+nnush ரேளா  
+nnusp ரேளி
+nnuspp ரேளீ
+nnusP ரேளீ
+nnus- ரேளு
+nnus-- ரேளூ
+
+nnys லேள
+nnys; லேள்
+nnysh லேளா
+nnysp லேளி
+nnyspp லேளீ
+nnysP லேளீ
+nnys- லேளு
+nnys-- லேளூ
+
+nnss ளேள
+nnss; ளேள்
+nnssh ளேளா
+nnssp ளேளி
+nnsspp ளேளீ
+nnssP ளேளீ
+nnss- ளேளு
+nnss-- ளேளூ
+
+nnts வேள
+nnts; வேள்
+nntsh வேளா
+nntsp வேளி
+nntspp வேளீ
+nntsP வேளீ
+nnts- வேளு
+nnts-- வேளூ
+
+nnos ழேள
+nnos; ழேள்
+nnosh ழேளா
+nnosp ழேளி
+nnospp ழேளீ
+nnosP ழேளீ
+nnos- ழேளு
+nnos-- ழேளூ
+
+nnws றேள
+nnws; றேள்
+nnwsh றேளா
+nnwsp றேளி
+nnwspp றேளீ
+nnwsP றேளீ
+nnws- றேளு
+nnws-- றேளூ
+
+nn`s ஹேள
+nn`s; ஹேள்
+nn`sh ஹேளா
+nn`sp ஹேளி
+nn`spp ஹேளீ
+nn`sP ஹேளீ
+nn`s- ஹேளு
+nn`s-- ஹேளூ
+
+nn\s ஷேள
+nn\s; ஷேள்
+nn\sh ஷேளா
+nn\sp ஷேளி
+nn\spp ஷேளீ
+nn\sP ஷேளீ
+nn\s- ஷேளு
+nn\s-- ஷேளூ
+
+nn]s ஸேள
+nn]s; ஸேள்
+nn]sh ஸேளா
+nn]sp ஸேளி
+nn]spp ஸேளீ
+nn]sP ஸேளீ
+nn]- ஸேளு
+nn]-- ஸேளூ
+
 Nfh; கேர்
 Nfhp கேரி
 Nfhpp கேரீ
@@ -866,99 +1120,286 @@ N]hp ஸேரி
 N]hpp ஸேரீ
 N]hP ஸேரீ
 
+nnfh; கேர்
+nnfhp கேரி
+nnfhpp கேரீ
+nnfhP கேரீ
+
+nnqh; ஙேர்
+nnqhp ஙேரி
+nnqhpp ஙேரீ
+nnqhP ஙேரீ
+
+nnrh; சேர்
+nnrhp சேரி
+nnrhpp சேரீ
+nnrhP சேரீ
+
+nn[h; ஜேர்
+nn[hp ஜேரி
+nn[hpp ஜேரீ
+nn[hP ஜேரீ
+
+nnQh; ஞேர்
+nnQhp ஞேரி
+nnQhpp ஞேரீ
+nnQhP ஞேரீ
+
+nnlh; டேர்
+nnlhp டேரி
+nnlhpp டேரீ
+nnlhP டேரீ
+
+nnzh; ணேர் 
+nnzhp ணேரி
+nnzhpp ணேரீ
+nnzhP ணேரீ
+
+nnjh; தேர்
+nnjhp தேரி
+nnjhpp தேரீ
+nnjhP தேரீ
+
+nneh; நேர்
+nnehp நேரி
+nnehP நேரீ
+
+nndh; னேர்
+nndhp னேரி
+nndhP னேரீ
+
+nngh; பேர்
+nnghp பேரி
+nnghpp பேரீ
+nnghP பேரீ
+
+nnkh; மேர்
+nnkhp மேரி
+nnkhP மேரீ
+
+nnah; யேர்
+nnahp யேரி
+nnahpp யேரீ
+nnahP யேரீ
+
+nnuh; ரேர்
+nnuhp ரேரி
+nnuhpp ரேரீ
+nnuhP ரேரீ
+
+nnyh; லேர்
+nnyhp லேரி
+nnyhpp லேரீ
+nnyhP லேரீ
+
+nnsh; ளேர்
+nnshp ளேரி
+nnshpp ளேரீ
+nnshP ளேரீ
+
+nnth; வேர்
+nnthp வேரி
+nnthpp வேரீ
+nnthP வேரீ
+
+nnoh; ழேர்
+nnohp ழேரி
+nnohpp ழேரீ
+nnohP ழேரீ
+
+nnwh; றேர்
+nnwhp றேரி
+nnwhpp றேரீ
+nnwhP றேரீ
+
+nn`h; ஹேர்
+nn`hp ஹேரி
+nn`hpp ஹேரீ
+nn`hP ஹேரீ
+
+nn\h; ஷேர்
+nn\hp ஷேரி
+nn\hpp ஷேரீ
+nn\hP ஷேரீ
+
+nn]h; ஸேர்
+nn]hp ஸேரி
+nn]hpp ஸேரீ
+nn]hP ஸேரீ
+
+fh; கர்
+fhp கரி
+fhpp கரீ
+fhP கரீ
+
+qh; ஙர்
+qhp ஙரி
+qhpp ஙரீ
+qhP ஙரீ
+
+rh; சர்
+rhp சரி
+rhpp சரீ
+rhP சரீ
+
+[h; ஜர்
+[hp ஜரி
+[hpp ஜரீ
+[hP ஜரீ
+
+Qh; ஞர்
+Qhp ஞரி
+Qhpp ஞரீ
+QhP ஞரீ
+
+lh; டர்
+lhp டரி
+lhpp டரீ
+lhP டரீ
+
+zh; ணர்
+zhp ணரி
+zhpp ணரீ
+zhP ணரீ
+
+jh; தர்
+jhp தரி
+jhpp தரீ
+jhP தரீ
+
+eh; நர்
+ehp நரி
+ehpp நரீ
+ehP நரீ
+
+dh; னர்
+dhp னரி
+dhpp னரீ
+dhP னரீ
+
+gh; பர்
+ghp பரி
+ghpp பரீ
+ghP பரீ
+
+kh; மர்
+khp மரி
+khpp மரீ
+khP மரீ
+
+ah; யர்
+ahp யரி
+ahpp யரீ
+ahP யரீ
+
+uh; ரர்
+uhp ரரி
+uhpp ரரீ
+uhP ரரீ
+
+yh; லர்
+yhp லரி
+yhpp லரீ
+yhP லரீ
+
+sh; ளர்
+shp ளரி
+shpp ளரீ
+shP ளரீ
+
+th; வர்
+thp வரி
+thpp வரீ
+thP வரீ
+
+oh; ழர்
+ohp ழரி
+ohpp ழரீ
+ohP ழரீ
+
+wh; றர்
+whp றரி
+whpp றரீ
+whP றரீ
+
 Fh; குர்
 Fhp குரி
 Fhpp குரீ
 FhP குரீ
 
-qh; ஙுர்
-qhp ஙுரி
-qhpp ஙுரீ
-qhP ஙுரீ
+Rh; சுர்
+Rhp சுரி
+Rhpp சுரீ
+RhP சுரீ
 
-rh; சுர்
-rhp சுரி
-rhpp சுரீ
-rhP சுரீ
+Lh; டுர்
+Lhp டுரி
+Lhpp டுரீ
+LhP டுரீ
 
-[h; ஜுர்
-[hp ஜுரி
-[hpp ஜுரீ
-[hP ஜுரீ
+Zh; ணுர்
+Zhp ணுரி
+Zhpp ணுரீ
+ZhP ணுரீ
 
-Qh; ஞுர்
-Qhp ஞுரி
-Qhpp ஞுரீ
-QhP ஞுரீ
+Jh; துர்
+Jhp துரி
+Jhpp துரீ
+JhP துரீ
 
-lh; டுர்
-lhp டுரி
-lhpp டுரீ
-lhP டுரீ
+Eh; நுர்
+Ehp நுரி
+Ehpp நுரீ
+EhP நுரீ
 
-zh; ணுர்
-zhp ணுரி
-zhpp ணுரீ
-zhP ணுரீ
+Dh; னுர்
+Dhp னுரி
+Dhpp னுரீ
+DhP னுரீ
 
-jh; துர்
-jhp துரி
-jhpp துரீ
-jhP துரீ
+Gh; புர்
+Ghp புரி
+Ghpp புரீ
+GhP புரீ
 
-eh; நுர்
-ehp நுரி
-ehpp நுரீ
-ehP நுரீ
+Kh; முர்
+Khp முரி
+Khpp முரீ
+KhP முரீ
 
-dh; னுர்
-dhp னுரி
-dhpp னுரீ
-dhP னுரீ
+Ah; யுர்
+Ahp யுரி
+Ahpp யுரீ
+AhP யுரீ
 
-gh; புர்
-ghp புரி
-ghpp புரீ
-ghP புரீ
+Uh; ருர்
+Uhp ருரி
+Uhpp ருரீ
+UhP ருரீ
 
-kh; முர்
-khp முரி
-khpp முரீ
-khP முரீ
+Yh; லுர்
+Yhp லுரி
+Yhpp லுரீ
+YhP லுரீ
 
-ah; யுர்
-ahp யுரி
-ahpp யுரீ
-ahP யுரீ
+Sh; ளுர்
+Shp ளுரி
+Shpp ளுரீ
+ShP ளுரீ
 
-uh; ருர்
-uhp ருரி
-uhpp ருரீ
-uhP ருரீ
+Th; வுர்
+Thp வுரி
+Thpp வுரீ
+ThP வுரீ
 
-yh; லுர்
-yhp லுரி
-yhpp லுரீ
-yhP லுரீ
+Oh; ழுர்
+Ohp ழுரி
+Ohpp ழுரீ
+OhP ழுரீ
 
-sh; ளுர்
-shp ளுரி
-shpp ளுரீ
-shP ளுரீ
-
-th; வுர்
-thp வுரி
-thpp வுரீ
-thP வுரீ
-
-oh; ழுர்
-ohp ழுரி
-ohpp ழுரீ
-ohP ழுரீ
-
-wh; றுர்
-whp றுரி
-whpp றுரீ
-whP றுரீ
+Wh; றுர்
+Whp றுரி
+Whpp றுரீ
+WhP றுரீ
 
 END_TABLE
