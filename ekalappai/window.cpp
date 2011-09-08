@@ -364,10 +364,11 @@ void Window::showTrayMessage(int index)
 {
     QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::MessageIcon(0);
 
-    QString message;
+   //this system messages proves to be more annoyance than benefit so hiding it
+   // QString message;
+   // message = iconComboBox->itemText(index)+ " set";
+   // trayIcon->showMessage("eKalappai 3.0",message, icon, 100);
 
-    message = iconComboBox->itemText(index)+ " set";
-    trayIcon->showMessage("eKalappai 3.0",message, icon, 100);
 }
 
 void Window::createIconGroupBox()
