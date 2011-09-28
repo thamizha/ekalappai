@@ -1,0 +1,12 @@
+﻿ஆங்கிலமல்லாத மொழிகளின் எழுத்துக்களை தட்டச்சுவதற்காக எ-கலப்பை மென்பொருள் உருவாக்கப்படுகிறது. இதன் முந்தைய பதிப்புகள் கீமேன் என்ற மென்பொருளினை அடிப்படையாகக் கொண்டு உருவாக்கப்பட்டது. தற்போதைய 3.0 பதிப்பு முழுவதும் கட்டற்ற மென்பொருளாக புதியதாக உருவாக்கப்பட்டுள்ளது.
+
+இதை லினக்ஸ், விண்டோஸ், மேக் மற்றும் சிம்பியன் இயங்குதளங்களுக்கு ஏற்ப வடிவமைக்கத் திட்டமிட்டுள்ளோம். ஆர்வமுள்ள நண்பர்கள் இத்திட்டத்தில் கலந்துகொள்ள அழைக்கிறோம். 
+
+Aim of this project is to create an opensource keyboard manager to type non-english languages.
+
+eKalappai uses popular scim-table format for handling the keyboards.
+As of now ekalappai supports only tamil typing, we plan to support other languages soon.
+
+If you are a C++ programmer and want to join this project, please email one of the team members.
+
+- Thamizha Team
