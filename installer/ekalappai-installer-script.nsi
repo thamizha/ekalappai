@@ -1,7 +1,21 @@
 #eKalappai installer creation script
 
 Name "eKalappai"
-OutFile "eKalappai-3.0.1-installer.exe"
+
+!define VERSION "3.1-dev"
+!define PUBLISHER "ThamiZha! community - thamizha.com"
+
+OutFile "eKalappai-${VERSION}-installer.exe"
+
+#Installer's VersionInfo
+  VIProductVersion                   "3.0.1.0"
+  VIAddVersionKey "CompanyName"      "${PUBLISHER}"
+  VIAddVersionKey "ProductName"      "eKalappai" 
+  VIAddVersionKey "ProductVersion"   "${VERSION}"
+  VIAddVersionKey "FileDescription"  "eKalappai windows installer"
+  VIAddVersionKey "FileVersion"      "${VERSION}"
+  VIAddVersionKey "LegalCopyright"   "${PUBLISHER}"
+  VIAddVersionKey "OriginalFilename" "eKalappai-${VERSION}-installer.exe"
 
 RequestExecutionLevel admin
 
@@ -14,6 +28,7 @@ InstallDirRegKey HKEY_LOCAL_MACHINE "SOFTWARE\eKalappai" ""
 DirText "Select the directory to install eKalappai in:"
 
 Section "" ; (default section)
+
 SetShellVarContext all
 SetOutPath "$INSTDIR"
 
@@ -49,7 +64,7 @@ createShortCut "$DESKTOP\eKalappai.lnk" "$INSTDIR\ekalappai.exe"
 #Open an output file called "install.log" on the install directory and write installation info on it when the installation happens.
 fileOpen $0 "$INSTDIR\install.log" w
  
-fileWrite $0 "Installed version: 3.0.1$\r$\n"
+fileWrite $0 "Installed version: ${VERSION}$\r$\n"
 fileWrite $0 "Installed Date: $\r$\n"
  
 #Close the file
@@ -97,7 +112,7 @@ SectionEnd ; end of uninstall section
 
 /* Replace the values of the two defines below to your application's window class and window title, respectivelly. */
 !define WNDCLASS "QWidget"
-!define WNDTITLE "eKalappai 3.0.1"
+!define WNDTITLE "eKalappai ${VERSION}"
  
 Function un.onInit
   FindWindow $0 "${WNDCLASS}" "${WNDTITLE}"

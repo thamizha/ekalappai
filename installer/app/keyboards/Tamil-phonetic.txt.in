@@ -37,6 +37,9 @@
 ### For more detailed and other information see : http://code.google.com/p/ekalappai/wiki/phonetic_layout_details (content creation pending)
 ### Notes written by : K. Sethu 2010.11.01
 ### ***************************************
+### ### b-> ப் ;  g->க் ; included - for bug issues 65 [ http://code.google.com/p/ekalappai/issues/detail?id=65 ] and 74 [ http://code.google.com/p/ekalappai/issues/detail?id=74 ]  
+### K. Sethu 2011.09.14
+### **************************************
 
 ### Begin Table data.
 BEGIN_TABLE
@@ -77,6 +80,25 @@ ko கொ
 koo கோ
 kO கோ
 kau கௌ
+
+g க்
+ga க
+gaa கா
+gA கா
+gi கி
+gii கீ
+gI கீ
+gu கு
+guu கூ
+gU கூ
+ge கெ
+gee கே
+gE கே
+gai கை
+go கொ
+goo கோ
+gO கோ
+gau கௌ
 
 ng ங்
 nga ங
@@ -286,6 +308,44 @@ po பொ
 poo போ
 pO போ
 pau பௌ
+
+p ப்
+pa ப
+paa பா
+pA பா
+pi பி
+pii பீ
+pI பீ
+pu பு
+puu பூ
+pU பூ
+pe பெ
+pee பே
+pE பே
+pai பை
+po பொ
+poo போ
+pO போ
+pau பௌ
+
+b ப்
+ba ப
+baa பா
+bA பா
+bi பி
+bii பீ
+bI பீ
+bu பு
+buu பூ
+bU பூ
+be பெ
+bee பே
+bE பே
+bai பை
+bo பொ
+boo போ
+bO போ
+bau பௌ
 
 f ஃப்
 fa ஃப
@@ -741,7 +801,7 @@ _ _
 ? ?
 / /
 ### Added to take care of nth - note: here nt is also added, since current keyboard engine looks for previous combination to compute number of backspaces. 
-### so we introduce nt to tell the engine to delete ன்ட் before printing ந்த் .
+### so we introduce nt to tell the engine to delete ன்ட் before printing 
 nt ன்ட்
 nth ந்த் 
 END_TABLE
