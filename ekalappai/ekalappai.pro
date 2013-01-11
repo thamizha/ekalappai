@@ -3,6 +3,7 @@ SOURCES = main.cpp \
     window.cpp
 RESOURCES = ekalappai.qrc
 QT += xml \
-    svg
+    svg \
+    widgets
 OTHER_FILES += ekalappai.rc
 RC_FILE = ekalappai.rc

@@ -18,6 +18,7 @@
 */
 
 #include <QtGui>
+#include <QtWidgets>
 
 #include "window.h"
 #include <windows.h>

@@ -18,6 +18,7 @@
 */
 
 #include <QtGui>
+#include <QtWidgets>
 #include "window.h"
 
 //#define _WIN32_WINNT 0x0500
@@ -491,7 +492,7 @@ void Window::callHook(int kb_index){
     current_keyboard = kb_index;
 
     if ( myFunction ) {
-        hkb = myFunction(GetModuleHandle(0),keyboard_enabled, this->winId());
+        hkb = myFunction(GetModuleHandle(0),keyboard_enabled, (HWND)this->winId());
     }
 }
 
