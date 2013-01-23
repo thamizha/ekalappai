@@ -35,8 +35,6 @@ SetOutPath "$INSTDIR"
 #Installed files list
 File  "app\ekalappai.exe"
 File  "app\ekhook.dll"
-File  "app\libgcc_s_dw2-1.dll"
-File  "app\mingwm10.dll"
 File  "app\QtCore4.dll"
 File  "app\QtGui4.dll"
 File  "app\eksettings.ini"
@@ -49,6 +47,9 @@ SetOutPath "$INSTDIR"
 WriteRegStr HKEY_LOCAL_MACHINE "SOFTWARE\eKalappai" "" "$INSTDIR"
 WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Uninstall\eKalappai" "DisplayName" "eKalappai (remove only)"
 WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Uninstall\eKalappai" "UninstallString" '"$INSTDIR\ekuninstall.exe"'
+
+#autorun with windows registry entry
+WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Run" "eKalappai" "$INSTDIR\eKalappai.exe"
 
 #write out uninstaller
 WriteUninstaller "$INSTDIR\ekuninstall.exe"
@@ -83,8 +84,6 @@ SetShellVarContext all
 Delete "$INSTDIR\ekuninstall.exe"
 Delete "$INSTDIR\ekalappai.exe"
 Delete "$INSTDIR\ekhook.dll"
-Delete "$INSTDIR\libgcc_s_dw2-1.dll"
-Delete "$INSTDIR\mingwm10.dll"
 Delete "$INSTDIR\QtCore4.dll"
 Delete "$INSTDIR\QtGui4.dll"
 Delete "$INSTDIR\install.log"
@@ -106,6 +105,8 @@ Delete "$DESKTOP\eKalappai.lnk"
 #Delete registry keys
 DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\eKalappai"
 DeleteRegKey HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\eKalappai"
+DeleteRegValue HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Windows\CurrentVersion\Run" "eKalappai"
+
 RMDir "$INSTDIR"
 SectionEnd ; end of uninstall section
 

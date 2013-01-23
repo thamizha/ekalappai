@@ -18,7 +18,6 @@
 */
 #ifndef WINDOW_H
 #define WINDOW_H
-#define NOMINMAX
 
 #include <QSystemTrayIcon>
 #include <QDialog>

@@ -18,11 +18,10 @@
 */
 
 #include <QtGui>
-#include <QtWidgets>
 #include "window.h"
 
 //#define _WIN32_WINNT 0x0500
-#define WINVER 0x0400
+//#define WINVER 0x0400
 
 #include <winuser.h>
 
@@ -35,6 +34,9 @@ using namespace std;
 
 Window::Window()
 {
+    //set current path of app to the executable path.
+    QDir::setCurrent(qApp->applicationDirPath());
+
     //load ekalappai hook dll
     myLib = new QLibrary( "ekhook.dll" );
 
@@ -321,7 +323,7 @@ void Window::changeKeyboard(int index)
 
     //logic to start a keyboard hook or remove keyboard hook based on the keyboard choosen
     callHook(index);
-    showTrayMessage(index);
+    //showTrayMessage(index);
     loadKeyBoard();
 }
 
@@ -366,9 +368,9 @@ void Window::showTrayMessage(int index)
     QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::MessageIcon(0);
 
    //this system messages proves to be more annoyance than benefit so hiding it
-   // QString message;
-   // message = iconComboBox->itemText(index)+ " set";
-   // trayIcon->showMessage("eKalappai 3.0",message, icon, 100);
+    QString message;
+    message = iconComboBox->itemText(index)+ " set";
+    trayIcon->showMessage("eKalappai 3.0",message, icon, 100);
 
 }
 
@@ -492,7 +494,8 @@ void Window::callHook(int kb_index){
     current_keyboard = kb_index;
 
     if ( myFunction ) {
-        hkb = myFunction(GetModuleHandle(0),keyboard_enabled, (HWND)this->winId());
+        qDebug() << "inside myfunction";
+        hkb = myFunction(GetModuleHandle(0),keyboard_enabled, this->winId());
     }
 }
 
