@@ -69,7 +69,16 @@ Window::Window()
     prev_unicode_character_length = 0;
     current_unicode_character_length = 0;
 
-    settings = new QSettings( "eksettings.ini", QSettings::IniFormat );
+    //windows specific code #TOFIX
+    QString settings_file_path =  qgetenv("APPDATA") + "\\" + qApp->applicationName() + "\\eksettings.ini" ;
+    //qDebug() << settings_file_path;
+
+    //if settings ini file doesnt exist in appdata folder for the user, copy that from programfiles.
+    if(!QFile(settings_file_path).exists()){
+        QFile(qApp->applicationDirPath()+"\\eksettings.ini" ).copy(settings_file_path);
+    }
+
+    settings = new QSettings( settings_file_path, QSettings::IniFormat );
 
     shortcut_modifier_key = settings->value("shortcut_modifier").toString();
     short_cut_key = settings->value("shortcut").toString();
@@ -494,7 +503,7 @@ void Window::callHook(int kb_index){
     current_keyboard = kb_index;
 
     if ( myFunction ) {
-        qDebug() << "inside myfunction";
+        //qDebug() << "inside myfunction";
         hkb = myFunction(GetModuleHandle(0),keyboard_enabled, this->winId());
     }
 }

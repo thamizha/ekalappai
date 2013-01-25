@@ -29,6 +29,9 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv);
 
+    app.setApplicationName("eKalappai");
+    app.setApplicationVersion("3.1");
+
     QPixmap pix(":/images/intro.png");
 
     QSplashScreen splash(pix);

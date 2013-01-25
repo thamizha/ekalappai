@@ -24,6 +24,7 @@
 #include <windows.h>
 #include <QMap>
 
+
 QT_BEGIN_NAMESPACE
 class QAction;
 class QCheckBox;
