@@ -78,15 +78,16 @@ Window::Window()
         QFile(qApp->applicationDirPath()+"\\eksettings.ini" ).copy(settings_file_path);
     }
 
-    settings = new QSettings( settings_file_path, QSettings::IniFormat );
+    ini_settings = new QSettings( settings_file_path, QSettings::IniFormat );
+    registry_settings = new QSettings( "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat );
 
-    shortcut_modifier_key = settings->value("shortcut_modifier").toString();
-    short_cut_key = settings->value("shortcut").toString();
+    shortcut_modifier_key = ini_settings->value("shortcut_modifier").toString();
+    short_cut_key = ini_settings->value("shortcut").toString();
     short_cut_key_hex = 0x0;
-    selected_keyboard = settings->value("selected_keyboard").toInt();
+    selected_keyboard = ini_settings->value("selected_keyboard").toInt();
 
-    createIconGroupBox();
-    createShortcutGroupBox();
+    createSettingsGroupBoxes();
+
 
     // call set shortcut2 function so that the short_cut_key_hex value is populated as per the ini settings
     setShortcut2(0);
@@ -106,9 +107,13 @@ Window::Window()
     connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
             this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
 
+    connect(checkboxStartWithWindows, SIGNAL(stateChanged(int)),
+            this, SLOT(checkboxStartWithWindows_ticked()));
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(iconGroupBox);
     mainLayout->addWidget(shortcutGroupBox);
+    mainLayout->addWidget(otherSettingsGroupBox);
     setLayout(mainLayout);
 
     iconComboBox->setCurrentIndex(selected_keyboard);
@@ -153,7 +158,7 @@ bool Window::winEvent( MSG* message, long* result )
 // This function is called when the shortcut modifier combo is changed
 void Window::setShortcut1(int index)
 {
-    settings->setValue("shortcut_modifier", shortcutComboBox1->currentText());
+    ini_settings->setValue("shortcut_modifier", shortcutComboBox1->currentText());
 
     //if none is selected, the allowed single key shortcuts should change
     if(index == 0){
@@ -189,7 +194,7 @@ void Window::setShortcut1(int index)
 void Window::setShortcut2(int index)
 {
     short_cut_key =   shortcutComboBox2->currentText();
-    settings->setValue("shortcut", short_cut_key);
+    ini_settings->setValue("shortcut", short_cut_key);
 
     if (short_cut_key == "ESC"){
         short_cut_key_hex = 0x1B;
@@ -383,7 +388,7 @@ void Window::showTrayMessage(int index)
 
 }
 
-void Window::createIconGroupBox()
+void Window::createSettingsGroupBoxes()
 {
     iconGroupBox = new QGroupBox(tr("Keyboards"));
 
@@ -402,10 +407,7 @@ void Window::createIconGroupBox()
     iconLayout->addWidget(iconComboBox);
     iconLayout->addStretch();
     iconGroupBox->setLayout(iconLayout);
-}
 
-void Window::createShortcutGroupBox()
-{
     shortcutGroupBox = new QGroupBox(tr("Shortcut Setting"));
 
     shortcutLabel1 = new QLabel("Modifier Key:");
@@ -457,7 +459,28 @@ void Window::createShortcutGroupBox()
     shortcutLayout->addWidget(shortcutComboBox2);
     shortcutLayout->addStretch();
     shortcutGroupBox->setLayout(shortcutLayout);
+
+
+    //start ekalappai with windows tickbox is placed in other settings group box
+    otherSettingsGroupBox = new QGroupBox(tr("Other Settings"));
+
+    checkboxStartWithWindows_label = new QLabel("Start eKalappai whenever windows starts");
+    checkboxStartWithWindows = new QCheckBox;
+
+    //if registry entry for auto start with windows for the current user exists, then check the checkbox
+    if(registry_settings->contains(qApp->applicationName())){
+        checkboxStartWithWindows->setChecked(true);
+    } else {
+        checkboxStartWithWindows->setChecked(false);
+    }
+
+    QHBoxLayout *otherSettingsLayout = new QHBoxLayout;
+    otherSettingsLayout->addWidget(checkboxStartWithWindows_label);
+    otherSettingsLayout->addWidget(checkboxStartWithWindows);
+    otherSettingsLayout->addStretch();
+    otherSettingsGroupBox->setLayout(otherSettingsLayout);
 }
+
 
 void Window::createActions()
 {
@@ -496,7 +519,7 @@ void Window::callHook(int kb_index){
     else {
         keyboard_enabled = true;
         selected_keyboard = kb_index;
-        settings->setValue("selected_keyboard", selected_keyboard);
+        ini_settings->setValue("selected_keyboard", selected_keyboard);
     }
 
     myFunction = (MyPrototype) myLib->resolve( "Init_nokeyboard" );
@@ -673,6 +696,18 @@ void Window::implementKeyboardLogic(){
         }
          return;
 }
+}
+
+
+//Function to add or disable registry entry to auto start ekalappai with windows for the current users
+void Window::checkboxStartWithWindows_ticked()
+{
+    if(checkboxStartWithWindows->isChecked()){
+        registry_settings->setValue(qApp->applicationName(),QDir::toNativeSeparators(qApp->applicationFilePath()));
+    }
+    else {
+        registry_settings->remove(qApp->applicationName());
+    }
 }
 
 //Helper functions//

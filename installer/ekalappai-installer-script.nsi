@@ -8,7 +8,7 @@ Name "eKalappai"
 OutFile "eKalappai-${VERSION}-installer.exe"
 
 #Installer's VersionInfo
-  VIProductVersion                   "3.0.1.0"
+  VIProductVersion                   "3.1.0.0"
   VIAddVersionKey "CompanyName"      "${PUBLISHER}"
   VIAddVersionKey "ProductName"      "eKalappai" 
   VIAddVersionKey "ProductVersion"   "${VERSION}"
@@ -48,8 +48,8 @@ WriteRegStr HKEY_LOCAL_MACHINE "SOFTWARE\eKalappai" "" "$INSTDIR"
 WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Uninstall\eKalappai" "DisplayName" "eKalappai (remove only)"
 WriteRegStr HKEY_LOCAL_MACHINE "Software\Microsoft\Windows\CurrentVersion\Uninstall\eKalappai" "UninstallString" '"$INSTDIR\ekuninstall.exe"'
 
-#autorun with windows registry entry
-WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Run" "eKalappai" "$INSTDIR\eKalappai.exe"
+#autorun with windows registry entry - This is set only for the user currently installing.
+WriteRegStr HKEY_CURRENT_USER "SOFTWARE\Microsoft\Windows\CurrentVersion\Run" "eKalappai" "$INSTDIR\eKalappai.exe"
 
 #write out uninstaller
 WriteUninstaller "$INSTDIR\ekuninstall.exe"
@@ -88,13 +88,11 @@ Delete "$INSTDIR\QtCore4.dll"
 Delete "$INSTDIR\QtGui4.dll"
 Delete "$INSTDIR\install.log"
 Delete "$INSTDIR\eksettings.ini"
-StrCpy $2 $INSTDIR "" 3
-Delete "$LOCALAPPDATA\\VirtualStore\\$2\\eksettings.ini"
-RMDir "$LOCALAPPDATA\\VirtualStore\\$2\\" 
-
 Delete "$INSTDIR\keyboards\*.in"
 RMDir "$INSTDIR\keyboards"
 RMDir $INSTDIR
+
+#Need to remove ekalappai.ini from user appdata also
 
 #Uninstall shortcuts
 Delete "$SMPROGRAMS\eKalappai\eKalappai.lnk"
