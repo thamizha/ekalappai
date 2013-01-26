@@ -24,6 +24,7 @@
 #include <windows.h>
 #include <QMap>
 
+
 QT_BEGIN_NAMESPACE
 class QAction;
 class QCheckBox;
@@ -72,10 +73,10 @@ private slots:
     void showTrayMessage(int index);
     void processKeypressEvent();
     void changeKeyboard(int index);
+    void checkboxStartWithWindows_ticked();
 
 private:
-    void createIconGroupBox();
-    void createShortcutGroupBox();
+    void createSettingsGroupBoxes();
     void createActions();
     void createTrayIcon();
     void callHook(int kb_index);
@@ -98,6 +99,11 @@ private:
     QComboBox *shortcutComboBox1;
     QComboBox *shortcutComboBox2;
 
+    QGroupBox *otherSettingsGroupBox;
+    QLabel *checkboxStartWithWindows_label;
+    QCheckBox *checkboxStartWithWindows;
+
+
     QAction *minimizeAction;
     QAction *maximizeAction;
     QAction *settingsAction;
@@ -107,7 +113,8 @@ private:
     QMenu *trayIconMenu;
 
     QLibrary *myLib;
-    QSettings *settings;
+    QSettings *ini_settings;
+    QSettings *registry_settings;
     QSettings *keyrules;
 
     HHOOK hkb;
@@ -156,7 +163,7 @@ private:
     int prev_unicode_character_length;
 
     QVector<DWORD> keystrokes;
-    QVector<DWORD> valid_keys;
+    QVector<DWORD> valid_keys;    
 
 };
 
