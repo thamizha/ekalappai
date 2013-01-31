@@ -1,11 +1,12 @@
 #eKalappai installer creation script
 
 Name "eKalappai"
-
+Icon "ekalappai_icon.ico" 
 !define VERSION "3.1-dev"
 !define PUBLISHER "ThamiZha! community - thamizha.com"
+!define /date MYTIMESTAMP "%Y%m%d"
 
-OutFile "eKalappai-${VERSION}-installer.exe"
+OutFile "eKalappai-${VERSION}-build-${MYTIMESTAMP}-installer.exe"
 
 #Installer's VersionInfo
   VIProductVersion                   "3.1.0.0"
