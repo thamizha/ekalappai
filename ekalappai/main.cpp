@@ -32,6 +32,15 @@ int main(int argc, char *argv[])
     app.setApplicationName("eKalappai");
     app.setApplicationVersion("3.1");
 
+    //Allow only one instance of eKalappai at any time
+    //This solution is based on solution provided in this article http://stackoverflow.com/questions/4087235/how-to-force-my-application-to-open-one-exe-only-qt-linux
+    QSharedMemory shared("59698760-43bb-44d9-8121-181ecbb70e4d");
+    if( !shared.create( 512, QSharedMemory::ReadWrite) )
+    {
+      qWarning() << "Cannot start more than one instance of eKalappai any time.";
+      exit(0);
+    }
+
     QPixmap pix(":/images/intro.png");
 
     QSplashScreen splash(pix);
@@ -45,8 +54,8 @@ int main(int argc, char *argv[])
     QApplication::setQuitOnLastWindowClosed(false);
 
     Window window;
+
     return app.exec();
 
 }
-
 
