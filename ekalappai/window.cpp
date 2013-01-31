@@ -56,7 +56,7 @@ Window::Window()
     current_vkCode = 0x0;
     controlkey_pressed = FALSE;
     altkey_pressed = FALSE;
-    keyboard_status = TRUE;
+    keyboard_status = FALSE;
     character_pressed = 0;
     prev1_character_pressed = 0;
     prev2_character_pressed = 0;
@@ -116,10 +116,16 @@ Window::Window()
     mainLayout->addWidget(otherSettingsGroupBox);
     setLayout(mainLayout);
 
-    iconComboBox->setCurrentIndex(selected_keyboard);
+    if (keyboard_status){
+        iconComboBox->setCurrentIndex(selected_keyboard);
+    }
+    else {
+        changeKeyboard(0);
+        iconComboBox->setCurrentIndex(0);
+    }
     trayIcon->show();
 
-    setWindowTitle(tr("eKalappai 3.0"));
+    setWindowTitle(qApp->applicationName()+ " " + qApp->applicationVersion() );
 
 }
 
@@ -384,7 +390,7 @@ void Window::showTrayMessage(int index)
    //this system messages proves to be more annoyance than benefit so hiding it
     QString message;
     message = iconComboBox->itemText(index)+ " set";
-    trayIcon->showMessage("eKalappai 3.0",message, icon, 100);
+    trayIcon->showMessage(qApp->applicationName() + " " + qApp->applicationVersion(),message, icon, 100);
 
 }
 
