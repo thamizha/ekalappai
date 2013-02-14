@@ -19,6 +19,7 @@
 
 #include <QtGui>
 #include "window.h"
+#include "about.h"
 
 //#define _WIN32_WINNT 0x0500
 //#define WINVER 0x0400
@@ -499,14 +500,24 @@ void Window::createActions()
     settingsAction = new QAction(tr("&Settings"), this);
     connect(settingsAction, SIGNAL(triggered()), this, SLOT(showNormal()));
 
+    aboutAction = new QAction(tr("&About"), this);
+    connect(aboutAction, SIGNAL(triggered()), this, SLOT(showAbout()));
+
     quitAction = new QAction(tr("&Quit"), this);
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
+}
+
+void Window::showAbout() {
+    About *abt = new About(this);
+    abt->show();
 }
 
 void Window::createTrayIcon()
 {
     trayIconMenu = new QMenu(this);
     trayIconMenu->addAction(settingsAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(aboutAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);
 
@@ -546,8 +557,7 @@ void Window::removeHook(){
 //This function gets called continuously by the application loop(via QTimer class). This function checks the keys pressed info
 //from ekhook dll and writes appropriate characters by calling GenerateKey function in dll.
 //This function also enables or disables the keyboard by checking the shortcut keypresses.
-void Window::processKeypressEvent(){
-
+void Window::processKeypressEvent(){       
        GetKeyPress getkeypress;
        getkeypress = (GetKeyPress) myLib->resolve( "GetKeyPress" );
        current_vkCode = getkeypress();
