@@ -74,6 +74,7 @@ private slots:
     void processKeypressEvent();
     void changeKeyboard(int index);
     void checkboxStartWithWindows_ticked();
+    void showAbout();
 
 private:
     void createSettingsGroupBoxes();
@@ -107,6 +108,7 @@ private:
     QAction *minimizeAction;
     QAction *maximizeAction;
     QAction *settingsAction;
+    QAction *aboutAction;
     QAction *quitAction;
 
     QSystemTrayIcon *trayIcon;
