@@ -16,10 +16,12 @@
 * You should have received a copy of the GNU General Public License version 3
 * along with eKalappai.  If not, see <http://www.gnu.org/licenses/>.
 */
+#include <QtWidgets>
+#include "QtGui/5.2.0/QtGui/qpa/qplatformnativeinterface.h"
 
-#include <QtGui>
 #include "window.h"
 #include "about.h"
+
 
 //#define _WIN32_WINNT 0x0500
 //#define WINVER 0x0400
@@ -30,6 +32,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+
 
 using namespace std;
 
@@ -144,27 +147,9 @@ void Window::closeEvent(QCloseEvent *event)
     }
 }
 
-
-bool Window::winEvent( MSG* message, long* result )
-{
-    UINT msg = message->message;
-
-    switch ( msg )
-    {
-        case WM_USER+755:
-            processKeypressEvent();
-            break;
-
-        default:
-            break;
-    }
-
-    return false;
-}
-
 // This function is called when the shortcut modifier combo is changed
 void Window::setShortcut1(int index)
-{
+{    
     ini_settings->setValue("shortcut_modifier", shortcutComboBox1->currentText());
 
     //if none is selected, the allowed single key shortcuts should change
@@ -542,9 +527,8 @@ void Window::callHook(int kb_index){
     myFunction = (MyPrototype) myLib->resolve( "Init_nokeyboard" );
     current_keyboard = kb_index;
 
-    if ( myFunction ) {
-        //qDebug() << "inside myfunction";
-        hkb = myFunction(GetModuleHandle(0),keyboard_enabled, this->winId());
+    if ( myFunction ) {       
+        hkb = myFunction(GetModuleHandle(0),keyboard_enabled, (HWND) this->winId());
     }
 }
 

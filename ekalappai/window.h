@@ -19,9 +19,9 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include <QtWidgets>
 #include <QSystemTrayIcon>
 #include <QDialog>
-#include <windows.h>
 #include <QMap>
 
 
@@ -59,8 +59,8 @@ public:
     //keyboard status
     bool keyboard_status;
 
-    virtual bool winEvent( MSG* message, long* result );
-    QMap<QString, QString> keyboardmap ;
+    //virtual bool nativeEvent( const QByteArray & eventType, MSG* message, long* result );
+    QMap<QString, QString> keyboardmap;
 
 
 protected:
@@ -70,11 +70,14 @@ private slots:
     void setShortcut1(int index);
     void setShortcut2(int index);
     void iconActivated(QSystemTrayIcon::ActivationReason reason);
-    void showTrayMessage(int index);
-    void processKeypressEvent();
+    void showTrayMessage(int index);    
     void changeKeyboard(int index);
     void checkboxStartWithWindows_ticked();
     void showAbout();
+
+public slots:
+    void processKeypressEvent();
+
 
 private:
     void createSettingsGroupBoxes();
@@ -88,6 +91,9 @@ private:
     void loadKeyBoard();
     void generateUnicodeCharacters(QString characters);
     void DebugMessageBox(QString message);
+
+    HWND getHWNDForWidget(const QWidget* widget);
+    QWindow* windowForWidget(const QWidget* widget);
 
     QGroupBox *iconGroupBox;
     QLabel *iconLabel;

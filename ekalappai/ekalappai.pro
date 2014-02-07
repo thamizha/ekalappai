@@ -1,11 +1,15 @@
 HEADERS = window.h \
-    about.h
+    about.h \
+    ekeventfilter.h
+
 SOURCES = main.cpp \
     window.cpp \
-    about.cpp
+    about.cpp \
+    ekeventfilter.cpp
 RESOURCES = ekalappai.qrc
 QT += xml \
-    svg
+    svg \
+    widgets
 OTHER_FILES += ekalappai.rc
 RC_FILE = ekalappai.rc
 
