@@ -11,7 +11,6 @@ EKEventFilter::EKEventFilter(){
  {
     const MSG &msg = *static_cast<MSG *>(message);
     UINT msgInt = msg.message;
-
     switch ( msgInt )
     {
         case WM_USER+755:

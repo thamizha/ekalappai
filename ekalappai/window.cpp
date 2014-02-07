@@ -408,7 +408,7 @@ void Window::createSettingsGroupBoxes()
     shortcutComboBox1 = new QComboBox;
     shortcutComboBox1->addItem(tr("NONE"));
     shortcutComboBox1->addItem(tr("CTRL"));
-    //shortcutComboBox1->addItem(tr("ALT"));
+    shortcutComboBox1->addItem(tr("ALT"));
 
     int index_tmp1 = shortcutComboBox1->findText(shortcut_modifier_key);
     shortcutComboBox1->setCurrentIndex(index_tmp1);
@@ -558,7 +558,7 @@ void Window::processKeypressEvent(){
        getaltkeypress = (GetAltKeyPress) myLib->resolve( "GetAltKeyPress" );
        altkey_pressed = getaltkeypress();
 
-       //qDebug() << "current_vkCode : " << current_vkCode << "-- short_cut_key_hex :" << short_cut_key_hex << " -- controlkey_pressed" << controlkey_pressed;
+       //qDebug() << "current_vkCode : " << current_vkCode << "-- short_cut_key_hex :" << short_cut_key_hex << " -- altkey_pressed" << altkey_pressed;
 
        //toggle the keyboard_enabled flag based on the shortcut key placed
        if((current_vkCode == short_cut_key_hex) && (shortcut_modifier_key == "NONE")) {
@@ -569,6 +569,11 @@ void Window::processKeypressEvent(){
          }
        //if control key is modifier       
        else if ((current_vkCode == short_cut_key_hex) && (shortcut_modifier_key == "CTRL")&& (controlkey_pressed == true ) ){
+           if (keyboard_status)
+                keyboard_status = false;
+            else
+                keyboard_status = true;
+       }else if((current_vkCode == short_cut_key_hex) && (shortcut_modifier_key == "ALT")&& (altkey_pressed == true )){
            if (keyboard_status)
                 keyboard_status = false;
             else
@@ -586,7 +591,7 @@ void Window::processKeypressEvent(){
               }
        }
 
-       if((keyboard_status)&& !(controlkey_pressed)){
+       if((keyboard_status) && !(controlkey_pressed) && !(altkey_pressed)){
            implementKeyboardLogic();
         }
 }
