@@ -16,8 +16,7 @@ EKEventFilter::EKEventFilter(){
     {
         case WM_USER+755:
            window->processKeypressEvent();
-           break;
-
+           return true;
         default:
             break;
     }
