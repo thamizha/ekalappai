@@ -558,7 +558,7 @@ void Window::processKeypressEvent(){
        getaltkeypress = (GetAltKeyPress) myLib->resolve( "GetAltKeyPress" );
        altkey_pressed = getaltkeypress();
 
-       qDebug() << "current_vkCode : " << current_vkCode << "-- short_cut_key_hex :" << short_cut_key_hex << " -- controlkey_pressed" << controlkey_pressed;
+       //qDebug() << "current_vkCode : " << current_vkCode << "-- short_cut_key_hex :" << short_cut_key_hex << " -- controlkey_pressed" << controlkey_pressed;
 
        //toggle the keyboard_enabled flag based on the shortcut key placed
        if((current_vkCode == short_cut_key_hex) && (shortcut_modifier_key == "NONE")) {
