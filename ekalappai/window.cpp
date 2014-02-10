@@ -150,7 +150,9 @@ void Window::closeEvent(QCloseEvent *event)
 // This function is called when the shortcut modifier combo is changed
 void Window::setShortcut1(int index)
 {    
+
     ini_settings->setValue("shortcut_modifier", shortcutComboBox1->currentText());
+    shortcut_modifier_key = ini_settings->value("shortcut_modifier").toString();
 
     //if none is selected, the allowed single key shortcuts should change
     if(index == 0){
@@ -557,7 +559,9 @@ void Window::processKeypressEvent(){
        GetAltKeyPress getaltkeypress;
        getaltkeypress = (GetAltKeyPress) myLib->resolve( "GetAltKeyPress" );
        altkey_pressed = getaltkeypress();
-
+        //qDebug() << "altkey_pressed : " << altkey_pressed;
+        //qDebug() << "controlkey_pressed : " << controlkey_pressed;
+        //qDebug() << "shortcut_modifier_key : " << shortcut_modifier_key;
        //qDebug() << "current_vkCode : " << current_vkCode << "-- short_cut_key_hex :" << short_cut_key_hex << " -- altkey_pressed" << altkey_pressed;
 
        //toggle the keyboard_enabled flag based on the shortcut key placed
