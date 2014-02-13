@@ -116,12 +116,13 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 
 	PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT) (lParam);
 
-	if (wParam == WM_KEYDOWN ){
-		current_vkCode = p->vkCode ;
+	if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN){
+		current_vkCode = p->vkCode ;		
 		PostMessage(callapp_hInst,WM_USER+755,wParam,lParam);
 
 		BYTE keyboard_state[256];
 		GetKeyboardState(keyboard_state);
+
 		WORD wCharacter = 0;
 
 		int ta = ToAscii((UINT)p->vkCode, p->scanCode,
@@ -133,7 +134,7 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 
 		shiftkey_pressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
 		bool caplock_pressed = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
-		altkey_pressed = ((GetKeyState(VK_LMENU) & 0x80 ) == 0x80  ? true : false);
+		altkey_pressed = ((GetKeyState(VK_MENU) & 0x80 ) == 0x80  ? true : false);
 		controlkey_pressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
 		spacebar_pressed = ((GetKeyState(VK_SPACE) & 0x80) == 0x80 ? true : false);
 		backspace_pressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
@@ -143,6 +144,7 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 		{
 			return 0;
 		}
+
 		if (altkey_pressed)
 		{
 			return 0;
@@ -163,13 +165,13 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 	//This portion is written to prevent the bug in which the shift key was not cleared untill 2 keys are pressed. 
 	//It handles key up events and doesnt call Postmessage so that no keystroke is sent to the appliction during key up. 
 	//only character_pressed variale is set, which helps us to clear the keys like shiftkey correctly
-	else if (wParam == WM_KEYUP ){
+	else if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP){
 		current_vkCode = p->vkCode ;
 		BYTE keyboard_state[256];
 		GetKeyboardState(keyboard_state);
 		shiftkey_pressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
 		controlkey_pressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
-		altkey_pressed = ((GetKeyState(VK_LMENU) & 0x80 ) == 0x80  ? true : false);
+		altkey_pressed = ((GetKeyState(VK_MENU) & 0x80 ) == 0x80  ? true : false);		
 	}
 
 	return CallNextHookEx(NULL, nCode, wParam, lParam);
@@ -207,7 +209,7 @@ extern "C" __declspec(dllexport) DWORD GetKeyPress()
 
 extern "C" __declspec(dllexport) bool GetAltKeyPress()
 {
-	return altkey_pressed;
+	return altkey_pressed;	
 }
 
 

@@ -16,10 +16,12 @@
 * You should have received a copy of the GNU General Public License version 3
 * along with eKalappai.  If not, see <http://www.gnu.org/licenses/>.
 */
+#include <QtWidgets>
+#include "QtGui/5.2.0/QtGui/qpa/qplatformnativeinterface.h"
 
-#include <QtGui>
 #include "window.h"
 #include "about.h"
+
 
 //#define _WIN32_WINNT 0x0500
 //#define WINVER 0x0400
@@ -30,6 +32,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+
 
 using namespace std;
 
@@ -144,28 +147,12 @@ void Window::closeEvent(QCloseEvent *event)
     }
 }
 
-
-bool Window::winEvent( MSG* message, long* result )
-{
-    UINT msg = message->message;
-
-    switch ( msg )
-    {
-        case WM_USER+755:
-            processKeypressEvent();
-            break;
-
-        default:
-            break;
-    }
-
-    return false;
-}
-
 // This function is called when the shortcut modifier combo is changed
 void Window::setShortcut1(int index)
-{
+{    
+
     ini_settings->setValue("shortcut_modifier", shortcutComboBox1->currentText());
+    shortcut_modifier_key = ini_settings->value("shortcut_modifier").toString();
 
     //if none is selected, the allowed single key shortcuts should change
     if(index == 0){
@@ -423,7 +410,7 @@ void Window::createSettingsGroupBoxes()
     shortcutComboBox1 = new QComboBox;
     shortcutComboBox1->addItem(tr("NONE"));
     shortcutComboBox1->addItem(tr("CTRL"));
-    //shortcutComboBox1->addItem(tr("ALT"));
+    shortcutComboBox1->addItem(tr("ALT"));
 
     int index_tmp1 = shortcutComboBox1->findText(shortcut_modifier_key);
     shortcutComboBox1->setCurrentIndex(index_tmp1);
@@ -542,9 +529,8 @@ void Window::callHook(int kb_index){
     myFunction = (MyPrototype) myLib->resolve( "Init_nokeyboard" );
     current_keyboard = kb_index;
 
-    if ( myFunction ) {
-        //qDebug() << "inside myfunction";
-        hkb = myFunction(GetModuleHandle(0),keyboard_enabled, this->winId());
+    if ( myFunction ) {       
+        hkb = myFunction(GetModuleHandle(0),keyboard_enabled, (HWND) this->winId());
     }
 }
 
@@ -573,7 +559,10 @@ void Window::processKeypressEvent(){
        GetAltKeyPress getaltkeypress;
        getaltkeypress = (GetAltKeyPress) myLib->resolve( "GetAltKeyPress" );
        altkey_pressed = getaltkeypress();
-
+        //qDebug() << "altkey_pressed : " << altkey_pressed;
+        //qDebug() << "controlkey_pressed : " << controlkey_pressed;
+        //qDebug() << "shortcut_modifier_key : " << shortcut_modifier_key;
+       //qDebug() << "current_vkCode : " << current_vkCode << "-- short_cut_key_hex :" << short_cut_key_hex << " -- altkey_pressed" << altkey_pressed;
 
        //toggle the keyboard_enabled flag based on the shortcut key placed
        if((current_vkCode == short_cut_key_hex) && (shortcut_modifier_key == "NONE")) {
@@ -582,8 +571,13 @@ void Window::processKeypressEvent(){
              else
                  keyboard_status = true;
          }
-       //if control key is modifier
+       //if control key is modifier       
        else if ((current_vkCode == short_cut_key_hex) && (shortcut_modifier_key == "CTRL")&& (controlkey_pressed == true ) ){
+           if (keyboard_status)
+                keyboard_status = false;
+            else
+                keyboard_status = true;
+       }else if((current_vkCode == short_cut_key_hex) && (shortcut_modifier_key == "ALT")&& (altkey_pressed == true )){
            if (keyboard_status)
                 keyboard_status = false;
             else
@@ -601,7 +595,7 @@ void Window::processKeypressEvent(){
               }
        }
 
-       if((keyboard_status)&& !(controlkey_pressed)){
+       if((keyboard_status) && !(controlkey_pressed) && !(altkey_pressed)){
            implementKeyboardLogic();
         }
 }
