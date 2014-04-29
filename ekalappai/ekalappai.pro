@@ -9,7 +9,8 @@ SOURCES = main.cpp \
 RESOURCES = ekalappai.qrc
 QT += xml \
     svg \
-    widgets
+    widgets \
+    gui-private
 OTHER_FILES += ekalappai.rc
 RC_FILE = ekalappai.rc
 

@@ -17,7 +17,7 @@
 * along with eKalappai.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include <QtWidgets>
-#include "QtGui/5.2.0/QtGui/qpa/qplatformnativeinterface.h"
+#include <qpa/qplatformnativeinterface.h>
 
 #include "window.h"
 #include "about.h"
