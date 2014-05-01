@@ -1,5 +1,7 @@
 build-ekalappai-Desktop*
+build-ekhook-Desktop*
 ekhook/Debug/*
 ekhook/Release/*
 ekhook/ekhook/*
 *.user
+ekhook/ekhook.pro.*
