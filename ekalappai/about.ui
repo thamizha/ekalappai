@@ -26,7 +26,7 @@
    <enum>Qt::NoContextMenu</enum>
   </property>
   <property name="windowTitle">
-   <string>About eKalappai v3.0</string>
+   <string/>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">

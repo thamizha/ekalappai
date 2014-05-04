@@ -6,6 +6,7 @@ About::About(QWidget *parent) :
     ui(new Ui::About)
 {
     ui->setupUi(this);
+    this->setWindowTitle("About " + qApp->applicationName()+ " " + qApp->applicationVersion());
 }
 
 About::~About()

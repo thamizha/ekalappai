@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     app.setApplicationName("eKalappai");
-    app.setApplicationVersion("3.1");   
+    app.setApplicationVersion("3.0.2");
 
     //Allow only one instance of eKalappai at any time
     //This solution is based on solution provided in this article http://stackoverflow.com/questions/4087235/how-to-force-my-application-to-open-one-exe-only-qt-linux
