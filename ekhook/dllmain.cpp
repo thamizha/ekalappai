@@ -18,6 +18,7 @@
 */
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "stdafx.h"
+#include "QDebug"
 
 #pragma data_seg(".HOOKDATA") //Shared data among all instances.
 
@@ -121,6 +122,7 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 		PostMessage(callapp_hInst,WM_USER+755,wParam,lParam);
 
 		BYTE keyboard_state[256];
+        GetKeyState(0);
 		GetKeyboardState(keyboard_state);
 
 		WORD wCharacter = 0;
@@ -128,11 +130,13 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 		int ta = ToAscii((UINT)p->vkCode, p->scanCode,
 						 keyboard_state, &wCharacter, 0);
 
-		if (ta > 0){
+
+        if (ta > 0){
+            //qDebug() << "Char ::: " << wCharacter;
 			character_pressed = wCharacter;
 		}
-
-		shiftkey_pressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
+        //qDebug() << "Shift Key Down"<<  ((GetKeyState(VK_SHIFT) & 0x80)  == 0x80 );
+        shiftkey_pressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
 		bool caplock_pressed = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
 		altkey_pressed = ((GetKeyState(VK_MENU) & 0x80 ) == 0x80  ? true : false);
 		controlkey_pressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
@@ -169,9 +173,10 @@ LRESULT CALLBACK keyboardHookProc_nokeyboard(int nCode, WPARAM wParam, LPARAM lP
 		current_vkCode = p->vkCode ;
 		BYTE keyboard_state[256];
 		GetKeyboardState(keyboard_state);
-		shiftkey_pressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
+        shiftkey_pressed = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
 		controlkey_pressed = ((GetKeyState(VK_CONTROL) & 0x80) == 0x80 ? true : false);
-		altkey_pressed = ((GetKeyState(VK_MENU) & 0x80 ) == 0x80  ? true : false);		
+        altkey_pressed = ((GetKeyState(VK_MENU) & 0x80 ) == 0x80  ? true : false);
+        //qDebug() << "Shift Key UP"<<  ((GetKeyState(VK_SHIFT) & 0x80)  == 0x80 );
 	}
 
 	return CallNextHookEx(NULL, nCode, wParam, lParam);
