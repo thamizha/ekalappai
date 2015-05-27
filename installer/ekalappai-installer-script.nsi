@@ -2,14 +2,14 @@
 
 Name "eKalappai"
 Icon "ekalappai_icon.ico" 
-!define VERSION "3.1-dev"
+!define VERSION "3.0.3"
 !define PUBLISHER "ThamiZha! community - thamizha.com"
 !define /date MYTIMESTAMP "%Y%m%d"
 
 OutFile "eKalappai-${VERSION}-build-${MYTIMESTAMP}-installer.exe"
 
 #Installer's VersionInfo
-  VIProductVersion                   "3.1.0.0"
+  VIProductVersion                   "3.0.3.0"
   VIAddVersionKey "CompanyName"      "${PUBLISHER}"
   VIAddVersionKey "ProductName"      "eKalappai" 
   VIAddVersionKey "ProductVersion"   "${VERSION}"
@@ -36,9 +36,9 @@ SetOutPath "$INSTDIR"
 #Installed files list
 File  "app\ekalappai.exe"
 File  "app\ekhook.dll"
-File  "app\icudt51.dll"
-File  "app\icuin51.dll"
-File  "app\icuuc51.dll"
+File  "app\icudt53.dll"
+File  "app\icuin53.dll"
+File  "app\icuuc53.dll"
 File  "app\libgcc_s_dw2-1.dll"
 File  "app\libstdc++-6.dll"
 File  "app\libwinpthread-1.dll"
