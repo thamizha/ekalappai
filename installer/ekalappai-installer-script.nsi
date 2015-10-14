@@ -2,14 +2,14 @@
 
 Name "eKalappai"
 Icon "ekalappai_icon.ico" 
-!define VERSION "3.0.3"
+!define VERSION "3.0.4"
 !define PUBLISHER "ThamiZha! community - thamizha.com"
 !define /date MYTIMESTAMP "%Y%m%d"
 
 OutFile "eKalappai-${VERSION}-build-${MYTIMESTAMP}-installer.exe"
 
 #Installer's VersionInfo
-  VIProductVersion                   "3.0.3.0"
+  VIProductVersion                   "3.0.4.0"
   VIAddVersionKey "CompanyName"      "${PUBLISHER}"
   VIAddVersionKey "ProductName"      "eKalappai" 
   VIAddVersionKey "ProductVersion"   "${VERSION}"
@@ -49,6 +49,12 @@ File  "app\eksettings.ini"
 
 SetOutPath "$INSTDIR\keyboards"
 File  "app\keyboards\*.in"
+
+SetOutPath "$INSTDIR\platforms"
+File  "app\platforms\qwindows.dll"
+SetOutPath "$INSTDIR"
+
+
 SetOutPath "$INSTDIR"
 
 #Registry settings
@@ -97,6 +103,8 @@ Delete "$INSTDIR\install.log"
 Delete "$INSTDIR\eksettings.ini"
 Delete "$INSTDIR\keyboards\*.in"
 RMDir "$INSTDIR\keyboards"
+Delete "$INSTDIR\platforms\*.dll"
+RMDir "$INSTDIR\platforms"
 RMDir $INSTDIR
 
 #Need to remove ekalappai.ini from user appdata also
